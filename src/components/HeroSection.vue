@@ -1,176 +1,223 @@
+<!-- src/components/HeroSection.vue -->
 <template>
   <section
-    class="hero"
+    class="hero-section"
     :style="{ backgroundImage: `url(${heroBg})` }"
   >
-    <!-- Overlays for contrast -->
-    <div class="overlay top"></div>
-    <div class="overlay bottom"></div>
-
+    <!-- Animated Title -->
     <div class="content-wrapper">
-      <!-- Centered Main Title -->
       <h1 class="hero-title">Schlaraffia Flensburg</h1>
-
-      <!-- Welcome Text -->
       <h2 class="welcome-text">Ein herzliches Willkommen</h2>
-
-      <!-- Call to Action links to About page -->
-      <router-link to="/about" class="cta-button">Mehr erfahren<span class="icon-arrow"></span></router-link>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator">
-      <div class="scroll-line"></div>
+    <!-- Button Grid overlapping next section -->
+    <div class="button-grid">
+      <router-link to="/about" class="grid-button">
+        <Info class="icon" />
+        <span>Über Uns</span>
+      </router-link>
+
+      <router-link to="/sippungsfolge" class="grid-button">
+        <List class="icon" />
+        <span>Sippungsfolge</span>
+      </router-link>
+
+      <router-link to="/contact" class="grid-button">
+        <PhoneCall class="icon" />
+        <span>Kontakt</span>
+      </router-link>
     </div>
   </section>
 </template>
 
 <script setup>
-import { onMounted, nextTick } from 'vue'
 import heroBg from '../assets/pictures/3.jpeg'
+import { Info, List, PhoneCall } from 'lucide-vue-next'
+import { onMounted, nextTick } from 'vue'
 
 onMounted(() => {
   nextTick(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in')
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    document
-      .querySelectorAll('.hero-title, .welcome-text, .cta-button')
-      .forEach(el => observer.observe(el))
+    const title = document.querySelector('.hero-title')
+    const subtitle = document.querySelector('.welcome-text')
+    const buttons = document.querySelectorAll('.grid-button')
+    if (title && subtitle) {
+      title.classList.add('animate-in')
+      subtitle.classList.add('animate-in')
+    }
+    buttons.forEach((btn, i) => {
+      btn.classList.add('hidden-btn')
+      setTimeout(() => btn.classList.add('animate-btn'), 800 + i * 200)
+    })
   })
 })
 </script>
 
 <style scoped>
-.hero {
+/* Fade in entire hero background */
+.hero-section {
   position: relative;
+  height: 100vh;
+  background: center top / cover no-repeat;
   padding-top: 64px;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  overflow: visible;
+
+  /* start hidden and shifted downward */
+  opacity: 0;
+  transform: translateY(30px);
+
+  /* slide up & fade in, starting after 1s */
+  animation: fadeInBg 0.6s ease-out 0s forwards;
 }
 
-/* Gradient overlays */
-.overlay.top {
+/* Keyframes for background fade-in */
+@keyframes fadeInBg {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-section::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(20deg, rgba(0,0,0,0.7), rgba(0,0,0,0.25));
+  background: rgba(0,0,0,0.4);
   z-index: 1;
+  opacity: 0;                /* start overlay hidden */
+  animation: fadeInOverlay 0.6s ease-out 0.1s forwards;
 }
-.overlay.bottom {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 25vh;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-  z-index: 1;
+
+/* Overlay fade-in delayed to appear after background */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .content-wrapper {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 0 1.5rem;
-  max-width: 800px;
-  width: 100%;
+  color: #fff;
 }
 
-/* Hidden initial state */
+/* Hidden initial state for text */
 .hero-title,
-.welcome-text,
-.cta-button {
+.welcome-text {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Animate in */
+/* Animate in for text */
 .animate-in {
+  animation: fadeInUp 0.8s forwards;
+}
+
+/* Keyframes for text fade-in */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  animation-delay: 0.2s;
+}
+
+.welcome-text {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 300;
+  animation-delay: 0.5s;
+}
+
+/* Button grid overlapping next section */
+.button-grid {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 10;
+  width: min(90%, 800px);
+}
+
+.grid-button {
+  opacity: 1;
+  position: relative;
+  transform: translateY(0);
+}
+
+/* Hidden initial state for buttons */
+.hidden-btn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+/* Animate-in for buttons */
+.animate-btn {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
-.hero-title {
-  color: #fff;
-  font-size: clamp(2.5rem,6vw,4rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  transition-delay: 0.2s;
-}
-
-.welcome-text {
-  color: #fff;
-  font-size: clamp(1.5rem,3vw,2.5rem);
-  font-weight: 300;
-  margin-bottom: 2rem;
-  transition-delay: 0.4s;
-}
-
-/* CTA Button styling */
-.cta-button {
-  display: inline-flex;
+/* Button styles */
+.grid-button {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 2rem;
+  padding: 1rem;
+  background: #fafafa;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #1d1d1f;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-button .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 1.5;
+  color: #d13900;
+}
+
+.grid-button span {
   font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  background: rgba(255,255,255,0.15);
-  border: 2px solid rgba(255,255,255,0.6);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  transition-delay: 0.6s;
-  position: relative;
-  overflow: hidden;
-}
-.cta-button:hover {
-  background: rgba(255,255,255,0.25);
+  font-weight: 600;
 }
 
-.icon-arrow {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(-45deg);
+.grid-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
 }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-.scroll-line {
-  width: 2px;
-  height: 50px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
-  animation: scrollLine 2s infinite;
-}
-@keyframes scrollLine {
-  0% { transform: translateY(-20px); opacity:0 }
-  50% { opacity:1 }
-  100% { transform: translateY(20px); opacity:0 }
-}
-
-/* Responsive tweaks */
 @media (max-width: 768px) {
-  .hero-title { transition-delay:0.1s }
-  .welcome-text { transition-delay:0.3s }
-  .cta-button { transition-delay:0.5s; padding:0.5rem 1.5rem }
+  .button-grid {
+    grid-template-columns: 1fr;
+    bottom: -3rem;
+  }
+  .grid-button {
+    padding: 0.75rem;
+  }
 }
 </style>

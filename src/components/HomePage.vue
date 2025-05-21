@@ -88,23 +88,17 @@ onMounted(() => {
   padding: clamp(4rem, 8vw, 6rem) 1.5rem;
   overflow: hidden;
 }
-
 .about-teaser {
-  background: linear-gradient(
-    to bottom,
-    #111827 0%,
-    #111827 40%,
-    #f9fafb 100%
-  );
+  background: #ffffff;
 }
 .about-teaser .section-title {
-  color: #f9fafb;
+  color: #2b2e32;
   font-size: clamp(1.875rem, 4vw, 2.5rem);
   font-weight: 600;
   margin-bottom: 1rem;
 }
 .about-teaser .teaser-text {
-  color: #e5e7eb;
+  color: #2f3034;
   margin-bottom: 2rem;
   font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.6;
@@ -126,14 +120,8 @@ onMounted(() => {
 .stat-icon { color: #2563eb; margin-bottom: 0.75rem; }
 .stat-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; color: #111827; }
 .stat-value { font-size: 1.75rem; font-weight: 700; color: #111827; }
-
 .events-teaser {
-  background: linear-gradient(
-    to bottom,
-    #f9fafb 0%,
-    #f9fafb 90%,
-    #ffffff 100%
-  );
+  background: #ffffff;
 }
 .events-teaser .section-title {
   color: #111827;
