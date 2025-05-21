@@ -66,7 +66,6 @@ function close()     { selected.value = null }
 </script>
 
 <style scoped>
-/* Section background: white to light grey */
 .sippungs-section {
   padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   padding-top: clamp(2rem, 5vw, 3rem);
@@ -98,26 +97,25 @@ function close()     { selected.value = null }
   background: var(--color-primary);
 }
 
-/* Horizontal scrolling layout */
 .sippungs-grid {
   display: flex;
-  flex-wrap: nowrap;           /* prevent wrapping to next line */
-  overflow-x: scroll;          /* always show horizontal scroll */
+  flex-wrap: nowrap;      
+  overflow-x: scroll;         
   gap: clamp(1.5rem, 3vw, 2rem);
   padding-bottom: 1rem;
   scroll-snap-type: x mandatory;
+  align-items: flex-start;
 }
 
-/* Scrollbar styling */
 .sippungs-grid::-webkit-scrollbar {
   height: 8px;
 }
 .sippungs-grid::-webkit-scrollbar-track {
-  background: #e2e8f0;         /* light grey track */
+  background: #e2e8f0;         
   border-radius: 4px;
 }
 .sippungs-grid::-webkit-scrollbar-thumb {
-  background: var(--color-primary);  /* use primary color thumb */
+  background: var(--color-primary);  
   border-radius: 4px;
 }
 
@@ -145,6 +143,9 @@ function close()     { selected.value = null }
   animation: fadeInUp 0.6s ease-out forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor:pointer;
+  display:flex;
+  flex-direction: column;
+  background: #ffffff;
 }
 .sippungs-card:focus-visible { outline:3px solid var(--color-primary); }
 .sippungs-card:hover {
@@ -152,7 +153,6 @@ function close()     { selected.value = null }
   box-shadow: var(--shadow-md);
 }
 
-/* Fade-in-up animation */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -162,6 +162,7 @@ function close()     { selected.value = null }
   position: relative;
   padding: 0.75rem 1rem;
   background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  width: 100%;
 }
 
 .card-id {
@@ -186,6 +187,7 @@ function close()     { selected.value = null }
 .card-title {
   padding: 1rem;
   font-size: clamp(1rem, 2.5vw, 1.25rem);
+  flex-grow: 1;
   font-weight: 500;
   color: #2d3748;
   text-align: center;
