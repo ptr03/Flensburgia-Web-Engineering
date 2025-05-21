@@ -1,31 +1,40 @@
-<!-- src/components/SippungsfolgeSection.vue -->
 <template>
   <section class="sippungs-section">
     <div class="months-container">
       <div v-for="(group, gIdx) in grouped" :key="gIdx" class="month-group">
         <h3 class="month-title">{{ group.label }}</h3>
+
         <div class="sippungs-grid">
-          <div
+          <button                 
             v-for="(item, idx) in group.items"
             :key="idx"
             class="sippungs-card"
             :style="{ animationDelay: `${idx * 100}ms` }"
+            @click="open(item)"
           >
             <div class="card-header">
-              <span class="card-id">{{ item.id ? `#${item.id}` : '' }}</span>
-              <time class="card-date">{{ item.date }}</time>
+              <span  class="card-id">{{ item.id ? `#${item.id}` : '' }}</span>
+              <time  class="card-date">{{ item.date }}</time>
             </div>
             <p class="card-title">{{ item.title }}</p>
-          </div>
+          </button>
         </div>
       </div>
     </div>
+
+    <SippungsModal
+      v-if="selected"
+      :item="selected"
+      @close="close"
+    />
   </section>
 </template>
 
 <script setup>
 import items from '../data/sippungsfolge.json'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import SippungsModal from './SippungsModal.vue'
+
 
 const sortedItems = computed(() => [...items].sort((a, b) => {
   const [dA, mA, yA] = a.date.split('.').map(Number)
@@ -45,6 +54,9 @@ const grouped = computed(() => {
   })
   return Object.values(map)
 })
+const selected = ref(null)          
+function open(item) { selected.value = item }
+function close()     { selected.value = null }
 </script>
 
 <style scoped>
@@ -118,16 +130,17 @@ const grouped = computed(() => {
 .sippungs-card {
   flex: 0 0 260px;
   scroll-snap-align: start;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  background: none;
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
+  border: 0px;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor:pointer;
 }
-
+.sippungs-card:focus-visible { outline:3px solid var(--color-primary); }
 .sippungs-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: var(--shadow-md);

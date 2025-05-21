@@ -32,5 +32,27 @@
   { "id": null, "date": "07.04.2025", "title": "Reychsausritt in die h. Hammonia" },
   { "id": 3183, "date": "10.04.2025", "title": "Pusteblume oder welches ist Dein / Lieblingswort? Auch: Vierzeiler zur Wahl" },
   { "id": 3184, "date": "17.04.2025", "title": "Pasta! Basta! / Reychseinritt der h. Perla Sylta" },
-  { "id": 3185, "date": "24.04.2025", "title": "Wahlschlaraffiade" }
+  {
+  "id": 3185,
+  "date": "24.04.2025",
+  "title": "Wahlschlaraffiade",
+  "description": "<p>Die Wahl des neuen Reychsrats …</p>",
+  "images": [
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img1.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img2.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img3.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img4.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img5.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img6.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img7.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img8.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img9.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img10.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img11.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img12.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img12.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img13.webp",
+    "/src/assets/pictures/sippungen/3185/sippung_3185_img15.webp"
+  ]
+}
 ]
