@@ -6,8 +6,8 @@
   >
     <!-- Animated Title -->
     <div class="content-wrapper">
-      <h1 class="hero-title">Schlaraffia Flensburg</h1>
-      <h2 class="welcome-text">Ein herzliches Willkommen</h2>
+      <h1 class="hero-title">Schlaraffia Flensburgia</h1>
+      <h2 class="welcome-text">Ein herzliches Willekum</h2>
     </div>
 
     <!-- Button Grid overlapping next section -->
