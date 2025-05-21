@@ -53,7 +53,6 @@ function toggleMenu() {
 const navLinks = [
   { name: 'Flensburgia',                     path: '/' },
   { name: 'Sippungsfolge',                   path: '/sippungsfolge' },
-  { name: 'Letzte Sippungen',                path: '/letzte-sippungen' },
   { name: 'Die Flensburgen',                 path: '/die-flensburgen' },
   { name: 'Sassen',                          path: '/sassen' },
   { name: 'Kilianischer Windjammerorden',    path: '/windjammerorden' },
