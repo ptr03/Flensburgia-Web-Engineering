@@ -72,7 +72,6 @@ const navLinks = [
   background: transparent;
 }
 
-/* pill-shaped background behind links */
 .nav-links {
   display: inline-flex;
   gap: 1.5rem;
@@ -95,7 +94,6 @@ const navLinks = [
   opacity: 0.8;
 }
 
-/* mobile toggle */
 .menu-toggle {
   display: none;
   background: none;
@@ -111,7 +109,6 @@ const navLinks = [
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* simple mobile menu */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .menu-toggle { display: block; }
@@ -134,11 +131,43 @@ const navLinks = [
   }
 }
 
-/* prevent any default blue/underline */
 .router-link-active .nav-link,
 .router-link-exact-active .nav-link,
 .router-link-active .mobile-nav-link {
   color: inherit !important;
   text-decoration: none !important;
 }
+
+.nav-link,
+.mobile-nav-link{
+  position: relative;    
+  display:inline-block;
+  padding: .5rem 1rem;     
+  border-radius: 9999px;  
+  font-weight: 600;
+  color:#1d1d1f;
+  text-decoration:none;
+  transition: background .2s ease, opacity .2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible{
+  background:#fff;          
+  opacity:.9;
+}
+
+.router-link-active,
+.router-link-exact-active{
+  background:#fff;         
+}
+
+.nav-links{
+  display:inline-flex;
+  gap:1.5rem;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+  padding:.5rem 1rem;
+  border-radius:9999px;
+}
+
 </style>
