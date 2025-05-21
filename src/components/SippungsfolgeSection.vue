@@ -35,24 +35,30 @@ import items from '../data/sippungsfolge.json'
 import { computed, ref } from 'vue'
 import SippungsModal from './SippungsModal.vue'
 
-
-const sortedItems = computed(() => [...items].sort((a, b) => {
-  const [dA, mA, yA] = a.date.split('.').map(Number)
-  const [dB, mB, yB] = b.date.split('.').map(Number)
-  return new Date(yA, mA - 1, dA) - new Date(yB, mB - 1, dB)
-}))
+const toDate = (str) => {
+  const [d, m, y] = str.split('.').map(Number)
+  return new Date(y, m - 1, d)
+}
+const sortedItems = computed(() =>
+  [...items].sort((a, b) => toDate(b.date) - toDate(a.date))
+)
 
 const grouped = computed(() => {
-  const map = {}
+  const map = new Map()
+
   sortedItems.value.forEach(item => {
-    const [d, m, y] = item.date.split('.')
-    const key = `${m}.${y}`
-    const dateObj = new Date(Number(y), Number(m) - 1)
-    const label = dateObj.toLocaleString('de-DE', { month: 'long', year: 'numeric' })
-    if (!map[key]) map[key] = { label, items: [] }
-    map[key].items.push(item)
+    const [ , m, y ] = item.date.split('.')
+    const key = `${m}.${y}`                      
+    const label = new Date(y, m - 1).toLocaleString(
+      'de-DE',
+      { month: 'long', year: 'numeric' }        
+    )
+
+    if (!map.has(key)) map.set(key, { label, items: [] })
+    map.get(key).items.push(item)               
   })
-  return Object.values(map)
+
+  return Array.from(map.values())                
 })
 const selected = ref(null)          
 function open(item) { selected.value = item }
