@@ -1,7 +1,6 @@
 <template>
   <section class="flensburgen-section">
     <div class="category-grid">
-      <!-- Category buttons to open respective modals -->
       <button
         v-for="cat in categories"
         :key="cat.id"
@@ -12,14 +11,13 @@
       </button>
     </div>
 
-    <!-- Modal Overlay -->
     <transition name="fade">
       <div v-if="activeId" class="modal-overlay" @click.self="closeModal">
         <div
           class="modal-content"
           :class="{ 'compact': activeId==='sassen' && filteredKnights.length===1 }"
         >
-          <!-- Zoomed Image Overlay -->
+          <!-- Zoom overlay -->
           <transition name="fade">
             <div
               v-if="enlargedImage"
@@ -33,7 +31,7 @@
             </div>
           </transition>
 
-          <!-- Sassen Modal -->
+          <!-- Sassen -->
           <div v-if="activeId === 'sassen'" class="modal-sassen">
             <h2>Sassen</h2>
             <div class="search-wrapper">
@@ -66,13 +64,13 @@
             </transition-group>
           </div>
 
-          <!-- Röde Grütt Modal -->
+          <!-- Röde Grütt -->
           <div v-else-if="activeId === 'rode-gruett'" class="modal-text poem">
             <h2>Röde Grütt</h2>
             <div class="text-content" v-html="formattedRodeGruett"></div>
           </div>
 
-          <!-- Erz- & Ehrenschlaraffen Modal -->
+          <!-- Erz- & Ehrenschlaraffen -->
           <div
             v-else-if="activeId === 'ehrenschlaraffen'"
             class="modal-ehrenschlaraffen"
@@ -80,10 +78,7 @@
             <h2>Erz- & Ehrenschlaraffen</h2>
             <div class="ehrenschlaraffen-grid">
               <img
-                v-for="fn in [
-                  'Erzschlaraffen-1920w.webp',
-                  'Ehrenschlaraffen-1920w.webp'
-                ]"
+                v-for="fn in ['Erzschlaraffen-1920w.webp','Ehrenschlaraffen-1920w.webp']"
                 :key="fn"
                 :src="getImage(fn)"
                 class="clickable"
@@ -91,30 +86,41 @@
               />
             </div>
           </div>
-      <!-- Kilianischer Windjammerorden -->
-        <div
-          v-else-if="activeId === 'kilianischer-windjammerorden'"
-          class="modal-text modal-windjammer"
-        >
-          <h2>Kilianischer Windjammerorden</h2>
-          <div class="text-content" v-html="formattedWindjammer"></div>
 
-          <div class="download-links">
-            <a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcdn.website-editor.net%2Fs%2F7eedee3b3d6c4ddaa47f6dd2ec757432%2Ffiles%2Fuploaded%2FEinritt-Liste165-3313-.docx%3FExpires%3D1751123329%26Signature%3DH4nBVGPGGUbnqdN50htYwjpNY1HeBGSOwFmccrBvyUjscMwM25C1yBjrEJ5Wi6N8xlyl9SnehdMXRXaXfDdhglGK2W3C5VMNd1Ot7jDg44xnYQTGPmcUrHUiUURvQ8ahpjDc3gaPHqET-0jTdiQ1Ql114cXUcW-dMBeJE6JOu6NUZ0opEPRWZ4-l6MVaBVkvNgcng1uVPyZrrLTAG3OwbtayMvY-92RkfvH462~C08ClkQjSHrP56yp6kL1KBw8OCMyqd3AIEar-ZitScklYnFJre~TuHKwlomKjBUiS6J6lDZneB867jetIWFBx9LnB8YO58vhQAWVFAEtMCHL4nQ__%26Key-Pair-Id%3DK2NXBXLF010TJW&wdOrigin=BROWSELINK" class="btn-download" target="_blank">
-              Eynritts-Liste herunterladen
-            </a>
-            <a href="https://cdn.website-editor.net/s/7eedee3b3d6c4ddaa47f6dd2ec757432/files/uploaded/statuten-3312-.pdf?Expires=1751123329&Signature=LhFFpQMCGI49baD8PHkJMB2UcikRJJtpG4sj4nG6q40B9qK5zW33C26sTukAtAok0Mq6vta3lqK3KgfK5ky9TlQwNzcJO7uN3LoViDlNCvE5~YsLzg9Okxgulj-IHv5ujIhwuNK3wuCg929yTKzGJ4njHrFD2XphEnpH1ynbEf5EBTAhQic7dwfklZbpCO6z-4q3F6KIvL-iOhOI2Gby5piQGNWt5hHzOVhooCNtbeAUd79QdP6AF4A4YaLXEg3lNFFf9R~9XgQeReOJ6oiHTqUF8Tjd20K8x3XB8uOrDbCg-hhkaPm0S00N22thXVN4ZA6UQ6HjH3l42l~D9q3GXg__&Key-Pair-Id=K2NXBXLF010TJW" class="btn-download" target="_blank">
-              Historische Statuten herunterladen
-            </a>
+          <!-- Kilianischer Windjammerorden -->
+          <div
+            v-else-if="activeId === 'kilianischer-windjammerorden'"
+            class="modal-text modal-windjammer"
+          >
+            <h2>Kilianischer Windjammerorden</h2>
+            <div class="text-content" v-html="formattedWindjammer"></div>
+            <div class="download-links">
+              <a
+                href="https://view.officeapps.live.com/op/view.aspx?src=…"
+                class="btn-download"
+                target="_blank"
+              >
+                Eynritts-Liste herunterladen
+              </a>
+              <a
+                href="https://cdn.website-editor.net/.../statuten.pdf"
+                class="btn-download"
+                target="_blank"
+              >
+                Historische Statuten herunterladen
+              </a>
+            </div>
           </div>
-        </div>
-          <!-- Close Button -->
+
+          <!-- Close -->
           <button class="btn-close" @click="closeModal">×</button>
         </div>
       </div>
     </transition>
   </section>
 </template>
+
+
 
 <script setup>
 import rodeGruettText  from '../data/rodeGruetteText.md?raw'
@@ -246,7 +252,7 @@ body.modal-open { overflow: hidden }
   padding: 1rem 1.5rem;
 }
 .category-button:nth-child(4) {
-  animation-delay: 1.4s; /* was 1.2s + 0.2s */
+  animation-delay: 1.4s; 
 }
 
 /* Close button */
