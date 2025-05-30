@@ -91,7 +91,23 @@
               />
             </div>
           </div>
+      <!-- Kilianischer Windjammerorden -->
+        <div
+          v-else-if="activeId === 'kilianischer-windjammerorden'"
+          class="modal-text modal-windjammer"
+        >
+          <h2>Kilianischer Windjammerorden</h2>
+          <div class="text-content" v-html="formattedWindjammer"></div>
 
+          <div class="download-links">
+            <a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcdn.website-editor.net%2Fs%2F7eedee3b3d6c4ddaa47f6dd2ec757432%2Ffiles%2Fuploaded%2FEinritt-Liste165-3313-.docx%3FExpires%3D1751123329%26Signature%3DH4nBVGPGGUbnqdN50htYwjpNY1HeBGSOwFmccrBvyUjscMwM25C1yBjrEJ5Wi6N8xlyl9SnehdMXRXaXfDdhglGK2W3C5VMNd1Ot7jDg44xnYQTGPmcUrHUiUURvQ8ahpjDc3gaPHqET-0jTdiQ1Ql114cXUcW-dMBeJE6JOu6NUZ0opEPRWZ4-l6MVaBVkvNgcng1uVPyZrrLTAG3OwbtayMvY-92RkfvH462~C08ClkQjSHrP56yp6kL1KBw8OCMyqd3AIEar-ZitScklYnFJre~TuHKwlomKjBUiS6J6lDZneB867jetIWFBx9LnB8YO58vhQAWVFAEtMCHL4nQ__%26Key-Pair-Id%3DK2NXBXLF010TJW&wdOrigin=BROWSELINK" class="btn-download" target="_blank">
+              Eynritts-Liste herunterladen
+            </a>
+            <a href="https://cdn.website-editor.net/s/7eedee3b3d6c4ddaa47f6dd2ec757432/files/uploaded/statuten-3312-.pdf?Expires=1751123329&Signature=LhFFpQMCGI49baD8PHkJMB2UcikRJJtpG4sj4nG6q40B9qK5zW33C26sTukAtAok0Mq6vta3lqK3KgfK5ky9TlQwNzcJO7uN3LoViDlNCvE5~YsLzg9Okxgulj-IHv5ujIhwuNK3wuCg929yTKzGJ4njHrFD2XphEnpH1ynbEf5EBTAhQic7dwfklZbpCO6z-4q3F6KIvL-iOhOI2Gby5piQGNWt5hHzOVhooCNtbeAUd79QdP6AF4A4YaLXEg3lNFFf9R~9XgQeReOJ6oiHTqUF8Tjd20K8x3XB8uOrDbCg-hhkaPm0S00N22thXVN4ZA6UQ6HjH3l42l~D9q3GXg__&Key-Pair-Id=K2NXBXLF010TJW" class="btn-download" target="_blank">
+              Historische Statuten herunterladen
+            </a>
+          </div>
+        </div>
           <!-- Close Button -->
           <button class="btn-close" @click="closeModal">×</button>
         </div>
@@ -101,31 +117,25 @@
 </template>
 
 <script setup>
+import rodeGruettText  from '../data/rodeGruetteText.md?raw'
+import windjammerText  from '../data/windjammerText.md?raw'
 import { ref, computed, watch } from 'vue'
 import knights from '../data/flensburgen.json'
-import rodeGruettText from '../data/rodeGruetteText.js'
 
-// Compute HTML with line breaks and paragraphs for the poem text
-const formattedRodeGruett = computed(() => {
-  const blocks = rodeGruettText.trim().split(/\n{2,}/g)
-  return blocks
-    .map((blk, i) => {
-      const html = blk
-        .split('\n')
-        .map(l => l.trim())
-        .join('<br/>')
-      return i === 0
-        ? `<p class="center intro">${html}</p>`
-        : `<p>${html}</p>`
-    })
-    .join('')
-})
+import MarkdownIt from 'markdown-it'
+const md = new MarkdownIt()
+
+const formattedRodeGruett   = computed(() => md.render( rodeGruettText   ))
+const formattedWindjammer   = computed(() => md.render( windjammerText   ))
+
+
 
 // Category definitions for buttons
 const categories = [
   { id: 'sassen', name: 'Sassen' },
   { id: 'rode-gruett', name: 'Röde Grütt' },
-  { id: 'ehrenschlaraffen', name: 'Erz- & Ehrenschlaraffen' }
+  { id: 'ehrenschlaraffen', name: 'Erz- & Ehrenschlaraffen' },
+  { id: 'kilianischer-windjammerorden', name: 'Kilianischer Windjammerorden' }
 ]
 
 // Reactive state for which modal is open
@@ -274,7 +284,19 @@ body.modal-open { overflow: hidden }
   max-height: 65vh;
   padding: 1rem;
 }
+.modal-text .text-content {
+  font-family: Georgia, “Times New Roman”, serif;
+  font-size: 1rem;
+  line-height: 1.5; 
+}
 
+.modal-text.poem .text-content p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;        
+  line-height: 1;
+  margin-right: 0.5rem;
+  font-family: serif;     
+}
 /* ---------------- */
 /* Sassen Modal     */
 /* ---------------- */
@@ -401,4 +423,63 @@ body.modal-open { overflow: hidden }
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+.modal-windjammer p:first-of-type::first-letter {
+  float: left;
+  font-size: 3rem;
+  line-height: 1;
+  margin-right: .5rem;
+  font-family: serif;
+}
+
+.modal-windjammer {
+  column-count: 1;
+  column-gap: 0;
+}
+.modal-windjammer h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-windjammer h3.wj-intro {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.modal-windjammer ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.modal-windjammer li {
+  margin-bottom: .5rem;
+}
+
+.modal-windjammer .text-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.download-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-download {
+  padding: 0.75rem 1.25rem;
+  background: #0056a6;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-download:hover {
+  background: #003f7d;
+}
+
 </style>
