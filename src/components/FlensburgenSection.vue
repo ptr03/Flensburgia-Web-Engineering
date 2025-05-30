@@ -245,6 +245,9 @@ body.modal-open { overflow: hidden }
   width: auto;
   padding: 1rem 1.5rem;
 }
+.category-button:nth-child(4) {
+  animation-delay: 1.4s; /* was 1.2s + 0.2s */
+}
 
 /* Close button */
 .btn-close {
