@@ -54,7 +54,6 @@ const navLinks = [
   { name: 'Flensburgia',                     path: '/' },
   { name: 'Sippungsfolge',                   path: '/sippungsfolge' },
   { name: 'Die Flensburgen',                 path: '/die-flensburgen' },
-  { name: 'Sassen',                          path: '/sassen' },
   { name: 'Kilianischer Windjammerorden',    path: '/windjammerorden' },
   { name: 'Dictionary',                        path: '/dictionary' },
   { name: 'Über Uns',                        path: '/about' },
