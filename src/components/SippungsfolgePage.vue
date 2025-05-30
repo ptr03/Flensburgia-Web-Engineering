@@ -1,10 +1,9 @@
 <template>
   <div class="sippungs-page">
-    <!-- Hero-like header on white background -->
     <section class="hero-plain">
       <div class="content-wrapper">
         <h1 class="hero-title">Sippungsfolge</h1>
-        <h2 class="welcome-text">Unsere Treffen von Oktober bis April</h2>
+        <h2 class="welcome-text">Unsere Treffen von April bis Oktober</h2>
       </div>
     </section>
     <SippungsfolgeSection />
@@ -32,7 +31,7 @@ onMounted(() => {
 
 .hero-plain {
   padding-top: 64px;
-  min-height: 30vh;  /* Reduced height */
+  min-height: 30vh;  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,6 +66,6 @@ onMounted(() => {
   color: black;
   font-size: clamp(1.5rem,3vw,2.5rem);
   font-weight: 300;
-  margin-top: 0.25rem;  /* Reduced spacing */
+  margin-top: 0.25rem;  
 }
 </style>
