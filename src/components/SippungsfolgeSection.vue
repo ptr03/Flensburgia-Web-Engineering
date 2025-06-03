@@ -1,20 +1,27 @@
+<!-- src/components/SippungsfolgeSection.vue -->
 <template>
   <section class="sippungs-section">
     <div class="months-container">
-      <div v-for="(group, gIdx) in grouped" :key="gIdx" class="month-group">
-        <h3 class="month-title">{{ group.label }}</h3>
+      <div
+        v-for="(group, gIdx) in grouped"
+        :key="gIdx"
+        class="month-group"
+      >
+        <h3 class="month-title animate-fade-in delay-200">
+          {{ group.label }}
+        </h3>
 
         <div class="sippungs-grid">
-          <button                 
+          <button
             v-for="(item, idx) in group.items"
             :key="idx"
-            class="sippungs-card"
+            class="sippungs-card animate-fade-in"
             :style="{ animationDelay: `${idx * 100}ms` }"
             @click="open(item)"
           >
             <div class="card-header">
-              <span  class="card-id">{{ item.id ? `#${item.id}` : '' }}</span>
-              <time  class="card-date">{{ item.date }}</time>
+              <span class="card-id">{{ item.id ? `#${item.id}` : '' }}</span>
+              <time class="card-date">{{ item.date }}</time>
             </div>
             <p class="card-title">{{ item.title }}</p>
           </button>
@@ -22,11 +29,7 @@
       </div>
     </div>
 
-    <SippungsModal
-      v-if="selected"
-      :item="selected"
-      @close="close"
-    />
+    <SippungsModal v-if="selected" :item="selected" @close="close" />
   </section>
 </template>
 
@@ -35,51 +38,57 @@ import items from '../data/sippungsfolge.json'
 import { computed, ref } from 'vue'
 import SippungsModal from './SippungsModal.vue'
 
-const toDate = (str) => {
+const toDate = str => {
   const [d, m, y] = str.split('.').map(Number)
   return new Date(y, m - 1, d)
 }
+
 const sortedItems = computed(() =>
   [...items].sort((a, b) => toDate(b.date) - toDate(a.date))
 )
 
 const grouped = computed(() => {
   const map = new Map()
-
   sortedItems.value.forEach(item => {
     const [ , m, y ] = item.date.split('.')
-    const key = `${m}.${y}`                      
-    const label = new Date(y, m - 1).toLocaleString(
-      'de-DE',
-      { month: 'long', year: 'numeric' }        
-    )
-
+    const key = `${m}.${y}`
+    const label = new Date(y, m - 1).toLocaleString('de-DE', {
+      month: 'long',
+      year: 'numeric'
+    })
     if (!map.has(key)) map.set(key, { label, items: [] })
-    map.get(key).items.push(item)               
+    map.get(key).items.push(item)
   })
-
-  return Array.from(map.values())                
+  return Array.from(map.values())
 })
-const selected = ref(null)          
-function open(item) { selected.value = item }
-function close()     { selected.value = null }
+
+const selected = ref(null)
+function open(item) {
+  selected.value = item
+}
+function close() {
+  selected.value = null
+}
 </script>
 
 <style scoped>
 .sippungs-section {
   padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   padding-top: clamp(2rem, 5vw, 3rem);
-  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+  background: #ffffff;
 }
 
 .month-group + .month-group {
   margin-top: clamp(3rem, 6vw, 4rem);
 }
 
+/* =============================== */
+/* Month Title – Blau (schwarz f. Text) */
+/* =============================== */
 .month-title {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 700;
-  color: #2d3748;
+  color: #0ea5e9; /* helleres Blau */
   text-align: center;
   margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
   position: relative;
@@ -94,31 +103,21 @@ function close()     { selected.value = null }
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: var(--color-primary);
+  background: #0ea5e9; /* helleres Blau */
 }
 
+/* =============================== */
+/* Sippungs-Grid & Cards           */
+/* =============================== */
 .sippungs-grid {
   display: flex;
-  flex-wrap: nowrap;      
-  overflow-x: scroll;         
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: clamp(1.5rem, 3vw, 2rem);
   padding-bottom: 1rem;
   scroll-snap-type: x mandatory;
   align-items: flex-start;
 }
-
-.sippungs-grid::-webkit-scrollbar {
-  height: 8px;
-}
-.sippungs-grid::-webkit-scrollbar-track {
-  background: #e2e8f0;         
-  border-radius: 4px;
-}
-.sippungs-grid::-webkit-scrollbar-thumb {
-  background: var(--color-primary);  
-  border-radius: 4px;
-}
-
 
 .sippungs-grid::-webkit-scrollbar {
   height: 8px;
@@ -134,34 +133,44 @@ function close()     { selected.value = null }
 .sippungs-card {
   flex: 0 0 260px;
   scroll-snap-align: start;
-  background: none;
-  border-radius: var(--radius-md);
-  border: 0px;
-  box-shadow: var(--shadow-sm);
+  background: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor:pointer;
-  display:flex;
+  cursor: pointer;
+  display: flex;
   flex-direction: column;
-  background: #ffffff;
 }
-.sippungs-card:focus-visible { outline:3px solid var(--color-primary); }
+
+.sippungs-card:focus-visible {
+  outline: 3px solid #0ea5e9;
+}
 .sippungs-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* =============================== */
+/* Card Header – Hellblau + Schwarz */
+/* =============================== */
 .card-header {
   position: relative;
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
   width: 100%;
 }
 
@@ -170,7 +179,7 @@ function close()     { selected.value = null }
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #ebf8ff;
+  color: #000000;
   font-weight: 600;
 }
 
@@ -179,7 +188,7 @@ function close()     { selected.value = null }
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #c6f6d5;
+  color: #000000;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -191,6 +200,28 @@ function close()     { selected.value = null }
   font-weight: 500;
   color: #2d3748;
   text-align: center;
-  background: #ffffff;
+}
+
+/* =============================== */
+/* Fade-In Hilfs-Klassen           */
+/* =============================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
 }
 </style>

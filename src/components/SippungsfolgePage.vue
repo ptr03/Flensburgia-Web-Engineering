@@ -1,3 +1,4 @@
+<!-- src/pages/SippungsPage.vue -->
 <template>
   <div class="sippungs-page">
     <section class="hero-plain">
@@ -12,13 +13,13 @@
 
 <script setup>
 import { onMounted, nextTick } from 'vue'
-import SippungsfolgeSection from './SippungsfolgeSection.vue'
+import SippungsfolgeSection from '../components/SippungsfolgeSection.vue'
 
 onMounted(() => {
   nextTick(() => {
-    document.querySelectorAll('.hero-title, .welcome-text').forEach(el => {
-      el.classList.add('animate-in')
-    })
+    document
+      .querySelectorAll('.hero-title, .welcome-text')
+      .forEach(el => el.classList.add('animate-in'))
   })
 })
 </script>
@@ -31,7 +32,7 @@ onMounted(() => {
 
 .hero-plain {
   padding-top: 64px;
-  min-height: 30vh;  
+  min-height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,11 +45,14 @@ onMounted(() => {
   padding: 0 1.5rem;
 }
 
+/* =============================== */
+/* Fade-In Animation for Titles    */
+/* =============================== */
 .hero-title,
 .welcome-text {
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate-in {
@@ -56,16 +60,25 @@ onMounted(() => {
   transform: translateY(0) !important;
 }
 
+/* =============================== */
+/* Hero Title – Gradient Styling   */
+/*            */
+/* =============================== */
 .hero-title {
-  color: black;
-  font-size: clamp(2.5rem,6vw,4rem);
-  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(to right, #0ea5e9, #0369a1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
 }
 
 .welcome-text {
-  color: black;
-  font-size: clamp(1.5rem,3vw,2.5rem);
+  color: #334155;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 300;
-  margin-top: 0.25rem;  
+  margin-top: 0.25rem;
 }
 </style>
