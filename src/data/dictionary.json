@@ -1,0 +1,443 @@
+[
+  {
+    "term": "Schlaraffia",
+    "definition": "Eine weltweite kulturelle und gesellige Vereinigung, gegründet 1859 in Prag, die sich der Pflege von Freundschaft, Kunst und Humor verschrieben hat. Die Mitglieder treffen sich in einem spielerisch mittelalterlich inspirierten Ambiente, um Witz, Kreativität und Gemeinschaft zu feiern.",
+    "kategorie": "Organisation",
+    "beispiel": "Die Schlaraffia Flensburgia wurde 1973 ins Leben gerufen und gehört zum Bund Deutscher Schlaraffen.",
+    "herkunft": "Vom althochdeutschen „scalrahhī“ (Faulheit, Spaß)"
+  },
+  {
+    "term": "Schlaraffe",
+    "definition": "Ein Mitglied der Schlaraffia, das sich einen künstlerischen Pseudonym-Namen zulegt und an den humoristischen, kulturellen und brüderlichen Aktivitäten der Ordensgemeinschaft teilnimmt.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Als Schlaraffe nahm Rt Humorista an der letzten Sippung teil und hielt eine humorvolle Laudatio.",
+    "herkunft": "Deutsch, abgeleitet von „Schlaraffia“"
+  },
+  {
+    "term": "Reych",
+    "definition": "Ein lokales Kapitel oder „Reich“ der Schlaraffia. Jeder Reych hat eigene Farben, Statuten und Traditionen, folgt jedoch den übergeordneten Prinzipien des Bundes.",
+    "kategorie": "Organisation",
+    "beispiel": "Der Reych Flensburgia feierte letztes Wochenende sein 50-jähriges Bestehen.",
+    "herkunft": "Mittelhochdeutsch „rîch“ (Reich, Herrschaft)"
+  },
+  {
+    "term": "Sippung",
+    "definition": "Die formelle Versammlung eines Reych, die in der Regel monatlich stattfindet und durch Rituale, humoristische Reden, Lieder und gemeinsame Mahlzeiten gekennzeichnet ist.",
+    "kategorie": "Ritual/Event",
+    "beispiel": "Die nächste Sippung der Flensburgia findet am 12. Mai um 19 Uhr im Burgkeller statt.",
+    "herkunft": "Althochdeutsch „sippo“ (Sippe, Gemeinschaft)"
+  },
+  {
+    "term": "Burg",
+    "definition": "Der Versammlungsort eines Reych während einer Sippung. Traditionell als „Festungssaal“ oder „Rittersaal“ gestaltet und in den Farben sowie Symbolen des Reyches geschmückt.",
+    "kategorie": "Ort",
+    "beispiel": "Die Burg der Flensburgia erstrahlt bei jeder Sippung in den Farben Rot und Gold.",
+    "herkunft": "Deutsch „Burg“ (Festung, Schloss)"
+  },
+  {
+    "term": "Schlaraffenfarben",
+    "definition": "Die charakteristischen Farben und Embleme, die jeder Reych führt. Sie erscheinen auf Abzeichen, Bannern, Halsketten und anderen Regalien während offizieller Veranstaltungen.",
+    "kategorie": "Symbolik",
+    "beispiel": "Die Schlaraffenfarben der Flensburgia sind Blau, Weiß und Silber.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Farben“"
+  },
+  {
+    "term": "Schlaraffenspruch",
+    "definition": "Ein humorvoller, oft gereimter oder archaisch klingender Wahlspruch oder Trinkspruch, der während der Versammlungen rezitiert wird und den geistvollen, scherzhaften Geist der Schlaraffia zum Ausdruck bringt.",
+    "kategorie": "Tradition",
+    "beispiel": "„Prosit Schlaraffia – Freundschaft blühe!“ ist ein klassischer Schlaraffenspruch.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Spruch“"
+  },
+  {
+    "term": "Schlaraffenlied",
+    "definition": "Ein gemeinsames Lied, das von Schlaraffen zu Beginn oder zum Abschluss einer Sippung gesungen wird. Die Texte preisen Freundschaft, Kunst und Humor und sind häufig in altertümlicher Sprache verfasst.",
+    "kategorie": "Tradition",
+    "beispiel": "Zum Auftakt jedes Festmahles wird das Schlaraffenlied gesungen, begleitet von Triangel und Trommel.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffia“ und „Lied“"
+  },
+  {
+    "term": "Schlaraffenmahl",
+    "definition": "Das feierliche Mahl, das während einer Sippung gereicht wird. Es besteht aus traditionell zubereiteten Speisen und Getränken. Die Reihenfolge des Essens und der Trinksprüche folgt festen, ritualisierten Abläufen.",
+    "kategorie": "Tradition",
+    "beispiel": "Beim Schlaraffenmahl wurden Gansbraten und Met gereicht, begleitet von Reden und Liedern.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffia“ und „Mahl“"
+  },
+  {
+    "term": "Visitenkarte",
+    "definition": "Eine kleine, farbig gestaltete Karte, auf der ein Schlaraffe seinen Pseudonym-Namen, die Reych-Farben und oft ein persönliches Wappen präsentiert. Beim Abschied werden Visitenkarten ausgetauscht.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Am Ende der Sippung überreichte jeder Schlaraffe seine Visitenkarte als Zeichen der Verbundenheit.",
+    "herkunft": "Deutsch „Visitenkarte“ mit schlaraffischem Design"
+  },
+  {
+    "term": "Schlaraffenpost",
+    "definition": "Das Vereinsblatt oder Bulletin eines Reych, in dem Ankündigungen, Berichte über vergangene Sippungen, künstlerische Beiträge und humoristische Artikel für die Mitglieder veröffentlicht werden.",
+    "kategorie": "Publikation",
+    "beispiel": "Die aktuelle Ausgabe der Schlaraffenpost enthält Berichte über das Burgfest und kommende Veranstaltungen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Post“"
+  },
+  {
+    "term": "Schlaraffenrede",
+    "definition": "Eine feierliche, oft satirisch-überzogene Rede, die ein Mitglied während einer Sippung hält. Sie ist in altertümlicher Sprache verfasst und würdigt besondere Anlässe oder herausragende Schlaraffen.",
+    "kategorie": "Ritual",
+    "beispiel": "Rt Lyrikus hielt eine Schlaraffenrede zur Ehrung des neu ernannten Burgmaiers.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Rede“"
+  },
+  {
+    "term": "Schlaraffenhauptmann",
+    "definition": "Der leitende Offizier einer Sippung, verantwortlich für den ordnungsgemäßen Ablauf, die Begrüßung der Teilnehmer und das Einhalten der Zeremonienordnung.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Schlaraffenhauptmann eröffnete die Sippung mit einem herzlichen Gruß an alle Anwesenden.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Hauptmann“"
+  },
+  {
+    "term": "Burgmaier",
+    "definition": "Ein verantwortliches Mitglied eines Reych, das sich um Finanzen, Logistik und Organisation kümmert. Der Burgmaier wird mit Respekt als „Euer Gnaden“ angesprochen.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Burgmaier Rhomanus legte den Jahresbericht über alle Einnahmen und Ausgaben vor.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Burg“ (Veranstaltungsort) und „Meier“ (Verwalter)"
+  },
+  {
+    "term": "Marschall",
+    "definition": "Ein Zeremonienmeister eines Reych, zuständig für die Einhaltung der Sitzordnung, die musikalische Begleitung und die Inszenierung der Einzüge und Abzüge der Teilnehmer.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Marschall leitete den Einzug der Ehrenschlaraffen mit Trompetenfanfaren.",
+    "herkunft": "Deutsch, aus mittelhochdeutsch „marschal“ (Pferdepfleger, später Zeremonienmeister)"
+  },
+  {
+    "term": "Herold",
+    "definition": "Der Ansager eines Reych, der Redner ankündigt, Ehrengäste vorstellt und offizielle Bekanntmachungen während der Sippung verkündet.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Herold verkündete feierlich den Beginn der Laudatio für Rt Venerabilis.",
+    "herkunft": "Deutsch, mittelalterlicher Titel für Ansager und Zeremonienhelfer"
+  },
+  {
+    "term": "Kanzler",
+    "definition": "Der Schreiber eines Reych, der Protokolle führt, Einträge in die Strafbibel vornimmt und die Mitgliederlisten pflegt.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Kanzler Epistola vermerkte alle Strafsprüche in der großen Pœna-Bibel.",
+    "herkunft": "Lateinisch „cancellarius“ (Schreiber, Kanzleibeamter)"
+  },
+  {
+    "term": "Schreiber",
+    "definition": "Ein Assistent des Kanzlers, der insbesondere für das akribische Schreiben von Versklatsch (Strafzetteln) und die Pflege der Gedächtnisbücher zuständig ist.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Schreiber Notarius verfasste die Einsegnung in stilvoller, altertümlicher Schreibschrift.",
+    "herkunft": "Deutsch, aus „schreiben“"
+  },
+  {
+    "term": "Strafbibel",
+    "definition": "Das „Pœna-Buch“ eines Reych, in dem sämtliche leichten Vergehen (häufig humorvoll gemeint) und die dazu verhängten Strafsprüche festgehalten werden. Bußen werden in der Regel durch künstlerische Beiträge oder Trinksprüche geleistet.",
+    "kategorie": "Archiv",
+    "beispiel": "Wer das Schlaraffenlied vergaß, landete in der Strafbibel und musste einen Gstanzl (humorvolles Gedicht) verfassen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Strafe“ und „Bibel“"
+  },
+  {
+    "term": "Schlaraffenchronik",
+    "definition": "Die offizielle Chronik eines Reych, in der alle bedeutsamen Ereignisse, Ehrungen und Jubelfeiern dokumentiert werden. Wird in der Regel über Generationen hinweg gepflegt.",
+    "kategorie": "Archiv",
+    "beispiel": "In der aktuellen Schlaraffenchronik kann man die Gründung der Flensburgia noch einmal nachlesen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Chronik“"
+  },
+  {
+    "term": "Zabobecher",
+    "definition": "Ein kleiner, kunstvoll verzierter Trinkbecher, der traditionell zum Trinken von Met (Honigwein) verwendet wird. Er wird bei feierlichen Anlässen in der Sippung herumgereicht.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Mit dem Zabobecher stießen alle Schlaraffen auf das Wohl des neuen Herolds an.",
+    "herkunft": "Deutsch, aus slawischem „zaboba“ (Festmahl, Trinkgelage)"
+  },
+  {
+    "term": "Zabobrede",
+    "definition": "Eine kurze humoristische Ansprache oder ein Trinkspruch, der beim Überreichen des Zabobechers gehalten wird. Meist in altertümlicher Sprache verfasst und geläutet durch ein lautes „Prost Schlaraffia!“",
+    "kategorie": "Tradition",
+    "beispiel": "Mit einer prächtigen Zabobrede ehrte Rt Eloquenz den neu aufgenommenen Schlaraffen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Zabo“ (Feierlaut) und „Rede“"
+  },
+  {
+    "term": "Fest- und Trauermahl",
+    "definition": "Ein besonderes Mahl, das zur Feier eines Jubiläums oder zum Gedenken an verstorbene Schlaraffen veranstaltet wird. Umfasst das Vortragen von Einsegnungen, Eulogien und das gemeinsame Gedenken in feierlichem Rahmen.",
+    "kategorie": "Ritual/Event",
+    "beispiel": "Beim Fest- und Trauermahl der Flensburgia wurde der verstorbene Ehrenburgmaier feierlich gewürdigt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Fest“, „Trauer“ und „Mahl“"
+  },
+  {
+    "term": "Schlaraffenspruchbuch",
+    "definition": "Eine Sammlung aller gängigen Schlaraffensprüche, Liedertexte, Laudationes und Rituale eines Reych. Dient neuen Mitgliedern als Leitfaden für Zeremonien und Reden.",
+    "kategorie": "Publikation",
+    "beispiel": "Neulinge erhalten bei Eintritt ein Exemplar des Schlaraffenspruchbuchs zur Einarbeitung.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“, „Spruch“ und „Buch“"
+  },
+  {
+    "term": "Schlaraffenfriede",
+    "definition": "Der feierliche Moment in einer Sippung, wenn alle Streitigkeiten begraben werden. Symbolisiert durch einen gemeinsamen Trinkspruch und das Ablegen aller Zwistigkeiten zugunsten der Freundschaft.",
+    "kategorie": "Ritual",
+    "beispiel": "Am Ende der Versammlung wurde der Schlaraffenfriede geschlossen und alle Differenzen versöhnt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Friede“"
+  },
+  {
+    "term": "Titel-Schlaraffen",
+    "definition": "Ehrenmitglieder eines Reych, die aufgrund besonderer Verdienste oder langjähriger Mitgliedschaft mit einem Ehrentitel ausgezeichnet werden (z. B. Ehrenschlaraffen, Erzschlaraffen).",
+    "kategorie": "Rang",
+    "beispiel": "Im Rahmen der Jubiläumssippung wurde Rt Emeritus als Erzschlaraffe gewürdigt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Titel“ und „Schlaraffe“"
+  },
+  {
+    "term": "Ehrenschlaraffe",
+    "definition": "Ein Mitgliederstatus, der Schlaraffen verliehen wird, die außergewöhnliche Verdienste um den Reych oder den Bund erbracht haben. Sie haben meist lebenslanges Stimm- und Rederecht, jedoch oft von Verpflichtungen befreit.",
+    "kategorie": "Rang",
+    "beispiel": "Der langjährige Burgmaier Rt Fidelio wurde zum Ehrenschlaraffen ernannt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Ehren“ und „Schlaraffe“"
+  },
+  {
+    "term": "Erzschlaraffe",
+    "definition": "Die höchste Ehrung, die ein Schlaraffe in einem Reych erreichen kann. Nur wenigen werden aufgrund herausragender Leistungen im künstlerisch-kulturellen Bereich oder für außergewöhnliches Engagement verliehen.",
+    "kategorie": "Rang",
+    "beispiel": "Nach fünfzigjähriger Mitgliedschaft und zahlreichen Verdiensten wurde Rt Magnus Aureus zum Erzschlaraffen proklamiert.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Erz-“ (hochsteigend) und „Schlaraffe“"
+  },
+  {
+    "term": "Schlaraffenkalender",
+    "definition": "Ein Jahresprogramm eines Reych, in dem alle geplanten Sippungen, Fest- und Trauermahle, Ausflüge und besonderen Veranstaltungen verzeichnet sind. Häufig als gedrucktes Heft oder Online-PDF erhältlich.",
+    "kategorie": "Publikation",
+    "beispiel": "Der neue Schlaraffenkalender für 2025 listet zehn Sippungen und drei regionale Treffen auf.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Kalender“"
+  },
+  {
+    "term": "Schlaraffenruf",
+    "definition": "Ein kurzer, kräftiger Ruf oder Juchzer, mit dem die Schlaraffen eine besonders gelungene Darbietung oder Rede würdigen. Oft begleitet von Applaus und Gelächter.",
+    "kategorie": "Tradition",
+    "beispiel": "Am Ende der Laudatio ertönte ein lauter Schlaraffenruf: „Hurra für den Jubilar!“",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Ruf“"
+  },
+  {
+    "term": "Pöna",
+    "definition": "Die Buße oder Strafe, die ein Schlaraffe für ein leichtes Vergehen („Schlitzigkeit“) während einer Sippung leisten muss. Meist in Form eines humorvollen Beitrags (Gedicht, Lied) oder einer öffentlichen Selbsterniedrigung.",
+    "kategorie": "Ritual",
+    "beispiel": "Weil Rt Ulrich beim Schlaraffenlied den falschen Text sang, musste er für seine Pöna einen Gstanzl vortragen.",
+    "herkunft": "Deutsch, abgeleitet von mittelhochdeutsch „pœna“ (Strafe, Buße)"
+  },
+  {
+    "term": "Pöngebuch",
+    "definition": "Das Buch oder Dokument, in dem alle verhängten Pönas („Strafen“) eines Reych festgehalten werden. Dient als humoristische Chronik der kleinen Fehltritte und der darauf folgenden Bußleistungen.",
+    "kategorie": "Archiv",
+    "beispiel": "Der Kanzler trug jede amüsante Pöna in das gelbe Pöngebuch ein.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Pöna“ und „Buch“"
+  },
+  {
+    "term": "Kränzlein",
+    "definition": "Ein kleiner Kreis innerhalb eines Reych, der sich zu Sonderthemen (z. B. Gesang, Dichtung, Historik) trifft. Oft initiieren Kränzlein eigene kulturelle Beiträge, die in die Sippung eingebunden werden.",
+    "kategorie": "Organisationseinheit",
+    "beispiel": "Das Kränzlein „Minne und Musik“ traf sich wöchentlich, um neue Schlaraffenlieder zu komponieren.",
+    "herkunft": "Deutsch, Verkleinerungsform von „Kranz“ (Versammlung, Zirkel)"
+  },
+  {
+    "term": "Schlaraffenorden",
+    "definition": "Eine besondere Ehrenauszeichnung, die einem Schlaraffen für herausragende Verdienste um Kunst, Humor oder Gemeinschaft verliehen wird. Wird in Form einer Kette, einer Plakette oder eines speziellen Abzeichens getragen.",
+    "kategorie": "Ehrung",
+    "beispiel": "Rt Serenitas wurde der „Orden der klingenden Feder“ verliehen, als Auszeichnung für seine literarischen Beiträge.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Orden“"
+  },
+  {
+    "term": "Schlaraffenbankett",
+    "definition": "Ein festlicher, oft groß angelegter Anlass im Jahreskalender eines Reych, bei dem auswärtige Gäste, Ehrenschlaraffen und benachbarte Reyche eingeladen werden. Umfasst häufig feierliche Reden, musikalische Darbietungen und gemeinsames Festmahl.",
+    "kategorie": "Ritual/Event",
+    "beispiel": "Jedes Frühjahr richtet die Flensburgia ein Schlaraffenbankett aus, zu dem auch der Bundesherold anreist.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Bankett“"
+  },
+  {
+    "term": "Schlaraffenfanfare",
+    "definition": "Ein kurzes, festliches Fanfarenstück, das zur musikalischen Eröffnung oder zum feierlichen Abschluss einer Sippung geblasen wird. Symbolisiert den Einzug und die feierliche Würde der Versammlung.",
+    "kategorie": "Tradition",
+    "beispiel": "Bevor die Ehrenschlaraffen einzogen, erklang eine prächtige Schlaraffenfanfare vom Burgbalkon.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Fanfare“"
+  },
+  {
+    "term": "Schlaraffenakademie",
+    "definition": "Eine Lehr- und Diskussionsrunde innerhalb eines Reych, in der Mitglieder ihre künstlerischen, literarischen oder wissenschaftlichen Themen vorstellen. Dient der Weiterbildung und Inspiration aller Schlaraffen.",
+    "kategorie": "Ritual",
+    "beispiel": "Im Rahmen der Schlaraffenakademie hielt Rt Scientia einen Vortrag über mittelalterliche Minnelyrik.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Akademie“"
+  },
+  {
+    "term": "Stammbuch",
+    "definition": "Ein privates Buch, das oft von einem Schlaraffen-Neuling beim Eintritt in einen Reych verfasst wird. Enthält Einträge anderer Schlaraffen mit Sprüchen, Segenswünschen und Schlaraffenweisheiten als persönliche Erinnerung.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Jeder Ehrenschlaraffe verewigte seine Grüße im Stammbuch von Rt Novize.",
+    "herkunft": "Deutsch, traditionell „Stammbuch“ für Erinnerungen und Autogramme"
+  },
+  {
+    "term": "Conventikel",
+    "definition": "Ein informelles Zusammentreffen der Schlaraffen außerhalb der regulären Sippung, häufig in kleineren Gruppen und ohne formelle Zeremonien. Dient der Pflege persönlicher Kontakte und künstlerischer Proben.",
+    "kategorie": "Ritual",
+    "beispiel": "Das Conventikel der Flensburgia traf sich jeden Mittwoch zur Liedprobe.",
+    "herkunft": "Lateinisch „conventiculum“ (kleines Treffen)"
+  },
+  {
+    "term": "Laudator",
+    "definition": "Ein Schlaraffe, der in einer offiziellen Laudatio (Lobrede) die Verdienste eines anderen Schlaraffen oder Ereignisse einer Sippung würdigt. Verwendet kunstvollen, humorvollen Sprachstil.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Rt Eloquenz diente als Laudator und glänzte mit einer pointierten Rede auf den Jubilar.",
+    "herkunft": "Lateinisch „laudator“ (Lobredner)"
+  },
+  {
+    "term": "Galliarde",
+    "definition": "Ein mehrstimmiges Lied oder Gedicht, das eine fröhliche oder freche Geschichte erzählt. Wird bei Schlaraffensitzungen musiziert oder rezitiert, um die Stimmung zu beleben.",
+    "kategorie": "Kulturbeitrag",
+    "beispiel": "Während des Banketts trug Rt Musica eine selbstgeschriebene Galliarde vor.",
+    "herkunft": "Italienisch „gagliarda“ (fröhlicher Tanz, Versform)"
+  },
+  {
+    "term": "Stetstein",
+    "definition": "Ein schlichter, symbolischer Stein, den Neulinge in die Mitte der Burg legen, um ihre Standhaftigkeit und Treue zur Gemeinschaft zu bezeugen. Der Stein bleibt häufig als Erinnerungsstück im Burgraum liegen.",
+    "kategorie": "Symbol",
+    "beispiel": "Beim Eintrittsritual legte Rt Constantia den Stetstein feierlich am Tor der Burg ab.",
+    "herkunft": "Deutsch, abgeleitet von „Stetigkeit“ (Standfestigkeit) und „Stein“"
+  },
+  {
+    "term": "Burgfräulein",
+    "definition": "Eine Partnerin oder Lady, die bei besonderen Gelegenheiten eingeladen wird, um das Ambiente einer Sippung zu bereichern. Sitzt häufig in einer Ehrenloge und nimmt an ausgewählten Zeremonien teil.",
+    "kategorie": "Rolle",
+    "beispiel": "Das Burgfräulein Allegra wurde feierlich begrüßt und nahm an der Liedrunde teil.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Burg“ und „Fräulein“"
+  },
+  {
+    "term": "Lorbeerkranz",
+    "definition": "Ein symbolischer Kranz aus Lorbeerblättern, der während der Ehrung eines besonderen Schlaraffen auf dessen Haupt gelegt wird. Steht für Ehre, Würde und künstlerische Vollendung.",
+    "kategorie": "Symbol",
+    "beispiel": "Als Zeichen höchster Anerkennung wurde dem Erzschlaraffen Anton der Lorbeerkranz aufgesetzt.",
+    "herkunft": "Lateinisch „laurus“ (Lorbeer) und „Kranz“"
+  },
+  {
+    "term": "Schlaraffenbank",
+    "definition": "Eine lange Bank oder Sitzgelegenheit in der Burg, auf der die Schlaraffen während der Sippung Platz nehmen. Oft eigens an das Farbschema des Reyches angepasst.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Die eigens gefertigte Schlaraffenbank wurde vom Schreiner Rt Artium gestaltet.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Bank“"
+  },
+  {
+    "term": "Minne",
+    "definition": "Die Kunst der höfischen Liebe, die in Schlaraffia-Kreisen als allegorisches Motiv aufgegriffen wird. Minnelyrik und Gedichte über Tugend und Zuneigung sind fester Bestandteil vieler Sippungen.",
+    "kategorie": "Kulturbeitrag",
+    "beispiel": "Rt Amor verzauberte mit seiner Minne-Darbietung die Zuhörerinnen und Zuhörer gleichermaßen.",
+    "herkunft": "Mittelhochdeutsch „minne“ (Liebe, Zuneigung)"
+  },
+  {
+    "term": "Schlaraffenakademiker",
+    "definition": "Ein Ehrentitel für Schlaraffen, die sich durch besondere künstlerische, literarische oder wissenschaftliche Beiträge auszeichnen. Sie geben oftmals Lehrvorträge in der Schlaraffenakademie.",
+    "kategorie": "Rang",
+    "beispiel": "Rt DoctorWitz wurde zum Schlaraffenakademiker ernannt, nachdem er seine Forschung über mittelalterliche Lyrik vorgestellt hatte.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Akademiker“"
+  },
+  {
+    "term": "Schlaraffenkelch",
+    "definition": "Ein großer, oft kunstvoll verzierter Trinkkelch, der beim Festmahl herumgereicht wird, um Met oder Wein zu reichen. Symbolisiert die Großzügigkeit und Gemeinschaft des Ordens.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Mit dem Schlaraffenkelch wurde auf den neuen Burgmaier angestoßen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Kelch“"
+  },
+  {
+    "term": "Schlaraffenrichter",
+    "definition": "Ein gewähltes Mitglied, das bei kleineren Streitigkeiten oder Unstimmigkeiten innerhalb eines Reych als Schiedsrichter fungiert. Entscheidet humorvoll, aber bindend, über Pönas und Bußleistungen.",
+    "kategorie": "Rollenbezeichnung",
+    "beispiel": "Der Schlaraffenrichter Rt Justus entwarf eine gerechte Strafe für den vergessenen Schlaraffenspruch.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Richter“"
+  },
+  {
+    "term": "Schlaraffenleucht",
+    "definition": "Eine spezielle Kerze oder Fackel, die während nächtlicher Sippungen entzündet wird, um eine festliche, stimmungsvolle Beleuchtung und mittelalterliche Atmosphäre zu schaffen.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Das Schlaraffenleucht wurde von Rt Fackelträger bei Einbruch der Dunkelheit entzündet.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Leucht“ (Leuchte)"
+  },
+  {
+    "term": "Schlaraffenloge",
+    "definition": "Ein spezieller Bereich oder Saal in der Burg, der für Ehrengäste, Ehrenschlaraffen und Besucher reserviert ist. Sitzt oft erhöht und mit den wichtigsten Insignien ausgestattet.",
+    "kategorie": "Ort",
+    "beispiel": "Die Schlaraffenloge bot Platz für alle Ehrengäste und den Bundesherold.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Loge“"
+  },
+  {
+    "term": "Schlaraffenmeister",
+    "definition": "Ein Ehrentitel für einen besonders erfahrenen Schlaraffen, der als Mentor fungiert, Neuaufnahmen in die Regeln einweist und beim Ritualablauf als Berater dient.",
+    "kategorie": "Rang",
+    "beispiel": "Der Schlaraffenmeister Rt Dominar gab dem Neuling wertvolle Tipps für seine erste Laudatio.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Meister“"
+  },
+  {
+    "term": "Schlaraffenfresko",
+    "definition": "An einer Burgwand angebrachte Wandmalerei oder Bildtafel, die bedeutende Schlaraffen-Ereignisse, Jubelzeilen oder historische Szenen darstellt. Dient der künstlerischen Erinnerungskultur.",
+    "kategorie": "Kulturdenkmal",
+    "beispiel": "Im Festsaal hängt ein Schlaraffenfresko, das die Gründungs-Sippung von 1973 zeigt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Fresko“"
+  },
+  {
+    "term": "Sippeninventar",
+    "definition": "Die Sammlung aller Utensilien, Bücher und Regalia eines Reych, die regelmäßig bei einer Sippung benutzt oder ausgestellt werden. Dazu gehören Musikinstrumente, Pöngebücher, Banner, Schlaraffenleucht und mehr.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Beim Festaufbau wurden alle Gegenstände aus dem Sippeninventar sorgfältig im Burgsaal ausgelegt.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Sippe“ (Gemeinschaft) und „Inventar“"
+  },
+  {
+    "term": "Schlaraffenfest",
+    "definition": "Ein größeres, oft jährliches Treffen mehrerer Reyche, das über mehrere Tage stattfindet. Enthält umfangreiche Feiern, gemeinsame Sippungen, Paraden und kulturelle Darbietungen in größerem Rahmen.",
+    "kategorie": "Ritual/Event",
+    "beispiel": "Beim XX. Deutschen Schlaraffenfest kamen über 500 Schlaraffen aus ganz Europa zusammen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Fest“"
+  },
+  {
+    "term": "Neutaufe",
+    "definition": "Eine symbolische Zeremonie, bei der ein neues Mitglied offiziell in den Reych aufgenommen und unter einem neuen Pseudonym getauft wird. Häufig mit allegorischen Ritualen und humoristischen Elementen verbunden.",
+    "kategorie": "Ritual",
+    "beispiel": "Die Neutaufe von Rt Novize fand unter großem Gelächter statt, als ihm sein Pseudonym „Rt Novimus“ verliehen wurde.",
+    "herkunft": "Deutsch, Zusammensetzung aus „neu“ und „Taufe“"
+  },
+  {
+    "term": "Festordnung",
+    "definition": "Das Regelwerk, das den Ablauf eines Schlaraffenbanketts oder einer Sippung in schriftlicher Form festhält. Legt Reihenfolge von Reden, Liedern, Mahlzeiten und Pönas fest.",
+    "kategorie": "Dokument",
+    "beispiel": "Gemäß der Festordnung empfing der Herold zuerst die Ehrengäste, bevor die Burgmaierin das Wort ergriff.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Fest“ und „Ordnung“"
+  },
+  {
+    "term": "Schlaraffenhandgemenge",
+    "definition": "Ein scherzhafter „Streit“ im Rahmen einer Sippung, bei dem zwei Schlaraffen spielerisch gegeneinander argumentieren oder singen, um den besten Witz oder die treffendste Laune zu präsentieren.",
+    "kategorie": "Ritual",
+    "beispiel": "Das Schlaraffenhandgemenge zwischen Rt Humorista und Rt Satiricus brachte die gesamte Versammlung zum Lachen.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Handgemenge“ (handfester Streit)"
+  },
+  {
+    "term": "Collane",
+    "definition": "Die Halskette oder -kordel, an der das offizielle Abzeichen eines Schlaraffen in Reychfarben befestigt wird. Wird vom Schlaraffenhauptmann oder einem hohen Offizier während öffentlicher Zeremonien getragen.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Der neue Hauptmann trat stolz mit der goldenen Collane des Reyches vor die versammelten Schlaraffen.",
+    "herkunft": "Lateinisch „collāna“ (Halskette)"
+  },
+  {
+    "term": "Schlaraffenbuße",
+    "definition": "Ein festgelegtes Ritual, das ein Schlaraffe vollzieht, wenn er in der Pöngebibel eingetragen wurde. Kann eine gereimte Selbsterkenntnis, ein kurzes Theaterstück oder ein musikalischer Beitrag sein.",
+    "kategorie": "Ritual",
+    "beispiel": "Für seine spät eingereichte Schlaraffenkartei musste Rt Verspätus eine abendliche Schlaraffenbuße in Form eines Gstanzls leisten.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Buße“"
+  },
+  {
+    "term": "Schlaraffenkittel",
+    "definition": "Die offizielle Robe oder Tunika, die viele Schlaraffen während formeller Anlässe und Sippungen tragen. Zeigt häufig Wappen, Orden und Reychfarben und symbolisiert die Zugehörigkeit zum Bund.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Die neuen Neumitglieder erhielten feierlich ihren Schlaraffenkittel vor dem Einzug in die Burg.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Kittel“"
+  },
+  {
+    "term": "Schlaraffensitz",
+    "definition": "Ein fest gestalteter Stuhl oder Thron, auf dem der Schlaraffenhauptmann während der Sippung Platz nimmt. Oft in den Reychfarben bemalt und mit Emblemen verziert.",
+    "kategorie": "Gegenstand",
+    "beispiel": "Der Schlaraffenhauptmann ließ sich auf seinen prunkvollen Schlaraffensitz nieder, während die Versammlung verstummte.",
+    "herkunft": "Deutsch, Zusammensetzung aus „Schlaraffe“ und „Sitz“"
+  },
+  {
+    "term": "Minnegabe",
+    "definition": "Eine künstlerische Gabe, z. B. ein Gedicht, ein Lied oder ein Kunstwerk, das ein Schlaraffe einem anderen bei einem besonderen Anlass überreicht. Ausdruck von Wertschätzung und Freundschaft.",
+    "kategorie": "Tradition",
+    "beispiel": "Als Zeichen der Anerkennung überreichte Rt Poeta seinem Burgmeister eine selbstverfasste Minnegabe.",
+    "herkunft": "Mittelhochdeutsch „minne“ (Liebe) und „Gabe“"
+  }
+]

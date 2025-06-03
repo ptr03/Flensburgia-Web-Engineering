@@ -210,9 +210,9 @@ function getImage(filename) {
   transform: translateY(20px);
   animation: fadeInUp .6s ease-out forwards;
 }
-.category-button:nth-child(1) { animation-delay: .8s }
-.category-button:nth-child(2) { animation-delay: 1s }
-.category-button:nth-child(3) { animation-delay: 1.2s }
+.category-button:nth-child(1) { animation-delay: 0.7s }
+.category-button:nth-child(2) { animation-delay: 0.8s }
+.category-button:nth-child(3) { animation-delay: 0.9s }
 .category-button:hover {
   background: #e0e0e0;
   transform: scale(1.03);
@@ -252,7 +252,7 @@ body.modal-open { overflow: hidden }
   padding: 1rem 1.5rem;
 }
 .category-button:nth-child(4) {
-  animation-delay: 1.4s; 
+  animation-delay: 1s; 
 }
 
 /* Close button */
