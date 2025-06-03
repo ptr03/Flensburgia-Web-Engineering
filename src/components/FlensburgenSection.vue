@@ -1,3 +1,4 @@
+<!-- src/components/FlensburgenSection.vue -->
 <template>
   <section class="flensburgen-section">
     <div class="category-grid">
@@ -33,7 +34,7 @@
 
           <!-- Sassen -->
           <div v-if="activeId === 'sassen'" class="modal-sassen">
-            <h2>Sassen</h2>
+            <h2 class="modal-title">Sassen</h2>
             <div class="search-wrapper">
               <input
                 v-model="search"
@@ -66,7 +67,7 @@
 
           <!-- Röde Grütt -->
           <div v-else-if="activeId === 'rode-gruett'" class="modal-text poem">
-            <h2>Röde Grütt</h2>
+            <h2 class="modal-title">Röde Grütt</h2>
             <div class="text-content" v-html="formattedRodeGruett"></div>
           </div>
 
@@ -75,7 +76,7 @@
             v-else-if="activeId === 'ehrenschlaraffen'"
             class="modal-ehrenschlaraffen"
           >
-            <h2>Erz- & Ehrenschlaraffen</h2>
+            <h2 class="modal-title">Erz- & Ehrenschlaraffen</h2>
             <div class="ehrenschlaraffen-grid">
               <img
                 v-for="fn in ['Erzschlaraffen-1920w.webp','Ehrenschlaraffen-1920w.webp']"
@@ -92,7 +93,7 @@
             v-else-if="activeId === 'kilianischer-windjammerorden'"
             class="modal-text modal-windjammer"
           >
-            <h2>Kilianischer Windjammerorden</h2>
+            <h2 class="modal-title">Kilianischer Windjammerorden</h2>
             <div class="text-content" v-html="formattedWindjammer"></div>
             <div class="download-links">
               <a
@@ -120,23 +121,19 @@
   </section>
 </template>
 
-
-
 <script setup>
-import rodeGruettText  from '../data/rodeGruetteText.md?raw'
-import windjammerText  from '../data/windjammerText.md?raw'
+import rodeGruettText from '../data/rodeGruetteText.md?raw'
+import windjammerText from '../data/windjammerText.md?raw'
 import { ref, computed, watch } from 'vue'
 import knights from '../data/flensburgen.json'
 
 import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
 
-const formattedRodeGruett   = computed(() => md.render( rodeGruettText   ))
-const formattedWindjammer   = computed(() => md.render( windjammerText   ))
+const formattedRodeGruett = computed(() => md.render(rodeGruettText))
+const formattedWindjammer = computed(() => md.render(windjammerText))
 
-
-
-// Category definitions for buttons
+// Kategorien-Definitionen
 const categories = [
   { id: 'sassen', name: 'Sassen' },
   { id: 'rode-gruett', name: 'Röde Grütt' },
@@ -144,7 +141,7 @@ const categories = [
   { id: 'kilianischer-windjammerorden', name: 'Kilianischer Windjammerorden' }
 ]
 
-// Reactive state for which modal is open
+// Modal‐State
 const activeId = ref(null)
 const openModal = id => { activeId.value = id }
 const closeModal = () => {
@@ -152,11 +149,11 @@ const closeModal = () => {
   enlargedImage.value = null
 }
 
-// State for image zoom overlay
+// Bild‐Zoom
 const enlargedImage = ref(null)
 const enlargeImage = img => { enlargedImage.value = img }
 
-// Search input for Sassen knights
+// Suche für Sassen
 const search = ref('')
 const sassenKnights = computed(() =>
   knights.filter(
@@ -169,16 +166,13 @@ const filteredKnights = computed(() =>
   )
 )
 
-// Prevent body scroll when modal is open
+// Body scroll unterbinden, wenn Modal offen ist
 watch(activeId, val => {
   document.body.classList.toggle('modal-open', !!val)
 })
 
-// Vite import helper for images
-const imageModules = import.meta.glob(
-  '../assets/pictures/flensburgen/*',
-  { eager: true }
-)
+// Bilder‐Loader via Vite
+const imageModules = import.meta.glob('../assets/pictures/flensburgen/*', { eager: true })
 function getImage(filename) {
   const path = `../assets/pictures/flensburgen/${filename}`
   return imageModules[path]?.default || ''
@@ -186,10 +180,14 @@ function getImage(filename) {
 </script>
 
 <style scoped>
-/* -------------------- */
-/* Base & Buttons       */
-/* -------------------- */
-.flensburgen-section { background: #fff; }
+/* =========================== */
+/* Base & Buttons              */
+/* =========================== */
+.flensburgen-section {
+  flex: 1;
+  background: #ffffff;
+  padding: 2rem 1.5rem;
+}
 
 .category-grid {
   display: grid;
@@ -199,42 +197,40 @@ function getImage(filename) {
 }
 
 .category-button {
-  padding: 2rem 1.5rem;
+  padding: 1.75rem 1rem;
   background: #f3f4f6;
   border: none;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp .6s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
-.category-button:nth-child(1) { animation-delay: 0.7s }
-.category-button:nth-child(2) { animation-delay: 0.8s }
-.category-button:nth-child(3) { animation-delay: 0.9s }
+.category-button:nth-child(1) { animation-delay: 0.6s }
+.category-button:nth-child(2) { animation-delay: 0.7s }
+.category-button:nth-child(3) { animation-delay: 0.8s }
+.category-button:nth-child(4) { animation-delay: 0.9s }
 .category-button:hover {
   background: #e0e0e0;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
-/* Prevent background scroll */
-body.modal-open { overflow: hidden }
-
-/* -------------------------- */
-/* Modal Overlay & Container  */
-/* -------------------------- */
+/* =========================== */
+/* Modal Overlay & Container   */
+/* =========================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 .modal-content {
-  background: #fff;
+  background: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   width: 90%;
@@ -242,20 +238,16 @@ body.modal-open { overflow: hidden }
   max-height: 75vh;
   overflow-y: auto;
   position: relative;
-  margin-top: 10vh;
-  animation: zoomIn .4s ease;
-  color: black;
+  animation: zoomIn 0.4s ease-out;
+  color: #000000;
 }
 .modal-content.compact {
   max-width: fit-content;
   width: auto;
   padding: 1rem 1.5rem;
 }
-.category-button:nth-child(4) {
-  animation-delay: 1s; 
-}
 
-/* Close button */
+/* Close Button */
 .btn-close {
   position: absolute;
   top: 1rem;
@@ -266,27 +258,26 @@ body.modal-open { overflow: hidden }
   cursor: pointer;
 }
 
-/* ---------------- */
-/* Fade & Zoom Keyframes */
-/* ---------------- */
+/* =========================== */
+/* Fade & Zoom Keyframes        */
+/* =========================== */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px) }
-  to   { opacity: 1; transform: translateY(0) }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes zoomIn {
-  from { opacity: 0; transform: scale(.9) }
-  to   { opacity: 1; transform: scale(1) }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(.95) }
-  to   { opacity: 1; transform: scale(1) }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* ------------------------------- */
-/* Modal Text (Röde Grütt Poem)   */
-/* ------------------------------- */
+/* =========================== */
+/* Modal Text (Röde Grütt)      */
+/* =========================== */
 .modal-text.poem .text-content {
-  display: block;
   text-align: center;
   white-space: pre-wrap;
   overflow-y: auto;
@@ -296,23 +287,28 @@ body.modal-open { overflow: hidden }
 .modal-text .text-content {
   font-family: Georgia, “Times New Roman”, serif;
   font-size: 1rem;
-  line-height: 1.5; 
+  line-height: 1.5;
 }
-
 .modal-text.poem .text-content p:first-of-type::first-letter {
   float: left;
-  font-size: 4rem;        
+  font-size: 4rem;
   line-height: 1;
   margin-right: 0.5rem;
-  font-family: serif;     
+  font-family: serif;
 }
-/* ---------------- */
-/* Sassen Modal     */
-/* ---------------- */
-.modal-sassen h2 { margin-bottom: .25rem }
+
+/* =========================== */
+/* Sassen Modal                */
+/* =========================== */
+.modal-sassen h2 {
+  margin-bottom: 0.5rem;
+  color: #0ea5e9; /* blau */
+  font-size: 1.75rem;
+  font-weight: 700;
+}
 
 .search-wrapper {
-  margin-bottom: .5rem;
+  margin-bottom: 0.75rem;
   display: flex;
   justify-content: center;
 }
@@ -320,17 +316,17 @@ body.modal-open { overflow: hidden }
 .search-bar {
   width: 100%;
   max-width: 400px;
-  padding: .75rem 1rem;
+  padding: 0.75rem 1rem;
   font-size: 1.125rem;
-  border: 1px solid #ccc;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: border .3s, box-shadow .3s;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 .search-bar:focus {
   outline: none;
-  border-color: #999;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.1);
 }
 
 .sassen-grid {
@@ -343,7 +339,7 @@ body.modal-open { overflow: hidden }
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  animation: fadeIn .3s ease-out;
+  animation: fadeIn 0.3s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -353,7 +349,7 @@ body.modal-open { overflow: hidden }
   object-fit: contain;
   max-height: 300px;
   cursor: zoom-in;
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 .sassen-card:hover img { transform: scale(1.05) }
 .sassen-name {
@@ -361,8 +357,8 @@ body.modal-open { overflow: hidden }
   bottom: 0;
   width: 100%;
   background: rgba(0,0,0,0.4);
-  color: #fff;
-  padding: .5rem;
+  color: #ffffff;
+  padding: 0.5rem;
   text-align: center;
   font-weight: 600;
   font-size: 1rem;
@@ -377,9 +373,9 @@ body.modal-open { overflow: hidden }
 }
 .sassen-card.single img { max-height: 50vh }
 
-/* ------------------------------- */
-/* Erz- & Ehrenschlaraffen Modal   */
-/* ------------------------------- */
+/* =========================== */
+/* Erz- & Ehrenschlaraffen Modal */
+/* =========================== */
 .ehrenschlaraffen-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -398,7 +394,7 @@ body.modal-open { overflow: hidden }
 /* Transition-group fade */
 .fade-list-enter-active,
 .fade-list-leave-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .fade-list-enter-from,
 .fade-list-leave-to {
@@ -407,16 +403,16 @@ body.modal-open { overflow: hidden }
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
 
-/* -------------------- */
-/* Image Zoom Overlay   */
-/* -------------------- */
+/* =========================== */
+/* Image Zoom Overlay           */
+/* =========================== */
 .image-zoom {
   position: fixed;
   inset: 0;
@@ -432,11 +428,15 @@ body.modal-open { overflow: hidden }
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+
+/* =========================== */
+/* Kilianischer Windjammerorden */
+/* =========================== */
 .modal-windjammer p:first-of-type::first-letter {
   float: left;
   font-size: 3rem;
   line-height: 1;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   font-family: serif;
 }
 
@@ -462,7 +462,7 @@ body.modal-open { overflow: hidden }
 }
 
 .modal-windjammer li {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .modal-windjammer .text-content p {
@@ -481,7 +481,7 @@ body.modal-open { overflow: hidden }
 .btn-download {
   padding: 0.75rem 1.25rem;
   background: #0056a6;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 6px;
   font-weight: 600;
@@ -491,4 +491,8 @@ body.modal-open { overflow: hidden }
   background: #003f7d;
 }
 
+/* Prevent background scroll */
+body.modal-open {
+  overflow: hidden;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="section flensburgen-page">
+  <div class="flensburgen-page">
     <!-- Hero Section -->
     <section class="hero-plain flense-hero">
       <div class="content-wrapper">
@@ -12,36 +12,58 @@
 
     <!-- Main Content -->
     <FlensburgenSection />
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      © 2025 Schlaraffia Flensburg. Alle Rechte vorbehalten.
+    </footer>
   </div>
 </template>
 
 <script setup>
-import FlensburgenSection from './FlensburgenSection.vue'
+import FlensburgenSection from '../components/FlensburgenSection.vue'
 </script>
 
 <style scoped>
-/* Page Background */
 .flensburgen-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: #ffffff;
 }
 
-/* Hero Section */
+/* Hier wird der Hero-Bereich etwas verkürzt, damit Buttons näher an der Beschreibung stehen */
 .flense-hero {
-  padding: clamp(3rem, 8vw, 5rem) 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+  padding: 0 1.5rem;
   background: #ffffff;
-  text-align: center;
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
+  overflow: visible; /* stellt sicher, dass nichts abgeschnitten wird */
 }
 
-/* Hero Title & Subtitle */
+.flense-hero .content-wrapper {
+  text-align: center;
+}
+
+/* Überschrift: mehr Zeilenhöhe und unteren Abstand hinzufügen, damit z.B. das "g" nicht abgeschnitten wird */
 .flense-hero .section-title {
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
   animation-delay: 0.2s;
-  color: #000;
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 2;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #0ea5e9, #0369a1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .flense-hero .section-subtitle {
@@ -49,11 +71,21 @@ import FlensburgenSection from './FlensburgenSection.vue'
   animation: fadeInUp 0.8s ease-out forwards;
   animation-delay: 0.4s;
   margin-top: 0.5rem;
-  color: #000;
-  font-size: 1.5rem;
+  color: #334155;
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
-/* Fade-In Keyframes */
+/* Footer immer unten anheften */
+.site-footer {
+  margin-top: auto;
+  background: #f8fafc;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  border-top: 1px solid #e2e8f0;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
