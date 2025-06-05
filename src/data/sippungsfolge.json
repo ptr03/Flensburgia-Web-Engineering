@@ -23,7 +23,7 @@
   { "id": 3174, "date": "13.02.2025", "title": "Aal- und Sprottensippung mit Turney" },
   { "id": 3175, "date": "20.02.2025", "title": "JunKnaSi" },
   { "id": 3176, "date": "27.02.2025", "title": "Wer hat die meisten Punkte?" },
-  { "id": 3177, "date": "06.03.2025", "title": "Jk-Prüfung/Verl.d Ritterarb.JK Thorsten / Lenzmondschlaraffiade/Passverlängerung" },
+  { "id": 3177, "date": "06.03.2025", "title": "Jk-Prüfung/Verl.d Ritterarb.JK Thorsten / Lenzmondschlaraffiade" },
   { "id": 3178, "date": "13.03.2025", "title": "Sippung der Do-Reyche in der Duburg" },
   { "id": 3179, "date": "20.03.2025", "title": "Wir machen Musik mit Burgfrauen u. Tross" },
   { "id": 3180, "date": "22.03.2025", "title": "Reychseinritt der h. Heylbronnen sowie / Ged. an die h.Kilia+h. Malmöhus mit B+T" },
@@ -36,23 +36,6 @@
   "id": 3185,
   "date": "24.04.2025",
   "title": "Wahlschlaraffiade",
-  "description": "<p>Die Wahl des neuen Reychsrats …</p>",
-  "images": [
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img1.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img2.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img3.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img4.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img5.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img6.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img7.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img8.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img9.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img10.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img11.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img12.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img12.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img13.webp",
-    "/src/assets/pictures/sippungen/3185/sippung_3185_img15.webp"
-  ]
+  "description": "<p>Die Wahl des neuen Reychsrats …</p>"
 }
 ]

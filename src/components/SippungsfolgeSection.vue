@@ -1,4 +1,3 @@
-<!-- src/components/SippungsfolgeSection.vue -->
 <template>
   <section class="sippungs-section">
     <div class="months-container">
@@ -23,36 +22,67 @@
               <span class="card-id">{{ item.id ? `#${item.id}` : '' }}</span>
               <time class="card-date">{{ item.date }}</time>
             </div>
+
             <p class="card-title">{{ item.title }}</p>
+
+            <!-- Wenn es Bilder gibt, normale Bild-Klasse nutzen -->
+            <div
+              v-if="imagesById[item.id] && imagesById[item.id].length"
+              class="single-image-wrapper"
+            >
+              <img
+                :src="imagesById[item.id][0]"
+                :alt="item.title"
+                class="real-image"
+              />
+            </div>
+
+            <!-- Wenn keine Bilder, dann Logo mit eigener Klasse -->
+            <div v-else class="single-image-wrapper">
+              <img
+                src="../assets/pictures/Flensburgia_icon.png"
+                alt="Flensburgia Logo"
+                class="fallback-logo"
+              />
+            </div>
           </button>
         </div>
       </div>
     </div>
 
-    <SippungsModal v-if="selected" :item="selected" @close="close" />
+    <SippungsModal
+      v-if="selected"
+      :item="selected"
+      :images="imagesById[selected.id] || []"
+      @close="close"
+    />
   </section>
 </template>
 
+
 <script setup>
-import items from '../data/sippungsfolge.json'
-import { computed, ref } from 'vue'
+import { ref, computed } from 'vue'
+import rawItems from '../data/sippungsfolge.json'
 import SippungsModal from './SippungsModal.vue'
 
+// 1) Datumshilfe: "DD.MM.YYYY" → Date-Objekt
 const toDate = str => {
   const [d, m, y] = str.split('.').map(Number)
   return new Date(y, m - 1, d)
 }
 
+// 2) Sortiere absteigend (neueste zuerst)
 const sortedItems = computed(() =>
-  [...items].sort((a, b) => toDate(b.date) - toDate(a.date))
+  [...rawItems].sort((a, b) => toDate(b.date) - toDate(a.date))
 )
 
+// 3) Gruppiere nach Monat.Jahr
 const grouped = computed(() => {
   const map = new Map()
   sortedItems.value.forEach(item => {
     const [ , m, y ] = item.date.split('.')
     const key = `${m}.${y}`
-    const label = new Date(y, m - 1).toLocaleString('de-DE', {
+    const label = new Date(Number(y), Number(m) - 1).toLocaleString('de-DE', {
       month: 'long',
       year: 'numeric'
     })
@@ -62,6 +92,7 @@ const grouped = computed(() => {
   return Array.from(map.values())
 })
 
+// 4) Modal‐State
 const selected = ref(null)
 function open(item) {
   selected.value = item
@@ -69,6 +100,23 @@ function open(item) {
 function close() {
   selected.value = null
 }
+
+// 5) VARIANTE B: Alle Bilder aus /src/assets/pictures/sippungen/<id>/* einlesen
+const imageModules = import.meta.glob(
+  '/src/assets/pictures/sippungen/*/*.{webp,png,jpg,jpeg}',
+  { eager: true, import: 'default' }
+)
+
+const imagesById = {}
+Object.entries(imageModules).forEach(([fullPath, imported]) => {
+  // Beispiel fullPath: "/src/assets/pictures/sippungen/3185/sippung_3185_img1.webp"
+  const match = fullPath.match(/\/sippungen\/([^/]+)\//)
+  if (match && match[1]) {
+    const id = match[1]
+    if (!imagesById[id]) imagesById[id] = []
+    imagesById[id].push(imported)
+  }
+})
 </script>
 
 <style scoped>
@@ -76,25 +124,22 @@ function close() {
   padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   padding-top: clamp(2rem, 5vw, 3rem);
   background: #ffffff;
+  flex: 1;
 }
 
 .month-group + .month-group {
   margin-top: clamp(3rem, 6vw, 4rem);
 }
 
-/* =============================== */
-/* Month Title – Blau (schwarz f. Text) */
-/* =============================== */
 .month-title {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 700;
-  color: #0ea5e9; /* helleres Blau */
+  color: #0ea5e9;
   text-align: center;
   margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
   position: relative;
   padding-bottom: 0.5rem;
 }
-
 .month-title::after {
   content: '';
   position: absolute;
@@ -103,51 +148,32 @@ function close() {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #0ea5e9; /* helleres Blau */
+  background: #0ea5e9;
 }
 
-/* =============================== */
-/* Sippungs-Grid & Cards           */
-/* =============================== */
 .sippungs-grid {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: clamp(1.5rem, 3vw, 2rem);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
   padding-bottom: 1rem;
-  scroll-snap-type: x mandatory;
-  align-items: flex-start;
-}
-
-.sippungs-grid::-webkit-scrollbar {
-  height: 8px;
-}
-.sippungs-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-.sippungs-grid::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
 }
 
 .sippungs-card {
-  flex: 0 0 260px;
-  scroll-snap-align: start;
+  width: 260px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
   opacity: 0;
+  transform: translateY(20px);
   animation: fadeInUp 0.6s ease-out forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sippungs-card:focus-visible {
-  outline: 3px solid #0ea5e9;
-}
 .sippungs-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -164,64 +190,87 @@ function close() {
   }
 }
 
-/* =============================== */
-/* Card Header – Hellblau + Schwarz */
-/* =============================== */
 .card-header {
   position: relative;
-  padding: 0.75rem 1rem;
+  height: 48px;
   background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
-  width: 100%;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 .card-id {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-right: auto;
   color: #000000;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .card-date {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
   color: #000000;
   font-size: 0.9rem;
   font-weight: 600;
 }
 
 .card-title {
-  padding: 1rem;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  flex-grow: 1;
+  margin: 0.75rem 0.5rem 0.5rem 0.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 500;
   color: #2d3748;
   text-align: center;
+  flex-grow: 1;
 }
 
-/* =============================== */
-/* Fade-In Hilfs-Klassen           */
-/* =============================== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.single-image-wrapper {
+  margin: 0.5rem;
+  height: 160px;            
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
+.single-image-wrapper .real-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.single-image-wrapper .fallback-logo {
+  max-width: 90%;           
+  max-height: 90%;          
+  object-fit: contain;     
+}
+
 
 .animate-fade-in {
   opacity: 0;
-  animation: fadeIn 0.6s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
-
 .delay-200 {
   animation-delay: 0.2s;
+}
+
+@media (max-width: 600px) {
+  .sippungs-card {
+    width: 90%;
+    height: auto;
+  }
+  .card-header {
+    height: 40px;
+  }
+  .card-title {
+    font-size: 1rem;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+  .single-image-wrapper {
+    height: 140px;
+  }
 }
 </style>
