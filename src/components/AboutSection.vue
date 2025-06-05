@@ -1,33 +1,26 @@
+<!-- src/components/AboutSection.vue -->
 <template>
-  <section 
-    class="about-section"
-    ref="sectionElement"
-  >
+  <section class="about-section">
     <div class="content-container">
-      <h2 class="section-title">Über Flensburgia</h2>
       
       <div class="text-container">
-        <p class="paragraph fade-in">
+        <p class="paragraph animate-on-scroll">
           Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® – 
-          einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor.
+          einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor. Unsere Burg dient 
+          als kultureller Treffpunkt, an dem wir Tradition und Moderne verbinden.
         </p>
         
-        <div class="stats-grid fade-in">
-          <div 
-            v-for="(stat, index) in stats" 
-            :key="index" 
-            class="stat-item"
-          >
-            <component :is="stat.icon" :size="28" class="stat-icon" />
+        <div class="stats-grid animate-on-scroll" :style="{ 'transition-delay': '0.2s' }">
+          <div v-for="(stat, index) in stats" :key="index" class="stat-item">
+            <component :is="stat.icon" size="28" class="stat-icon" />
             <h3 class="stat-title">{{ stat.title }}</h3>
             <p class="stat-value">{{ stat.value }}</p>
           </div>
         </div>
 
-        <p class="paragraph fade-in">
-          Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig 
-          Sippungen veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst 
-          sowie internationaler Vernetzung entwickeln.
+        <p class="paragraph animate-on-scroll" :style="{ 'transition-delay': '0.4s' }">
+          Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen 
+          veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst sowie internationaler Vernetzung entwickeln.
         </p>
       </div>
     </div>
@@ -35,89 +28,76 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { CalendarDays, Trophy, Users } from 'lucide-vue-next';
+import { ref, onMounted } from 'vue'
+import { CalendarDays, Trophy, Users } from 'lucide-vue-next'
 
 const stats = ref([
-  { 
-    title: 'Jährliche Veranstaltungen', 
-    value: '30+',
-    icon: CalendarDays
-  },
-  { 
-    title: 'Gegründet', 
-    value: '1973',
-    icon: Trophy
-  },
-  {
-    title: 'Aktive Mitglieder',
-    value: '25+',
-    icon: Users
-  }
-]);
-
-const sectionElement = ref(null);
+  { title: 'Jährliche Veranstaltungen', value: '30+', icon: CalendarDays },
+  { title: 'Gegründet', value: '1973', icon: Trophy },
+  { title: 'Aktive Mitglieder', value: '25+', icon: Users }
+])
 
 onMounted(() => {
   const observer = new IntersectionObserver(
-    (entries) => {
+    entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
         }
-      });
+      })
     },
     { threshold: 0.1 }
-  );
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-});
+  )
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
+})
 </script>
 
 <style scoped>
 .about-section {
   padding: clamp(4rem, 10vw, 8rem) 1.5rem;
-  background: #fbfbfd;
+  background: #ffffff;
 }
 
 .content-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  display: grid;
+  gap: clamp(2rem, 5vw, 3rem);
+  text-align: center;
 }
 
+/* Title in primary blue */
 .section-title {
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 600;
-  color: #1d1d1f;
-  text-align: center;
+  color: #0ea5e9;
   margin-bottom: clamp(2rem, 5vw, 3rem);
-  letter-spacing: -0.015em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
 }
 
-.text-container {
-  display: grid;
-  gap: clamp(2rem, 5vw, 3rem);
-}
-
+/* Absätze */
 .paragraph {
   font-size: clamp(1rem, 1.25vw, 1.125rem);
   line-height: 1.6;
   color: #464646;
-  text-align: center;
   margin: 0 auto;
   max-width: 65ch;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s ease;
 }
 
+/* Statistiken als Grid */
 .stats-grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s ease;
 }
 
 .stat-item {
@@ -152,18 +132,18 @@ onMounted(() => {
   color: #1d1d1f;
 }
 
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Sobald das Element sichtbar ist, wird es eingeblendet */
+.animate-on-scroll.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
-  .stat-item {
-    padding: 1.5rem;
+  .section-title {
+    margin-bottom: 2rem;
   }
 }
 </style>
