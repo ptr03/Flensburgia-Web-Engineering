@@ -1,6 +1,7 @@
+<!-- src/components/AboutSection.vue -->
 <template>
   <section class="about-section">
-    <!-- Hero-Bereich -->
+    <!-- Hero-Bereich mit etwas weniger Abstand nach oben -->
     <div class="hero-plain about-hero">
       <div class="content-wrapper">
         <h1 class="hero-title animate-target">Über Flensburgia</h1>
@@ -13,7 +14,7 @@
     <!-- Einführender Text -->
     <div class="intro-text-container animate-target" style="transition-delay: 0.2s">
       <p class="intro-text">
-        Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® – 
+        Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® –  
         einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor.  
         Unsere Burg dient als kultureller Treffpunkt, an dem wir Tradition und Moderne verbinden.
       </p>
@@ -36,10 +37,49 @@
     <!-- Abschließender Satz -->
     <div class="footer-text-container animate-target" style="transition-delay: 0.8s">
       <p class="footer-text">
-        Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen 
+        Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen  
         veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst 
         sowie internationaler Vernetzung entwickeln.
       </p>
+    </div>
+
+    <!-- Neue Info-Sektion mit externen Links -->
+    <div class="external-info-container">
+      <div class="external-text">
+        <p>
+          Willkommen! – Ein herzliches Willekum!  
+        </p>
+        <p>
+          Hier sind Sie richtig, wenn Sie in eine Welt eintauchen wollen, in der Werte  
+          noch einen Wert haben.  
+        </p>
+        <p>
+          Schlaraffia ist ein Spiel, das 1859 in Prag gegründet wurde.  
+          Es vereint auf einmalige Art und Weise Freundschaft mit Humor und Kunst.  
+          In jedem Fall ist Schlaraffia eine Persiflage auf das Leben.  
+          Ein deutschsprachiger Männerbund, weder geheim, noch politisch oder berufsfördernd.  
+          Dafür weltoffen und fröhlich.  
+          Also zeitgemäßer denn je. Lernen Sie uns kennen!
+        </p>
+      </div>
+      <div class="buttons-container">
+        <a
+          class="external-button"
+          href="https://www.schlaraffia-im-norden.de/"
+          target="_blank"
+          rel="noopener"
+        >
+          Schlaraffia im Norden
+        </a>
+        <a
+          class="external-button"
+          href="https://www.schlaraffia.org/"
+          target="_blank"
+          rel="noopener"
+        >
+          Schlaraffia® weltweit
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -55,7 +95,7 @@ const stats = ref([
 ])
 
 onMounted(() => {
-  // Sobald die Komponente gemountet ist, fügen wir allen "animate-target"-Elementen die Klasse "animate-in" hinzu
+  // Fade-In für alle animate-target-Elemente
   nextTick(() => {
     document.querySelectorAll('.animate-target').forEach(el => {
       el.classList.add('animate-in')
@@ -66,12 +106,12 @@ onMounted(() => {
 
 <style scoped>
 /* ===============================
-   Hero-ähnlicher Abschnitt
+   Hero-ähnlicher Abschnitt (kleinerer Abstand)
    =============================== */
 .about-hero {
   background: #ffffff;
-  padding-top: 64px;
-  padding-bottom: 2rem;
+  padding-top: 48px;   /* statt 64px: etwas weniger Abstand nach oben */
+  padding-bottom: 1.5rem; /* statt 2rem */
   text-align: center;
 }
 .content-wrapper {
@@ -187,6 +227,45 @@ onMounted(() => {
 }
 
 /* ===============================
+   Externe Info-Sektion & Buttons
+   =============================== */
+.external-info-container {
+  background: #f9fafb;
+  padding: 2rem 1.5rem;
+  margin: 2rem 0;
+  text-align: center;
+  border-radius: 12px;
+}
+.external-text p {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  color: #1d1d1f;
+  margin-bottom: 1rem;
+}
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.external-button {
+  display: inline-block;
+  background: #0ea5e9;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.2s;
+}
+.external-button:hover {
+  background: #0369a1;
+  transform: translateY(-2px);
+}
+
+/* ===============================
    Fade-In Animation
    =============================== */
 @keyframes fadeInUp {
@@ -215,6 +294,13 @@ onMounted(() => {
   }
   .welcome-text {
     font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+  .external-info-container {
+    padding: 1.5rem 1rem;
+  }
+  .buttons-container {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }
 </style>
