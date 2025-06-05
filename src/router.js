@@ -7,6 +7,7 @@ import SippungsfolgePage from './components/SippungsfolgePage.vue'
 import ContactPage        from './components/ContactPage.vue'
 import FlensburgenPage    from './components/FlensburgenPage.vue'
 import DictionaryPage     from './components/DictionaryPage.vue'  
+import Impressum from './components/Impressum.vue'
 
 const routes = [
   { path: '/',             name: 'Home',          component: HomePage },
@@ -15,11 +16,8 @@ const routes = [
   { path: '/contact',      name: 'Contact',       component: ContactPage },
   { path: '/die-flensburgen', name: 'DieFlensburgen', component: FlensburgenPage },
   { path: '/contact', name: 'Contact', component: ContactPage },
-  {
-    path: '/dictionary',
-    name: 'Dictionary',
-    component: DictionaryPage
-  }
+  { path: '/dictionary', name: 'Dictionary', component: DictionaryPage},
+  { path: '/impressum', name: 'Impressum', component: Impressum}
 ]
 
 const router = createRouter({
