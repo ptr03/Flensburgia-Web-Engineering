@@ -1,4 +1,3 @@
-// src/router.js
 import { createRouter, createWebHistory } from 'vue-router'
 
 // (1) Import every page component that you list in `routes`
@@ -24,7 +23,15 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // Wenn der Nutzer mit Zurück-/Vorwärts-Button navigiert, übernimmt savedPosition
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Ansonsten immer ganz nach oben scrollen:
+    return { top: 0 }
+  }
 })
 
 export default router
