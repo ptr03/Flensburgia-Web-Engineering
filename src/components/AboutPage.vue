@@ -1,19 +1,6 @@
-<!-- src/pages/AboutPage.vue -->
 <template>
   <div class="about-page-wrapper">
-    <!-- Hero Section wie bei SippungsfolgePage -->
-    <section class="hero-plain">
-      <div class="content-wrapper">
-        <h1 class="hero-title animate-target">
-          Über Flensburgia
-        </h1>
-        <h2 class="welcome-text animate-target">
-          Eine Gemeinschaft für Freundschaft, Kunst und Humor
-        </h2>
-      </div>
-    </section>
-
-    <!-- AboutSection (Intro + Stats) -->
+    <!-- AboutSection übernimmt Hero + Intro + Stats -->
     <AboutSection />
 
     <!-- Timeline Section (nur horizontale Boxen) -->
@@ -39,12 +26,20 @@
     <section class="container link-section">
       <h2 class="section-title text-center animate-target">Unser Orden</h2>
       <div class="link-grid">
-        <router-link to="/die-flensburgen" class="link-card animate-target" :style="{ 'transition-delay': '0.2s' }">
+        <router-link
+          to="/die-flensburgen"
+          class="link-card animate-target"
+          :style="{ 'transition-delay': '0.2s' }"
+        >
           <img :src="placeholderImg" alt="Die Flensburgen" />
           <span>Die Flensburgen</span>
         </router-link>
-        <router-link to="/sippungsfolge" class="link-card animate-target" :style="{ 'transition-delay': '0.4s' }">
-          <img :src="placeholderImg" alt="Sassen" />
+        <router-link
+          to="/sippungsfolge"
+          class="link-card animate-target"
+          :style="{ 'transition-delay': '0.4s' }"
+        >
+          <img :src="placeholderImg" alt="Sippungsfolge" />
           <span>Sassen</span>
         </router-link>
       </div>
@@ -57,7 +52,7 @@ import { ref, onMounted, nextTick } from 'vue'
 import AboutSection from '../components/AboutSection.vue'
 import placeholderImg from '../assets/pictures/Flensburgia_icon.png'
 
-// Timeline-Daten (Beispiele; bitte mit endgültigen Inhalten ersetzen)
+// Timeline-Daten (Beispiele; bitte mit echten Inhalten ersetzen)
 const timeline = ref([
   { year: '1859', description: 'Gründung der Schlaraffia in Prag.' },
   { year: '1973', description: 'Gründung der Schlaraffia Flensburgia.' },
@@ -67,8 +62,11 @@ const timeline = ref([
 ])
 
 onMounted(() => {
+  // Sobald die Seite geladen ist, spielen wir die Fade-In-Animationen aus
   nextTick(() => {
-    document.querySelectorAll('.animate-target').forEach(el => el.classList.add('animate-in'))
+    document.querySelectorAll('.animate-target').forEach(el => {
+      el.classList.add('animate-in')
+    })
   })
 })
 </script>
@@ -79,60 +77,6 @@ onMounted(() => {
   min-height: 100vh;
 }
 
-/* Hero-Abschnitt analog zu SippungsfolgePage */
-.hero-plain {
-  padding-top: 64px;
-  min-height: 30vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-}
-
-.content-wrapper {
-  text-align: center;
-  max-width: 800px;
-  padding: 0 1.5rem;
-}
-
-.hero-title {
-  margin: 0;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(to right, #0ea5e9, #0369a1);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.welcome-text {
-  color: #334155;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 300;
-  margin-top: 0.25rem;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-target {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.animate-in {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
 /* Container-Grundlage */
 .container {
   max-width: 1200px;
@@ -140,17 +84,19 @@ onMounted(() => {
   padding: 2rem 1.5rem;
 }
 
-/* Horizontaler Timeline-Container */
-.timeline-section {
-  margin-top: 3rem;
-}
+/* Section-Titel */
 .section-title {
   font-size: clamp(1.875rem, 4vw, 2.5rem);
   font-weight: 600;
   color: #1d1d1f;
   text-align: center;
   margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
+
+/* Horizontaler Timeline-Container */
 .timeline-horizontal {
   display: flex;
   gap: 2rem;
@@ -165,6 +111,9 @@ onMounted(() => {
   padding: 1.5rem;
   text-align: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
 .marker {
   width: 12px;
@@ -205,6 +154,8 @@ onMounted(() => {
   color: #1d1d1f;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
 }
 .link-card img {
   width: 80px;
@@ -220,6 +171,23 @@ onMounted(() => {
 .link-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================
+   Fade-In Animation (wird von beiden Dateien verwendet)
+   =============================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-in {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 /* Responsive */

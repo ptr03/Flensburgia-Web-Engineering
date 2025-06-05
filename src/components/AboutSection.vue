@@ -1,34 +1,51 @@
-<!-- src/components/AboutSection.vue -->
 <template>
   <section class="about-section">
-    <div class="content-container">
-      
-      <div class="text-container">
-        <p class="paragraph animate-on-scroll">
-          Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® – 
-          einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor. Unsere Burg dient 
-          als kultureller Treffpunkt, an dem wir Tradition und Moderne verbinden.
-        </p>
-        
-        <div class="stats-grid animate-on-scroll" :style="{ 'transition-delay': '0.2s' }">
-          <div v-for="(stat, index) in stats" :key="index" class="stat-item">
-            <component :is="stat.icon" size="28" class="stat-icon" />
-            <h3 class="stat-title">{{ stat.title }}</h3>
-            <p class="stat-value">{{ stat.value }}</p>
-          </div>
-        </div>
-
-        <p class="paragraph animate-on-scroll" :style="{ 'transition-delay': '0.4s' }">
-          Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen 
-          veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst sowie internationaler Vernetzung entwickeln.
-        </p>
+    <!-- Hero-Bereich -->
+    <div class="hero-plain about-hero">
+      <div class="content-wrapper">
+        <h1 class="hero-title animate-target">Über Flensburgia</h1>
+        <h2 class="welcome-text animate-target">
+          Eine Gemeinschaft für Freundschaft, Kunst und Humor
+        </h2>
       </div>
+    </div>
+
+    <!-- Einführender Text -->
+    <div class="intro-text-container animate-target" style="transition-delay: 0.2s">
+      <p class="intro-text">
+        Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® – 
+        einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor.  
+        Unsere Burg dient als kultureller Treffpunkt, an dem wir Tradition und Moderne verbinden.
+      </p>
+    </div>
+
+    <!-- Statistik-Karten -->
+    <div class="stats-container">
+      <div
+        v-for="(stat, index) in stats"
+        :key="index"
+        class="stat-card animate-target"
+        :style="{ 'transition-delay': `${(index + 1) * 0.2}s` }"
+      >
+        <component :is="stat.icon" class="stat-icon" />
+        <h3 class="stat-title">{{ stat.title }}</h3>
+        <p class="stat-value">{{ stat.value }}</p>
+      </div>
+    </div>
+
+    <!-- Abschließender Satz -->
+    <div class="footer-text-container animate-target" style="transition-delay: 0.8s">
+      <p class="footer-text">
+        Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen 
+        veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst 
+        sowie internationaler Vernetzung entwickeln.
+      </p>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { CalendarDays, Trophy, Users } from 'lucide-vue-next'
 
 const stats = ref([
@@ -38,112 +55,166 @@ const stats = ref([
 ])
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
+  // Sobald die Komponente gemountet ist, fügen wir allen "animate-target"-Elementen die Klasse "animate-in" hinzu
+  nextTick(() => {
+    document.querySelectorAll('.animate-target').forEach(el => {
+      el.classList.add('animate-in')
+    })
+  })
 })
 </script>
 
 <style scoped>
-.about-section {
-  padding: clamp(4rem, 10vw, 8rem) 1.5rem;
+/* ===============================
+   Hero-ähnlicher Abschnitt
+   =============================== */
+.about-hero {
   background: #ffffff;
-}
-
-.content-container {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  gap: clamp(2rem, 5vw, 3rem);
+  padding-top: 64px;
+  padding-bottom: 2rem;
   text-align: center;
 }
-
-/* Title in primary blue */
-.section-title {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 600;
-  color: #0ea5e9;
-  margin-bottom: clamp(2rem, 5vw, 3rem);
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.hero-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(to right, #0ea5e9, #0369a1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s ease;
+  transition: all 0.8s ease-out;
+}
+.welcome-text {
+  color: #334155;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 300;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
 }
 
-/* Absätze */
-.paragraph {
-  font-size: clamp(1rem, 1.25vw, 1.125rem);
+/* ===============================
+   Einführender Text zentriert
+   =============================== */
+.intro-text-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+.intro-text {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.6;
-  color: #464646;
-  margin: 0 auto;
-  max-width: 65ch;
+  color: #1d1d1f;
+  margin: 0;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s ease;
+  transition: all 0.6s ease-out;
 }
 
-/* Statistiken als Grid */
-.stats-grid {
+/* ===============================
+   Statistik-Karten-Container
+   =============================== */
+.stats-container {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+.stat-card {
+  background: #ffffff;
+  border: 1px solid rgba(210, 210, 215, 0.3);
+  border-radius: 16px;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s ease;
+  transition: all 0.6s ease-out;
 }
-
-.stat-item {
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 18px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(210, 210, 215, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.stat-item:hover {
+.stat-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.15);
 }
-
 .stat-icon {
-  color: #0066cc;
-  margin-bottom: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #0ea5e9;
+  margin-bottom: 0.75rem;
 }
-
 .stat-title {
   font-size: 1rem;
   font-weight: 500;
   color: #1d1d1f;
   margin-bottom: 0.5rem;
 }
-
 .stat-value {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 600;
   color: #1d1d1f;
+  margin: 0;
 }
 
-/* Sobald das Element sichtbar ist, wird es eingeblendet */
-.animate-on-scroll.visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+/* ===============================
+   Abschließender Satz zentriert
+   =============================== */
+.footer-text-container {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.footer-text {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
 
+/* ===============================
+   Fade-In Animation
+   =============================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-in {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* ===============================
+   Responsive Anpassungen
+   =============================== */
 @media (max-width: 768px) {
-  .stats-grid {
+  .stats-container {
     grid-template-columns: 1fr;
   }
-  .section-title {
-    margin-bottom: 2rem;
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+  .welcome-text {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
 }
 </style>
