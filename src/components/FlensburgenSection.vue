@@ -189,11 +189,17 @@ function getImage(filename) {
   padding: 2rem 1.5rem;
 }
 
+/* 2×2 Grid für Flensburgen-Kategorien */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
+}
+@media (max-width: 640px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .category-button {
