@@ -1,36 +1,30 @@
-<!-- src/components/SippungsfolgePage.vue -->
+<!-- src/pages/SippungsfolgePage.vue -->
 <template>
   <div class="sippungs-page">
     <section class="hero-plain">
       <div class="content-wrapper">
-        <!-- Hero-Titel animieren -->
-        <transition name="fade-down" appear>
-          <h1 class="hero-title">Sippungsfolge</h1>
-        </transition>
-        <transition name="fade-down" appear>
-          <h2 class="welcome-text">Unsere Treffen von April bis Oktober</h2>
-        </transition>
+        <h1 class="hero-title animate-target">
+          <Calendar class="title-icon" />
+          Sippungsfolge
+        </h1>
+        <h2 class="welcome-text animate-target">Unsere Treffen von April bis Oktober</h2>
       </div>
     </section>
-
-    <!-- Verzögert anzeigen, damit die Hero-Überschrift fertig animiert ist -->
-    <transition name="fade-in-section">
-      <SippungsfolgeSection v-if="showSection" />
-    </transition>
+    <SippungsfolgeSection />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import SippungsfolgeSection from './SippungsfolgeSection.vue'
+import { onMounted, nextTick } from 'vue'
+import SippungsfolgeSection from '../components/SippungsfolgeSection.vue'
+import { Calendar } from 'lucide-vue-next'
 
-const showSection = ref(false)
-
-// Nach 0,8 s (Dauer der Hero-Animation) blenden wir den Sippungs-Bereich ein
 onMounted(() => {
-  setTimeout(() => {
-    showSection.value = true
-  }, 800)
+  nextTick(() => {
+    document
+      .querySelectorAll('.animate-target')
+      .forEach(el => el.classList.add('animate-in'))
+  })
 })
 </script>
 
@@ -55,10 +49,24 @@ onMounted(() => {
   padding: 0 1.5rem;
 }
 
-/* ================================ */
-/* Hero-Titel – Gradient Styling    */
-/* ================================ */
+/* Keyframe für Fade-In nach oben */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero-Titel: Grundstil, ohne initiales Verschieben */
 .hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -66,9 +74,17 @@ onMounted(() => {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0;
 }
 
+/* Icon-Größe und Abstand */
+.title-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-right: 1rem;
+  color: #0ea5e9;
+}
+
+/* Willkommens-Text */
 .welcome-text {
   color: #334155;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -76,36 +92,17 @@ onMounted(() => {
   margin-top: 0.25rem;
 }
 
-/* ======================================== */
-/* Fade-Down Transition für Hero-Titel      */
-/* (Initial Appearance via `appear`)        */
-/* ======================================== */
-.fade-down-enter-from {
+/* 
+  Wir geben beiden Elementen (Titel + Untertitel) die Klasse 'animate-target',
+  und sobald .animate-in hinzukommt, führen wir FadeInUp aus.
+*/
+.animate-target {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.fade-down-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-down-enter-active {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ======================================== */
-/* Fade-In für den gesamten Sippungs-Bereich */
-/* ======================================== */
-.fade-in-section-enter-from {
-  opacity: 0;
-}
-
-.fade-in-section-enter-to {
-  opacity: 1;
-}
-
-.fade-in-section-enter-active {
-  transition: opacity 0.4s ease-out;
+/* Wenn .animate-in gesetzt ist, wird fadeInUp abgespielt */
+.animate-in {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 </style>

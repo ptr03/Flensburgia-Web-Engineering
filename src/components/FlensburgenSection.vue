@@ -8,7 +8,9 @@
         class="category-button"
         @click="openModal(cat.id)"
       >
-        {{ cat.name }}
+        <!-- Icon vor dem Namen -->
+        <component :is="cat.icon" class="category-icon" />
+        <span>{{ cat.name }}</span>
       </button>
     </div>
 
@@ -78,13 +80,19 @@
           >
             <h2 class="modal-title">Erz- & Ehrenschlaraffen</h2>
             <div class="ehrenschlaraffen-grid">
-              <img
-                v-for="fn in ['Erzschlaraffen-1920w.webp','Ehrenschlaraffen-1920w.webp']"
-                :key="fn"
-                :src="getImage(fn)"
-                class="clickable"
-                @click="enlargeImage({ filename: fn, name: fn.replace('.webp','') })"
-              />
+              <div
+                v-for="eh in ehrenschlaraffen"
+                :key="eh.id"
+                class="ehrenschlaraffen-card"
+              >
+                <img
+                  :src="getImage(eh.filename)"
+                  :alt="eh.name"
+                  class="clickable"
+                  @click="enlargeImage(eh)"
+                />
+                <div class="ehrenschlaraffen-name">{{ eh.name }}</div>
+              </div>
             </div>
           </div>
 
@@ -126,6 +134,10 @@ import rodeGruettText from '../data/rodeGruetteText.md?raw'
 import windjammerText from '../data/windjammerText.md?raw'
 import { ref, computed, watch } from 'vue'
 import knights from '../data/flensburgen.json'
+import ehrenschlaraffenData from '../data/flensburgen.json'
+
+// Icons von lucide-vue-next importieren
+import { Users, BookOpen, Award, Ship } from 'lucide-vue-next'
 
 import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
@@ -133,12 +145,12 @@ const md = new MarkdownIt()
 const formattedRodeGruett = computed(() => md.render(rodeGruettText))
 const formattedWindjammer = computed(() => md.render(windjammerText))
 
-// Kategorien-Definitionen
+// Kategorien-Definition mit Icon-Komponente
 const categories = [
-  { id: 'sassen', name: 'Sassen' },
-  { id: 'rode-gruett', name: 'Röde Grütt' },
-  { id: 'ehrenschlaraffen', name: 'Erz- & Ehrenschlaraffen' },
-  { id: 'kilianischer-windjammerorden', name: 'Kilianischer Windjammerorden' }
+  { id: 'sassen', name: 'Sassen', icon: Users },
+  { id: 'rode-gruett', name: 'Röde Grütt', icon: BookOpen },
+  { id: 'ehrenschlaraffen', name: 'Erz- & Ehrenschlaraffen', icon: Award },
+  { id: 'kilianischer-windjammerorden', name: 'Kilianischer Windjammerorden', icon: Ship }
 ]
 
 // Modal‐State
@@ -165,6 +177,9 @@ const filteredKnights = computed(() =>
     kn.name.toLowerCase().includes(search.value.toLowerCase())
   )
 )
+
+// "Ehrenschlaraffen" aus JSON-Datei
+const ehrenschlaraffen = ref(ehrenschlaraffenData)
 
 // Body scroll unterbinden, wenn Modal offen ist
 watch(activeId, val => {
@@ -202,8 +217,18 @@ function getImage(filename) {
   }
 }
 
+/* 
+  Wichtige Anpassungen:
+  - Padding oben/unten vergrößert (2rem statt 1.75rem), damit der Button "größer" wird
+  - Inhalte (Icon + Text) zentriert
+  - Gap zwischen Icon und Text auf 1rem gesetzt
+*/
 .category-button {
-  padding: 1.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;               /* größerer Abstand zwischen Icon und Text */
+  padding: 2rem 1rem;      /* etwas mehr Höhe */
   background: #f3f4f6;
   border: none;
   border-radius: 8px;
@@ -221,6 +246,13 @@ function getImage(filename) {
 .category-button:hover {
   background: #e0e0e0;
   transform: scale(1.02);
+}
+
+/* Icon in den Buttons */
+.category-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #0ea5e9;
 }
 
 /* =========================== */
@@ -384,17 +416,36 @@ function getImage(filename) {
 /* =========================== */
 .ehrenschlaraffen-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
   gap: 1rem;
   justify-items: center;
   margin-top: 1rem;
 }
-.ehrenschlaraffen-grid img {
-  width: 100%;
-  max-width: 300px;
-  cursor: zoom-in;
+.ehrenschlaraffen-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  animation: fadeIn 0.3s ease-out;
+}
+.ehrenschlaraffen-card img {
+  width: 100%;
+  object-fit: contain;
+  max-height: 200px;
+  cursor: zoom-in;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s;
+}
+.ehrenschlaraffen-card:hover img { transform: scale(1.05) }
+.ehrenschlaraffen-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
 }
 
 /* Transition-group fade */

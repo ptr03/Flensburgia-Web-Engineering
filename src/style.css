@@ -92,7 +92,13 @@ body {
   box-shadow: var(--shadow-md);
   border-color: rgba(210, 210, 215, 0.6);
 }
-
+.section-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  fill: currentColor;
+}
 /* 
 Dark Mode adjustments
 --------------------------------------------------
