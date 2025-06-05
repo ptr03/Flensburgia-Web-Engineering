@@ -1,3 +1,4 @@
+<!-- src/components/SippungsfolgeSection.vue -->
 <template>
   <section class="sippungs-section">
     <div class="months-container">
@@ -59,9 +60,8 @@
   </section>
 </template>
 
-
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import rawItems from '../data/sippungsfolge.json'
 import SippungsModal from './SippungsModal.vue'
 
@@ -117,6 +117,34 @@ Object.entries(imageModules).forEach(([fullPath, imported]) => {
     imagesById[id].push(imported)
   }
 })
+
+// Scroll-Triggered Animation mit IntersectionObserver
+let observer = null
+
+const createObserver = () => {
+  observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+}
+
+onMounted(() => {
+  createObserver()
+  // Beobachte alle Elemente mit Klasse "animate-fade-in"
+  const elements = document.querySelectorAll('.animate-fade-in')
+  elements.forEach(el => observer.observe(el))
+})
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
+})
 </script>
 
 <style scoped>
@@ -159,6 +187,23 @@ Object.entries(imageModules).forEach(([fullPath, imported]) => {
   padding-bottom: 1rem;
 }
 
+/* Grundzustand: unsichtbar und verschoben */
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Sobald sichtbar, Animation abspielen */
+.animate-fade-in.visible {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Delay-Klasse: Verzögerung für Animation */
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+/* Karten-Styling */
 .sippungs-card {
   width: 260px;
   height: 380px;
@@ -167,9 +212,6 @@ Object.entries(imageModules).forEach(([fullPath, imported]) => {
   background: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -234,27 +276,16 @@ Object.entries(imageModules).forEach(([fullPath, imported]) => {
   justify-content: center;
 }
 
-
 .single-image-wrapper .real-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-
 .single-image-wrapper .fallback-logo {
   max-width: 90%;           
   max-height: 90%;          
   object-fit: contain;     
-}
-
-
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-.delay-200 {
-  animation-delay: 0.2s;
 }
 
 @media (max-width: 600px) {

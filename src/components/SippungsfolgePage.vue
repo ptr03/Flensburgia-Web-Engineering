@@ -1,26 +1,36 @@
-<!-- src/pages/SippungsPage.vue -->
+<!-- src/components/SippungsfolgePage.vue -->
 <template>
   <div class="sippungs-page">
     <section class="hero-plain">
       <div class="content-wrapper">
-        <h1 class="hero-title">Sippungsfolge</h1>
-        <h2 class="welcome-text">Unsere Treffen von April bis Oktober</h2>
+        <!-- Hero-Titel animieren -->
+        <transition name="fade-down" appear>
+          <h1 class="hero-title">Sippungsfolge</h1>
+        </transition>
+        <transition name="fade-down" appear>
+          <h2 class="welcome-text">Unsere Treffen von April bis Oktober</h2>
+        </transition>
       </div>
     </section>
-    <SippungsfolgeSection />
+
+    <!-- Verzögert anzeigen, damit die Hero-Überschrift fertig animiert ist -->
+    <transition name="fade-in-section">
+      <SippungsfolgeSection v-if="showSection" />
+    </transition>
   </div>
 </template>
 
 <script setup>
-import { onMounted, nextTick } from 'vue'
-import SippungsfolgeSection from '../components/SippungsfolgeSection.vue'
+import { ref, onMounted } from 'vue'
+import SippungsfolgeSection from './SippungsfolgeSection.vue'
 
+const showSection = ref(false)
+
+// Nach 0,8 s (Dauer der Hero-Animation) blenden wir den Sippungs-Bereich ein
 onMounted(() => {
-  nextTick(() => {
-    document
-      .querySelectorAll('.hero-title, .welcome-text')
-      .forEach(el => el.classList.add('animate-in'))
-  })
+  setTimeout(() => {
+    showSection.value = true
+  }, 800)
 })
 </script>
 
@@ -45,25 +55,9 @@ onMounted(() => {
   padding: 0 1.5rem;
 }
 
-/* =============================== */
-/* Fade-In Animation for Titles    */
-/* =============================== */
-.hero-title,
-.welcome-text {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-in {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* =============================== */
-/* Hero Title – Gradient Styling   */
-/*            */
-/* =============================== */
+/* ================================ */
+/* Hero-Titel – Gradient Styling    */
+/* ================================ */
 .hero-title {
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
@@ -80,5 +74,38 @@ onMounted(() => {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 300;
   margin-top: 0.25rem;
+}
+
+/* ======================================== */
+/* Fade-Down Transition für Hero-Titel      */
+/* (Initial Appearance via `appear`)        */
+/* ======================================== */
+.fade-down-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-down-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-down-enter-active {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ======================================== */
+/* Fade-In für den gesamten Sippungs-Bereich */
+/* ======================================== */
+.fade-in-section-enter-from {
+  opacity: 0;
+}
+
+.fade-in-section-enter-to {
+  opacity: 1;
+}
+
+.fade-in-section-enter-active {
+  transition: opacity 0.4s ease-out;
 }
 </style>
