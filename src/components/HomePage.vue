@@ -1,8 +1,9 @@
+<!-- src/pages/HomePage.vue -->
 <template>
   <HeroSection />
 
   <!-- About Teaser -->
-  <section class="section about-teaser bg-transition">
+  <section class="section about-teaser">
     <div class="container">
       <h2 class="section-title text-center animate-on-scroll">Über Flensburgia</h2>
       <p class="teaser-text animate-on-scroll">
@@ -21,14 +22,32 @@
         </div>
       </div>
       <div class="cta-wrapper text-center">
-        <!-- match outline style for both CTAs -->
-        <router-link to="/about" class="btn btn-outline-gradient mt-4 animate-on-scroll">Mehr über uns</router-link>
+        <router-link to="/about" class="btn btn-outline-gradient mt-4 animate-on-scroll">
+          Mehr über uns
+        </router-link>
       </div>
     </div>
   </section>
 
-  <!-- Events Teaser -->
-  <section class="section events-teaser bg-transition">
+  <!-- Aktuelles Section (in Blöcken, Hintergrund: weiß) -->
+  <section class="section aktuelles-teaser">
+    <div class="container">
+      <h2 class="section-title text-center animate-on-scroll">Aktuelles</h2>
+      <div class="aktuales-grid">
+        <div
+          v-for="(item, idx) in aktuales"
+          :key="item.id"
+          class="aktual-card animate-on-scroll"
+          :style="{ 'transition-delay': `${(idx + 1) * 0.2}s` }"
+        >
+          <p class="aktual-text">{{ item.text }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Teaser (Kommende Veranstaltungen, verwaltet per JSON, Hintergrund: weiß) -->
+  <section class="section events-teaser">
     <div class="container">
       <h2 class="section-title text-center animate-on-scroll">Kommende Veranstaltungen</h2>
       <div class="events-grid">
@@ -44,7 +63,9 @@
         </article>
       </div>
       <div class="cta-wrapper text-center">
-        <router-link to="/events" class="btn btn-outline-gradient mt-4 animate-on-scroll">Alle Veranstaltungen</router-link>
+        <router-link to="/events" class="btn btn-outline-gradient mt-4 animate-on-scroll">
+          Alle Veranstaltungen
+        </router-link>
       </div>
     </div>
   </section>
@@ -52,33 +73,37 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import HeroSection from './HeroSection.vue'
+import HeroSection from '../components/HeroSection.vue'
 import { CalendarDays, Trophy, Users } from 'lucide-vue-next'
+import aktualesData from '../data/aktuelles.json'
+import eventsData from '../data/events.json'
 
+// Statistiken für das "Über Flensburgia"
 const statsTeaser = ref([
   { title: 'Jährliche Veranstaltungen', value: '30+', icon: CalendarDays },
   { title: 'Gegründet', value: '1973', icon: Trophy },
   { title: 'Aktive Mitglieder', value: '25+', icon: Users }
 ])
 
-// pulled from flensburgia.info as examples
-const allEvents = ref([
-  { id: 1, date: '15. Oktober 2024', title: 'Kulturerbe-Symposium', excerpt: 'Führende Experten diskutieren den Erhalt regionaler Kulturgüter durch moderne Methoden.' },
-  { id: 2, date: '2.–4. November 2024', title: 'Traditionelles Kunstfestival', excerpt: 'Dreitägige Feier lokaler Handwerkskunst, Musik und Kulinarik mit Workshops.' },
-  { id: 3, date: '1. Dezember 2024', title: 'Winterlichter-Ausstellung', excerpt: 'Interaktive Lichtinstallationen mit traditionellen Motiven und moderner Technologie.' },
-  { id: 4, date: '10. Januar 2025', title: 'Neujahrsritual', excerpt: 'Feierlicher Ritus zum Jahresbeginn in der historischen Burg Flensburgia.' }
-])
+// "Aktuelles" aus JSON-Datei
+const aktuales = ref(aktualesData)
+
+// "Kommende Veranstaltungen" aus JSON-Datei
+const allEvents = ref(eventsData)
 const upcomingEvents = ref(allEvents.value.slice(0, 3))
 
+// IntersectionObserver für Scroll-Animation
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in')
-      }
-    })
-  }, { threshold: 0.1 })
-
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in')
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
   document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
 })
 </script>
@@ -86,10 +111,11 @@ onMounted(() => {
 <style scoped>
 .section {
   padding: clamp(4rem, 8vw, 6rem) 1.5rem;
-  overflow: hidden;
 }
+
+/* About Teaser */
 .about-teaser {
-  background: #ffffff;
+  background-color: #ffffff; /* weißer Block */
 }
 .about-teaser .section-title {
   color: #2b2e32;
@@ -103,7 +129,6 @@ onMounted(() => {
   font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.6;
 }
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -111,7 +136,7 @@ onMounted(() => {
   margin-bottom: 3rem;
 }
 .stat-item {
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 16px;
   padding: 2rem;
   text-align: center;
@@ -120,8 +145,43 @@ onMounted(() => {
 .stat-icon { color: #2563eb; margin-bottom: 0.75rem; }
 .stat-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; color: #111827; }
 .stat-value { font-size: 1.75rem; font-weight: 700; color: #111827; }
+.cta-wrapper { display: flex; justify-content: center; margin-top: 2rem; }
+
+/* Aktuelles Teaser (weißer Block) */
+.aktuelles-teaser {
+  background-color: #ffffff;
+}
+.aktuelles-teaser .section-title {
+  color: #111827;
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.aktuales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.aktual-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.05);
+  transition: transform 0.3s ease;
+}
+.aktual-card:hover {
+  transform: translateY(-4px);
+}
+.aktual-text {
+  margin: 0;
+  color: #374151;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+}
+
+/* Events Teaser (weißer Block) */
 .events-teaser {
-  background: #ffffff;
+  background-color: #ffffff;
 }
 .events-teaser .section-title {
   color: #111827;
@@ -129,7 +189,6 @@ onMounted(() => {
   font-weight: 600;
   margin-bottom: 1rem;
 }
-
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -137,17 +196,34 @@ onMounted(() => {
   margin: 2rem 0;
 }
 .event-card {
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 16px;
   padding: 1.75rem;
-  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.1);
+  box-shadow: 0 4px 16px rgba(31, 41, 55, 0.05);
   transition: transform 0.3s ease;
 }
-.event-card:hover { transform: translateY(-4px); }
-.event-date { font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem; display: block; }
-.event-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; color: #111827; }
-.event-excerpt { font-size: 1rem; color: #4b5563; line-height: 1.5; }
+.event-card:hover {
+  transform: translateY(-4px);
+}
+.event-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+.event-excerpt {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
 
+/* Buttons */
 .btn {
   display: inline-block;
   padding: 0.75rem 2rem;
@@ -167,21 +243,26 @@ onMounted(() => {
   transform: translateY(-2px);
 }
 
-.animate-on-scroll { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+/* Scroll-triggered Animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
 
 @media (max-width: 640px) {
-  .stats-grid, .events-grid { grid-template-columns: 1fr; }
-  .btn { width: 100%; text-align: center; }
+  .stats-grid,
+  .aktuales-grid,
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
-.cta-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.cta-wrapper .btn {
-  margin: 0 auto; /* extra insurance */
-}
-
 </style>

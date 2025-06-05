@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "date": "15. Oktober 2024",
+    "title": "Kulturerbe-Symposium",
+    "excerpt": "Führende Experten diskutieren den Erhalt regionaler Kulturgüter durch moderne Methoden."
+  },
+  {
+    "id": 2,
+    "date": "2.–4. November 2024",
+    "title": "Traditionelles Kunstfestival",
+    "excerpt": "Dreitägige Feier lokaler Handwerkskunst, Musik und Kulinarik mit Workshops."
+  },
+  {
+    "id": 3,
+    "date": "1. Dezember 2024",
+    "title": "Winterlichter-Ausstellung",
+    "excerpt": "Interaktive Lichtinstallationen mit traditionellen Motiven und moderner Technologie."
+  },
+  {
+    "id": 4,
+    "date": "10. Januar 2025",
+    "title": "Neujahrsritual",
+    "excerpt": "Feierlicher Ritus zum Jahresbeginn in der historischen Burg Flensburgia."
+  }
+]
