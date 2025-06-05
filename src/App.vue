@@ -1,7 +1,10 @@
+<!-- src/App.vue -->
 <template>
   <div id="app">
     <NavigationBar />
-    <router-view />
+    <main class="main-content">
+      <router-view />
+    </main>
     <Footer />
   </div>
 </template>
@@ -20,4 +23,14 @@ export default {
 
 <style>
 @import './style.css';
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
 </style>
