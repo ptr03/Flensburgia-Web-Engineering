@@ -8,6 +8,8 @@ import ContactPage        from './components/ContactPage.vue'
 import FlensburgenPage    from './components/FlensburgenPage.vue'
 import DictionaryPage     from './components/DictionaryPage.vue'  
 import Impressum from './components/Impressum.vue'
+import Terms from './components/Terms.vue'
+import Privacy from './components/Privacy.vue'
 
 const routes = [
   { path: '/',             name: 'Home',          component: HomePage },
@@ -17,7 +19,9 @@ const routes = [
   { path: '/die-flensburgen', name: 'DieFlensburgen', component: FlensburgenPage },
   { path: '/contact', name: 'Contact', component: ContactPage },
   { path: '/dictionary', name: 'Dictionary', component: DictionaryPage},
-  { path: '/impressum', name: 'Impressum', component: Impressum}
+  { path: '/impressum', name: 'Impressum', component: Impressum},
+  { path: '/terms', name: 'Terms', component: Terms},
+  { path: '/privacy', name: 'Privacy', component: Privacy}
 ]
 
 const router = createRouter({
