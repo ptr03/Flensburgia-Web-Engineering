@@ -205,15 +205,20 @@ onBeforeUnmount(() => {
 
 /* Karten-Styling */
 .sippungs-card {
-  width: 260px;
-  height: 380px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  aspect-ratio: 4 / 5;        
+  width: 260px;              
+  overflow: hidden;           
 }
 
 .sippungs-card:hover {
@@ -262,12 +267,16 @@ onBeforeUnmount(() => {
   font-weight: 500;
   color: #2d3748;
   text-align: center;
-  flex-grow: 1;
+  flex-shrink: 0;
+  line-height: 1.2;
+  max-height: 2.4rem;         
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .single-image-wrapper {
+  flex-grow: 1;               
   margin: 0.5rem;
-  height: 160px;            
   overflow: hidden;
   border-radius: 6px;
   background: #f1f5f9;
@@ -291,6 +300,7 @@ onBeforeUnmount(() => {
 @media (max-width: 600px) {
   .sippungs-card {
     width: 90%;
+    aspect-ratio: auto;
     height: auto;
   }
   .card-header {
