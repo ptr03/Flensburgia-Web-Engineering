@@ -7,7 +7,8 @@
         :key="gIdx"
         class="month-group"
       >
-        <h3 class="month-title animate-fade-in delay-200">
+        <!-- Monatstitel mit scroll-triggered Animation -->
+        <h3 class="month-title animate-target delay-200">
           {{ group.label }}
         </h3>
 
@@ -15,8 +16,7 @@
           <button
             v-for="(item, idx) in group.items"
             :key="idx"
-            class="sippungs-card animate-fade-in"
-            :style="{ animationDelay: `${idx * 100}ms` }"
+            class="sippungs-card animate-target"
             @click="open(item)"
           >
             <div class="card-header">
@@ -26,7 +26,7 @@
 
             <p class="card-title">{{ item.title }}</p>
 
-            <!-- Wenn es Bilder gibt, normale Bild-Klasse nutzen -->
+            <!-- Bilder oder Fallback-Logo -->
             <div
               v-if="imagesById[item.id] && imagesById[item.id].length"
               class="single-image-wrapper"
@@ -37,8 +37,6 @@
                 class="real-image"
               />
             </div>
-
-            <!-- Wenn keine Bilder, dann Logo mit eigener Klasse -->
             <div v-else class="single-image-wrapper">
               <img
                 src="../assets/pictures/Flensburgia_icon.png"
@@ -61,22 +59,22 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import rawItems from '../data/sippungsfolge.json'
 import SippungsModal from './SippungsModal.vue'
 
-// 1) Datumshilfe: "DD.MM.YYYY" → Date-Objekt
+// Datumshilfe
 const toDate = str => {
   const [d, m, y] = str.split('.').map(Number)
   return new Date(y, m - 1, d)
 }
 
-// 2) Sortiere absteigend (neueste zuerst)
+// Sortiere absteigend (neueste zuerst)
 const sortedItems = computed(() =>
   [...rawItems].sort((a, b) => toDate(b.date) - toDate(a.date))
 )
 
-// 3) Gruppiere nach Monat.Jahr
+// Gruppiere nach Monat.Jahr
 const grouped = computed(() => {
   const map = new Map()
   sortedItems.value.forEach(item => {
@@ -92,7 +90,7 @@ const grouped = computed(() => {
   return Array.from(map.values())
 })
 
-// 4) Modal‐State
+// Modal‐State
 const selected = ref(null)
 function open(item) {
   selected.value = item
@@ -101,7 +99,7 @@ function close() {
   selected.value = null
 }
 
-// 5) VARIANTE B: Alle Bilder aus /src/assets/pictures/sippungen/<id>/* einlesen
+// Importiere Bilder
 const imageModules = import.meta.glob(
   '/src/assets/pictures/sippungen/*/*.{webp,png,jpg,jpeg}',
   { eager: true, import: 'default' }
@@ -109,7 +107,6 @@ const imageModules = import.meta.glob(
 
 const imagesById = {}
 Object.entries(imageModules).forEach(([fullPath, imported]) => {
-  // Beispiel fullPath: "/src/assets/pictures/sippungen/3185/sippung_3185_img1.webp"
   const match = fullPath.match(/\/sippungen\/([^/]+)\//)
   if (match && match[1]) {
     const id = match[1]
@@ -118,32 +115,22 @@ Object.entries(imageModules).forEach(([fullPath, imported]) => {
   }
 })
 
-// Scroll-Triggered Animation mit IntersectionObserver
-let observer = null
-
-const createObserver = () => {
-  observer = new IntersectionObserver(
+// IntersectionObserver für scroll-triggered Animation
+onMounted(() => {
+  const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
+          entry.target.classList.add('animate-in')
           observer.unobserve(entry.target)
         }
       })
     },
     { threshold: 0.1 }
   )
-}
-
-onMounted(() => {
-  createObserver()
-  // Beobachte alle Elemente mit Klasse "animate-fade-in"
-  const elements = document.querySelectorAll('.animate-fade-in')
-  elements.forEach(el => observer.observe(el))
-})
-
-onBeforeUnmount(() => {
-  if (observer) observer.disconnect()
+  document.querySelectorAll('.animate-target').forEach(el => {
+    observer.observe(el)
+  })
 })
 </script>
 
@@ -167,7 +154,10 @@ onBeforeUnmount(() => {
   margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
   position: relative;
   padding-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
+
 .month-title::after {
   content: '';
   position: absolute;
@@ -187,23 +177,6 @@ onBeforeUnmount(() => {
   padding-bottom: 1rem;
 }
 
-/* Grundzustand: unsichtbar und verschoben */
-.animate-fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-/* Sobald sichtbar, Animation abspielen */
-.animate-fade-in.visible {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Delay-Klasse: Verzögerung für Animation */
-.delay-200 {
-  animation-delay: 0.2s;
-}
-
-/* Karten-Styling */
 .sippungs-card {
   display: flex;
   flex-direction: column;
@@ -212,13 +185,14 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: none;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  aspect-ratio: 4 / 5;        
-  width: 260px;              
-  overflow: hidden;           
+  /* gleiche Kartengröße */
+  aspect-ratio: 4 / 5;
+  width: 260px;
+  overflow: hidden;
 }
 
 .sippungs-card:hover {
@@ -235,6 +209,11 @@ onBeforeUnmount(() => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ".animate-in" löst die Animation aus */
+.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .card-header {
@@ -269,13 +248,13 @@ onBeforeUnmount(() => {
   text-align: center;
   flex-shrink: 0;
   line-height: 1.2;
-  max-height: 2.4rem;         
+  max-height: 2.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .single-image-wrapper {
-  flex-grow: 1;               
+  flex-grow: 1;
   margin: 0.5rem;
   overflow: hidden;
   border-radius: 6px;
@@ -292,9 +271,14 @@ onBeforeUnmount(() => {
 }
 
 .single-image-wrapper .fallback-logo {
-  max-width: 90%;           
-  max-height: 90%;          
-  object-fit: contain;     
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+/* Verzögerungsklasse für Titel */
+.delay-200 {
+  animation-delay: 0.2s;
 }
 
 @media (max-width: 600px) {
@@ -308,7 +292,8 @@ onBeforeUnmount(() => {
   }
   .card-title {
     font-size: 1rem;
-    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin: 0.5rem;
+    max-height: 2.4rem;
   }
   .single-image-wrapper {
     height: 140px;
