@@ -13,10 +13,6 @@
     <!-- Main Content -->
     <FlensburgenSection />
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      © 2025 Schlaraffia Flensburg. Alle Rechte vorbehalten.
-    </footer>
   </div>
 </template>
 

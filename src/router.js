@@ -14,6 +14,7 @@ const routes = [
   { path: '/sippungsfolge', name: 'Sippungsfolge', component: SippungsfolgePage },
   { path: '/contact',      name: 'Contact',       component: ContactPage },
   { path: '/die-flensburgen', name: 'DieFlensburgen', component: FlensburgenPage },
+  { path: '/contact', name: 'Contact', component: ContactPage },
   {
     path: '/dictionary',
     name: 'Dictionary',
