@@ -1,7 +1,7 @@
 <!-- src/components/AboutSection.vue -->
 <template>
   <section class="about-section">
-    <!-- Hero-Bereich mit etwas weniger Abstand nach oben -->
+    <!-- Hero-Bereich (jetzt mit mehr Abstand unten) -->
     <div class="hero-plain about-hero">
       <div class="content-wrapper">
         <h1 class="hero-title animate-target">Über Flensburgia</h1>
@@ -11,74 +11,43 @@
       </div>
     </div>
 
-    <!-- Einführender Text -->
-    <div class="intro-text-container animate-target" style="transition-delay: 0.2s">
-      <p class="intro-text">
-        Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® –  
-        einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor.  
-        Unsere Burg dient als kultureller Treffpunkt, an dem wir Tradition und Moderne verbinden.
+    <!-- Infotext-Box direkt unter dem Subtitle -->
+    <div class="welcome-box animate-target" style="transition-delay: 0.2s">
+      <p>
+        Willkommen! – Ein herzliches Willekum!<br /><br />
+        Hier sind Sie richtig, wenn Sie in eine Welt eintauchen wollen, in der Werte noch einen Wert haben.<br /><br />
+        Schlaraffia ist ein Spiel, das 1859 in Prag gegründet wurde. Es vereint auf einmalige Art und Weise Freundschaft mit Humor und Kunst. In jedem Fall ist Schlaraffia eine Persiflage auf das Leben. Ein deutschsprachiger Männerbund, weder geheim, noch politisch oder berufsfördernd. Dafür weltoffen und fröhlich. Also zeitgemäßer denn je. Lernen Sie uns kennen!
       </p>
     </div>
-
+    <div class="buttons-container animate-target" style="transition-delay: 1s">
+      <a
+        class="external-button"
+        href="https://www.schlaraffia-im-norden.de/"
+        target="_blank"
+        rel="noopener"
+      >
+        Schlaraffia im Norden
+      </a>
+      <a
+        class="external-button"
+        href="https://www.schlaraffia.org/"
+        target="_blank"
+        rel="noopener"
+      >
+        Schlaraffia® weltweit
+      </a>
+    </div>
     <!-- Statistik-Karten -->
     <div class="stats-container">
       <div
         v-for="(stat, index) in stats"
         :key="index"
         class="stat-card animate-target"
-        :style="{ 'transition-delay': `${(index + 1) * 0.2}s` }"
+        :style="{ 'transition-delay': `${(index + 1) * 0.2 + 0.2}s` }"
       >
         <component :is="stat.icon" class="stat-icon" />
         <h3 class="stat-title">{{ stat.title }}</h3>
         <p class="stat-value">{{ stat.value }}</p>
-      </div>
-    </div>
-
-    <!-- Abschließender Satz -->
-    <div class="footer-text-container animate-target" style="transition-delay: 0.8s">
-      <p class="footer-text">
-        Unsere Burg dient als Ort des kulturellen Austauschs, wo wir regelmäßig Sippungen  
-        veranstalten und gemeinsam Projekte zur Förderung regionaler Kunst 
-        sowie internationaler Vernetzung entwickeln.
-      </p>
-    </div>
-
-    <!-- Neue Info-Sektion mit externen Links -->
-    <div class="external-info-container">
-      <div class="external-text">
-        <p>
-          Willkommen! – Ein herzliches Willekum!  
-        </p>
-        <p>
-          Hier sind Sie richtig, wenn Sie in eine Welt eintauchen wollen, in der Werte  
-          noch einen Wert haben.  
-        </p>
-        <p>
-          Schlaraffia ist ein Spiel, das 1859 in Prag gegründet wurde.  
-          Es vereint auf einmalige Art und Weise Freundschaft mit Humor und Kunst.  
-          In jedem Fall ist Schlaraffia eine Persiflage auf das Leben.  
-          Ein deutschsprachiger Männerbund, weder geheim, noch politisch oder berufsfördernd.  
-          Dafür weltoffen und fröhlich.  
-          Also zeitgemäßer denn je. Lernen Sie uns kennen!
-        </p>
-      </div>
-      <div class="buttons-container">
-        <a
-          class="external-button"
-          href="https://www.schlaraffia-im-norden.de/"
-          target="_blank"
-          rel="noopener"
-        >
-          Schlaraffia im Norden
-        </a>
-        <a
-          class="external-button"
-          href="https://www.schlaraffia.org/"
-          target="_blank"
-          rel="noopener"
-        >
-          Schlaraffia® weltweit
-        </a>
       </div>
     </div>
   </section>
@@ -95,7 +64,6 @@ const stats = ref([
 ])
 
 onMounted(() => {
-  // Fade-In für alle animate-target-Elemente
   nextTick(() => {
     document.querySelectorAll('.animate-target').forEach(el => {
       el.classList.add('animate-in')
@@ -106,12 +74,12 @@ onMounted(() => {
 
 <style scoped>
 /* ===============================
-   Hero-ähnlicher Abschnitt (kleinerer Abstand)
+   Hero-ähnlicher Abschnitt (mehr Abstand unten)
    =============================== */
 .about-hero {
   background: #ffffff;
-  padding-top: 48px;   /* statt 64px: etwas weniger Abstand nach oben */
-  padding-bottom: 1.5rem; /* statt 2rem */
+  padding-top: 48px;       /* etwas weniger oben */
+  padding-bottom: 6rem;    /* noch mehr Abstand unten, damit Titel weiter runterrutscht */
   text-align: center;
 }
 .content-wrapper {
@@ -131,6 +99,7 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease-out;
+  margin-top: 5%;
 }
 .welcome-text {
   color: #334155;
@@ -143,22 +112,25 @@ onMounted(() => {
 }
 
 /* ===============================
-   Einführender Text zentriert
+   Infotext-Box
    =============================== */
-.intro-text-container {
+.welcome-box {
   max-width: 700px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
+  margin: -3rem auto 2rem; 
+  padding: 1.5rem 1.5rem;
+  background: #f9fafb;
+  border-radius: 12px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
-.intro-text {
+.welcome-box p {
   font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.6;
   color: #1d1d1f;
   margin: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
+  white-space: pre-wrap;
 }
 
 /* ===============================
@@ -169,7 +141,7 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 2.5rem auto; /* etwas mehr Abstand nach Infotext-Box */
   padding: 0 1.5rem;
 }
 .stat-card {
@@ -208,46 +180,17 @@ onMounted(() => {
 }
 
 /* ===============================
-   Abschließender Satz zentriert
+   Buttons direkt unter Stats
    =============================== */
-.footer-text-container {
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  padding: 0 1.5rem;
-  text-align: center;
-}
-.footer-text {
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
-  line-height: 1.6;
-  color: #4b5563;
-  margin: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-}
-
-/* ===============================
-   Externe Info-Sektion & Buttons
-   =============================== */
-.external-info-container {
-  background: #f9fafb;
-  padding: 2rem 1.5rem;
-  margin: 2rem 0;
-  text-align: center;
-  border-radius: 12px;
-}
-.external-text p {
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
-  line-height: 1.6;
-  color: #1d1d1f;
-  margin-bottom: 1rem;
-}
 .buttons-container {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
 }
 .external-button {
   display: inline-block;
@@ -295,8 +238,9 @@ onMounted(() => {
   .welcome-text {
     font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
-  .external-info-container {
-    padding: 1.5rem 1rem;
+  .welcome-box {
+    margin: -2rem auto 1.5rem; /* negative margin auf Mobil etwas reduziert */
+    padding: 1rem 1rem;
   }
   .buttons-container {
     flex-direction: column;
