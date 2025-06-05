@@ -3,8 +3,8 @@
   <div class="contact-page">
     <section class="contact-hero">
       <div class="content-wrapper">
-        <h1 class="section-title">Kontakt</h1>
-        <p class="section-subtitle">
+        <h1 class="section-title animate-target">Kontakt</h1>
+        <p class="section-subtitle animate-target">
           Wir stehen Ihnen gerne zur Verfügung – schreiben Sie uns oder rufen Sie an.
         </p>
       </div>
@@ -13,7 +13,7 @@
     <section class="contact-section">
       <div class="container">
         <!-- Kontaktinformationen -->
-        <div class="contact-info">
+        <div class="contact-info animate-target">
           <h2 class="contact-heading">Unsere Ansprechpartner</h2>
           <ul class="contact-list">
             <li>
@@ -32,7 +32,7 @@
         </div>
 
         <!-- Kontaktformular -->
-        <div class="contact-form-wrapper">
+        <div class="contact-form-wrapper animate-target">
           <h2 class="contact-heading">Kontaktformular</h2>
           <form @submit.prevent="submitForm" class="contact-form">
             <div class="form-group">
@@ -60,7 +60,7 @@
               <textarea
                 id="message"
                 v-model="form.message"
-                rows="5"
+                rows="7"
                 required
                 placeholder="Ihre Nachricht"
               ></textarea>
@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 const form = ref({
   name: '',
@@ -85,15 +85,31 @@ const form = ref({
 const success = ref(false)
 
 function submitForm() {
-  // Hier könnte eine API-Anfrage erfolgen. Zum Demo nur Feedback anzeigen.
   success.value = true
-  // Formular zurücksetzen
   form.value.name = ''
   form.value.email = ''
   form.value.message = ''
-  // Erfolgsnachricht nach 5 Sekunden ausblenden
   setTimeout(() => (success.value = false), 5000)
 }
+
+onMounted(() => {
+  nextTick(() => {
+    document.querySelectorAll('.section-title, .section-subtitle')
+      .forEach(el => el.classList.add('animate-in'))
+  })
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+  document.querySelectorAll('.animate-target').forEach(el => observer.observe(el))
+})
 </script>
 
 <style scoped>
@@ -105,9 +121,10 @@ function submitForm() {
 }
 
 .contact-hero {
-  background: #f1f5f9;
+  background: #ffffff;
   padding: clamp(4rem, 8vw, 6rem) 1.5rem;
   text-align: center;
+  margin-top: 64px;
 }
 
 .content-wrapper {
@@ -120,12 +137,16 @@ function submitForm() {
   font-weight: 700;
   color: #0ea5e9;
   margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .section-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: #334155;
   margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .contact-section {
@@ -133,17 +154,18 @@ function submitForm() {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1300px; /* erhöht für breiteres Layout */
   margin: 0 auto;
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-/* Kontaktinformationen */
 .contact-info {
   flex: 1 1 300px;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .contact-heading {
@@ -179,9 +201,10 @@ function submitForm() {
   text-decoration: underline;
 }
 
-/* Kontaktformular */
 .contact-form-wrapper {
-  flex: 1 1 400px;
+  flex: 1 1 500px; 
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .contact-form {
@@ -242,8 +265,22 @@ function submitForm() {
   font-weight: 500;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@media (max-width: 992px) {
   .container {
     flex-direction: column;
   }
