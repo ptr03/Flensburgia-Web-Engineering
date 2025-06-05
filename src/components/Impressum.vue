@@ -1,31 +1,48 @@
 <!-- src/pages/Impressum.vue -->
 <template>
   <div class="impressum-page">
+    <!-- Hero-Bereich -->
     <section class="hero-plain">
       <div class="content-wrapper">
         <h1 class="hero-title animate-target">Impressum</h1>
       </div>
     </section>
 
+    <!-- Inhalt -->
     <section class="section content-section">
       <div class="container">
-        <h2>Angaben gemäß § 5 TMG</h2>
+        <!-- Haftungshinweis -->
+        <h2>Haftungshinweis</h2>
+        <p>
+          Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die
+          Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich
+          deren Betreiber verantwortlich.
+        </p>
+
+        <!-- Bildnachweise -->
+        <h2>Bildnachweise</h2>
+        <p>
+          Alle eingestellten Bilder sind nachweislich Eigentum der Schlaraffia Flensburgia
+          oder werden freiwillig von Mitgliedern der Schlaraffia zur Verfügung gestellt.
+          <br /><br />
+          Zur Wahrung der Persönlichkeitsrechte am eigenen Bild hat jede abgelichtete und hier
+          zu sehende Person vorher ihre Einwilligung schriftlich erteilt!
+        </p>
+
+        <!-- Betreiber / Herausgeber -->
+        <h2>Betreiber / Herausgeber dieser Website</h2>
         <p>
           Schlaraffia Flensburgia e. V.<br />
-          Musterstraße 123<br />
-          24937 Flensburg
+          Händelhof 7<br />
+          24394 Flensburg
         </p>
 
-        <h3>Vertreten durch</h3>
+        <h3>Vertretungsberechtigt</h3>
         <p>
-          Vorstand: Rt Beispielname (Erster Vorsitzender)<br />
-          Rt Musterfrau (Zweiter Vorsitzender)
-        </p>
-
-        <h3>Kontakt</h3>
-        <p>
-          Telefon: 0461 1234567<br />
-          E-Mail: kontakt@flensburgia.de
+          Franz Dewanger (Ritter Wohlbedacht)<br />
+          24980 Meyn / Am Mühlenteich 2<br />
+          Telefon: 04639 78064<br />
+          E-Mail: f.dewanger(at)t-online.de
         </p>
 
         <h3>Registereintrag</h3>
@@ -35,16 +52,16 @@
           Registernummer: VR 1234 FI
         </p>
 
-        <h3>Umsatzsteuer-ID</h3>
+        <h3>Netzvogt</h3>
         <p>
-          Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE 123456789
+          Andreas Ovens (Kn244)<br />
+          Händelhof 7, 24394 Flensburg<br />
+          E-Mail: andreas.ovens@gmx.de
         </p>
 
-        <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+        <h3>Umsatzsteuer-ID</h3>
         <p>
-          Rt Beispielname<br />
-          Musterstraße 123<br />
-          24937 Flensburg
+          Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: DE 123456789
         </p>
       </div>
     </section>
@@ -56,9 +73,9 @@ import { onMounted, nextTick } from 'vue'
 
 onMounted(() => {
   nextTick(() => {
-    document
-      .querySelectorAll('.animate-target')
-      .forEach(el => el.classList.add('animate-in'))
+    document.querySelectorAll('.animate-target').forEach(el => {
+      el.classList.add('animate-in')
+    })
   })
 })
 </script>
@@ -69,7 +86,7 @@ onMounted(() => {
   min-height: 100vh;
 }
 
-/* Hero-Bereich analog zu anderen Seiten */
+/* Hero-Bereich */
 .hero-plain {
   padding-top: 64px;
   min-height: 30vh;
@@ -99,6 +116,7 @@ onMounted(() => {
   transition: all 0.8s ease-out;
 }
 
+/* Text-Abschnitt */
 .section {
   padding: clamp(4rem, 8vw, 6rem) 1.5rem;
 }
@@ -112,8 +130,7 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-h2,
-h3 {
+h2, h3 {
   color: #1d1d1f;
   margin-top: 1.5rem;
 }

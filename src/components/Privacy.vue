@@ -1,3 +1,4 @@
+<!-- src/pages/Privacy.vue -->
 <template>
   <div class="privacy-page">
     <!-- Hero-Bereich -->
@@ -10,48 +11,83 @@
     <!-- Inhalt -->
     <section class="section content-section">
       <div class="container">
-        <h2>Datenschutzerklärung</h2>
+        <!-- Geltungsbereich -->
+        <h2>Geltungsbereich</h2>
         <p>
-          Der Schutz Ihrer persönlichen Daten ist uns wichtig. Nachfolgend informieren wir 
-          Sie, welche personenbezogenen Daten wir erheben und wie wir sie verwenden.
+          Diese Datenschutzerklärung soll die Nutzer dieser Website gemäß Bundesdatenschutzgesetz
+          und Telemediengesetz über die Art, den Umfang und den Zweck der Erhebung und Verwendung
+          personenbezogener Daten durch den Verein „Schlaraffia Flensburgia“ informieren.
+          <br /><br />
+          Wir nehmen den Schutz Ihrer Daten sehr ernst und behandeln Ihre personenbezogenen Daten
+          vertraulich und entsprechend der gesetzlichen Vorschriften.
+          <br /><br />
+          Bedenken Sie bitte, dass die Datenübertragung im Internet grundsätzlich Sicherheitslücken
+          aufweisen kann. Ein vollumfänglicher Schutz vor dem Zugriff durch Fremde ist nicht realisierbar.
         </p>
 
-        <h3>Erhebung und Verarbeitung persönlicher Daten</h3>
+        <!-- Zugriffsdaten -->
+        <h2>Zugriffsdaten</h2>
         <p>
-          Wir verarbeiten personenbezogene Daten, wenn Sie uns diese von sich aus, zum 
-          Beispiel im Kontaktformular, mitteilen.  
-          Folgende Daten können erhoben werden: Name, E-Mail-Adresse, IP-Adresse.
+          Wir als Websitebetreiber bzw. der Seitenprovider erheben Daten über Zugriffe auf die Seite
+          und speichern diese als „Server-Logfiles“ ab. Folgende Daten werden so protokolliert:
+        </p>
+        <ul>
+          <li>Besuchte Website</li>
+          <li>Uhrzeit zum Zeitpunkt des Zugriffes</li>
+          <li>Menge der gesendeten Daten in Byte</li>
+          <li>Quelle/Verweis, von welchem Sie auf die Seite gelangten</li>
+          <li>Verwendeter Browser</li>
+          <li>Verwendetes Betriebssystem</li>
+          <li>Verwendete IP-Adresse</li>
+        </ul>
+        <p>
+          Die erhobenen Daten dienen lediglich statistischen Auswertungen und der Verbesserung der Website.
+          Wir behalten uns allerdings vor, die Server-Logfiles nachträglich zu überprüfen, sollten konkrete
+          Anhaltspunkte auf eine rechtswidrige Nutzung hinweisen.
         </p>
 
-        <h3>Zwecke der Datenverarbeitung</h3>
+        <!-- Cookies -->
+        <h2>Cookies</h2>
         <p>
-          Wir verwenden die Daten, um Ihre Anfragen zu bearbeiten, Sie über Veranstaltungen 
-          zu informieren oder statistische Auswertungen vorzunehmen.
+          Diese Website verwendet Cookies. Dabei handelt es sich um kleine Textdateien, welche auf Ihrem
+          Endgerät gespeichert werden. Ihr Browser greift auf diese Dateien zu. Durch den Einsatz von Cookies
+          erhöht sich die Benutzerfreundlichkeit und Sicherheit dieser Website. Gängige Browser bieten die
+          Einstellungsoption, Cookies nicht zuzulassen. Hinweis: Es ist nicht gewährleistet, dass Sie auf
+          alle Funktionen dieser Website ohne Einschränkungen zugreifen können, wenn Sie entsprechende
+          Einstellungen vornehmen.
         </p>
 
-        <h3>Rechtsgrundlage</h3>
+        <!-- Umgang mit personenbezogenen Daten -->
+        <h2>Umgang mit personenbezogenen Daten</h2>
         <p>
-          Die Verarbeitung erfolgt nach Art. 6 Abs. 1 lit. b DSGVO zur Erfüllung unserer 
-          vertraglichen Pflichten und zur Beantwortung Ihrer Kontaktanfragen.
+          Wir erheben, nutzen und geben Ihre personenbezogenen Daten nur weiter, wenn dies im gesetzlichen
+          Rahmen erlaubt ist oder Sie in die Datenerhebung einwilligen.  
+          Als personenbezogene Daten gelten sämtliche Informationen, welche dazu dienen, Ihre Person zu
+          bestimmen und welche zu Ihnen zurückverfolgt werden können – also beispielsweise Ihr Name, Ihre
+          E-Mail-Adresse und Telefonnummer.
         </p>
 
-        <h3>Datenweitergabe</h3>
+        <!-- Umgang mit Kontaktdaten -->
+        <h2>Umgang mit Kontaktdaten</h2>
         <p>
-          Eine Weitergabe Ihrer Daten an Dritte erfolgt nur, wenn dies zur Vertragserfüllung 
-          notwendig ist oder wir gesetzlich dazu verpflichtet sind.
+          Nehmen Sie mit uns durch die angebotenen Kontaktmöglichkeiten Verbindung auf, werden Ihre Angaben
+          gespeichert, damit auf diese zur Bearbeitung und Beantwortung Ihrer Anfrage zurückgegriffen
+          werden kann. Ohne Ihre Einwilligung werden diese Daten nicht an Dritte weitergegeben.
         </p>
 
-        <h3>Cookies und Tracking</h3>
+        <!-- Umgang mit Kommentaren und Beiträgen -->
+        <h2>Umgang mit Kommentaren und Beiträgen</h2>
         <p>
-          Wir verwenden keine Cookies zur Speicherung personenbezogener Daten. 
-          Statistische Auswertungen erfolgen anonymisiert.
+          Es gibt keine Möglichkeit, auf dieser Webseite einen Beitrag oder Kommentar zu hinterlassen.
         </p>
 
-        <h3>Betroffenenrechte</h3>
+        <!-- Rechte des Nutzers -->
+        <h2>Rechte des Nutzers: Auskunft, Berichtigung und Löschung</h2>
         <p>
-          Sie haben das Recht auf Auskunft, Berichtigung, Löschung oder Einschränkung der 
-          Verarbeitung Ihrer personenbezogenen Daten. Wenden Sie sich dazu bitte an die 
-          im Impressum genannten Kontaktdaten.
+          Als Nutzer erhalten Sie auf Antrag kostenlose Auskunft darüber, welche personenbezogenen Daten
+          über Sie gespeichert wurden. Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur
+          Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf
+          Berichtigung falscher Daten und auf die Sperrung oder Löschung Ihrer personenbezogenen Daten.
         </p>
       </div>
     </section>
@@ -120,15 +156,20 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-h2, h3 {
+h2 {
   color: #1d1d1f;
   margin-top: 1.5rem;
 }
 
-p {
+p, ul, li {
   color: #374151;
   line-height: 1.6;
   margin-top: 0.5rem;
+}
+
+/* Listen-Stil */
+ul {
+  margin-left: 1rem;
 }
 
 /* Fade-In Animation */

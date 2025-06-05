@@ -1,3 +1,4 @@
+<!-- src/pages/Terms.vue -->
 <template>
   <div class="terms-page">
     <!-- Hero-Bereich -->
@@ -12,40 +13,41 @@
       <div class="container">
         <h2>Anwendungsbereich</h2>
         <p>
-          Diese Allgemeinen Geschäftsbedingungen (im Folgenden „AGB“) regeln die Nutzung 
-          der Webseite und der damit verbundenen Dienstleistungen von Schlaraffia Flensburgia 
+          Diese Allgemeinen Geschäftsbedingungen (im Folgenden „AGB“) regeln die Nutzung
+          der Webseite und der damit verbundenen Dienstleistungen von Schlaraffia Flensburgia
           e. V. (nachfolgend „Anbieter“ genannt).
         </p>
 
         <h3>Vertragsabschluss</h3>
         <p>
-          Mit Nutzung dieser Website erkennen Sie diese AGB an. Ein gesonderter Vertrag 
+          Mit Nutzung dieser Website erkennen Sie diese AGB an. Ein gesonderter Vertrag
           kommt nicht zustande, soweit kein anderes ausdrücklich vereinbart ist.
         </p>
 
         <h3>Leistungsbeschreibung</h3>
         <p>
-          Der Anbieter stellt über die Internetseite Informationen, Veranstaltungshinweise 
-          und Kontaktmöglichkeiten zur Verfügung. Darüber hinausgehende Leistungen erfolgen 
+          Der Anbieter stellt über die Internetseite Informationen, Veranstaltungshinweise
+          und Kontaktmöglichkeiten zur Verfügung. Darüber hinausgehende Leistungen erfolgen
           nur bei gesonderter Vereinbarung.
         </p>
 
         <h3>Haftung</h3>
         <p>
-          Der Anbieter haftet nur für Schäden, die auf vorsätzlicher oder grob fahrlässiger 
-          Pflichtverletzung beruhen. Eine Haftung für leichte Fahrlässigkeit ist ausgeschlossen, 
-          es sei denn, es handelt sich um Schäden aus der Verletzung des Lebens, des Körpers 
+          Der Anbieter haftet nur für Schäden, die auf vorsätzlicher oder grob fahrlässiger
+          Pflichtverletzung beruhen. Eine Haftung für leichte Fahrlässigkeit ist ausgeschlossen,
+          es sei denn, es handelt sich um Schäden aus der Verletzung des Lebens, des Körpers
           oder der Gesundheit.
         </p>
 
         <h3>Datenschutz</h3>
         <p>
-          Informationen zum Datenschutz finden Sie in unserer <router-link to="/privacy">Privacy Policy</router-link>.
+          Informationen zum Datenschutz finden Sie in unserer
+          <router-link to="/privacy">Privacy Policy</router-link>.
         </p>
 
         <h3>Änderung der AGB</h3>
         <p>
-          Der Anbieter behält sich vor, diese AGB jederzeit zu ändern. Die jeweils aktuelle 
+          Der Anbieter behält sich vor, diese AGB jederzeit zu ändern. Die jeweils aktuelle
           Version ist auf der Webseite abrufbar.
         </p>
       </div>
