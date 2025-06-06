@@ -1,6 +1,6 @@
-<!-- src/components/FlensburgenSection.vue -->
 <template>
   <section class="flensburgen-section">
+    <!-- Obere Kategorie-Buttons: Sassen, Röde Grütt, Erz- & Ehrenschlaraffen, Kilianischer Windjammerorden -->
     <div class="category-grid">
       <button
         v-for="cat in categories"
@@ -8,7 +8,6 @@
         class="category-button"
         @click="openModal(cat.id)"
       >
-        <!-- Icon vor dem Namen -->
         <component :is="cat.icon" class="category-icon" />
         <span>{{ cat.name }}</span>
       </button>
@@ -18,9 +17,12 @@
       <div v-if="activeId" class="modal-overlay" @click.self="closeModal">
         <div
           class="modal-content"
-          :class="{ 'compact': activeId==='sassen' && filteredKnights.length===1 }"
+          :class="{
+            compact:
+              activeId === 'sassen' && filteredSassen.length === 1
+          }"
         >
-          <!-- Zoom overlay -->
+          <!-- Bild-Zoom Overlay -->
           <transition name="fade">
             <div
               v-if="enlargedImage"
@@ -28,15 +30,19 @@
               @click.self="enlargedImage = null"
             >
               <img
-                :src="getImage(enlargedImage.filename)"
+                :src="getImage(enlargedImage.fullPath)"
                 :alt="enlargedImage.name"
               />
             </div>
           </transition>
 
-          <!-- Sassen -->
+          <!-- ====================== -->
+          <!-- 1) Sassen Modal       -->
+          <!-- ====================== -->
           <div v-if="activeId === 'sassen'" class="modal-sassen">
             <h2 class="modal-title">Sassen</h2>
+
+            <!-- Suchfeld -->
             <div class="search-wrapper">
               <input
                 v-model="search"
@@ -45,19 +51,21 @@
                 class="search-bar"
               />
             </div>
+
+            <!-- Gitterdarstellung -->
             <transition-group
               name="fade-list"
               tag="div"
               class="sassen-grid"
-              :class="{ single: filteredKnights.length === 1 }"
+              :class="{ single: filteredSassen.length === 1 }"
             >
               <div
-                v-for="kn in filteredKnights"
+                v-for="kn in filteredSassen"
                 :key="kn.id"
                 class="sassen-card"
               >
                 <img
-                  :src="getImage(kn.filename)"
+                  :src="getImage(kn.fullPath)"
                   :alt="kn.name"
                   class="clickable"
                   @click="enlargeImage(kn)"
@@ -67,36 +75,101 @@
             </transition-group>
           </div>
 
-          <!-- Röde Grütt -->
+          <!-- ====================== -->
+          <!-- 2) Röde Grütt Modal   -->
+          <!-- ====================== -->
           <div v-else-if="activeId === 'rode-gruett'" class="modal-text poem">
             <h2 class="modal-title">Röde Grütt</h2>
             <div class="text-content" v-html="formattedRodeGruett"></div>
           </div>
 
-          <!-- Erz- & Ehrenschlaraffen -->
+          <!-- =============================================== -->
+          <!-- 3) Erz- & Ehrenschlaraffen – Auswahlbuttons   -->
+          <!-- =============================================== -->
           <div
-            v-else-if="activeId === 'ehrenschlaraffen'"
-            class="modal-ehrenschlaraffen"
+            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === null"
+            class="modal-schlaraffen-selection"
           >
             <h2 class="modal-title">Erz- & Ehrenschlaraffen</h2>
-            <div class="ehrenschlaraffen-grid">
-              <div
-                v-for="eh in ehrenschlaraffen"
-                :key="eh.id"
-                class="ehrenschlaraffen-card"
+            <div class="selection-buttons">
+              <button
+                class="sub-button"
+                @click="subSchlaraffen = 'erz'"
               >
-                <img
-                  :src="getImage(eh.filename)"
-                  :alt="eh.name"
-                  class="clickable"
-                  @click="enlargeImage(eh)"
-                />
-                <div class="ehrenschlaraffen-name">{{ eh.name }}</div>
-              </div>
+                Erzschlaraffen
+              </button>
+              <button
+                class="sub-button"
+                @click="subSchlaraffen = 'ehr'"
+              >
+                Ehrenschlaraffen
+              </button>
             </div>
           </div>
 
-          <!-- Kilianischer Windjammerorden -->
+          <!-- ======================================================= -->
+          <!-- 4a) Erzschlaraffen – zeigt alle Bilder aus Ordner „Erzschlaraffen“ -->
+          <!-- ======================================================= -->
+          <div
+            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'erz'"
+            class="modal-schlaraffen-grid"
+          >
+            <h2 class="modal-title">Erzschlaraffen</h2>
+            <div class="ehrenschlaraffen-grid">
+              <div
+                v-for="item in erzList"
+                :key="item.id"
+                class="ehrenschlaraffen-card"
+              >
+                <img
+                  :src="getImage(item.fullPath)"
+                  :alt="item.name"
+                  class="clickable"
+                  @click="enlargeImage(item)"
+                />
+                <div class="ehrenschlaraffen-name">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- Zurück-Button -->
+            <button class="btn-back" @click="subSchlaraffen = null">
+              ← Zur Auswahl
+            </button>
+          </div>
+
+          <!-- ======================================================= -->
+          <!-- 4b) Ehrenschlaraffen – zeigt alle Bilder aus Ordner „Ehrenschlaraffen“ -->
+          <!-- ======================================================= -->
+          <div
+            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'ehr'"
+            class="modal-schlaraffen-grid"
+          >
+            <h2 class="modal-title">Ehrenschlaraffen</h2>
+            <div class="ehrenschlaraffen-grid">
+              <div
+                v-for="item in ehrList"
+                :key="item.id"
+                class="ehrenschlaraffen-card"
+              >
+                <img
+                  :src="getImage(item.fullPath)"
+                  :alt="item.name"
+                  class="clickable"
+                  @click="enlargeImage(item)"
+                />
+                <div class="ehrenschlaraffen-name">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- Zurück-Button -->
+            <button class="btn-back" @click="subSchlaraffen = null">
+              ← Zur Auswahl
+            </button>
+          </div>
+
+          <!-- =========================================== -->
+          <!-- 5) Kilianischer Windjammerorden Modal    -->
+          <!-- =========================================== -->
           <div
             v-else-if="activeId === 'kilianischer-windjammerorden'"
             class="modal-text modal-windjammer"
@@ -121,7 +194,7 @@
             </div>
           </div>
 
-          <!-- Close -->
+          <!-- Schließen-Button -->
           <button class="btn-close" @click="closeModal">×</button>
         </div>
       </div>
@@ -130,67 +203,129 @@
 </template>
 
 <script setup>
+import { ref, computed, watch } from 'vue'
+import MarkdownIt from 'markdown-it'
+
+// 1) Rohtexte importieren
 import rodeGruettText from '../data/rodeGruetteText.md?raw'
 import windjammerText from '../data/windjammerText.md?raw'
-import { ref, computed, watch } from 'vue'
-import knights from '../data/flensburgen.json'
-import ehrenschlaraffenData from '../data/flensburgen.json'
 
-// Icons von lucide-vue-next importieren
+// 2) JSON für Sassen
+import sassenData from '../data/sassen.json'
+
+// 3) Icons von lucide-vue-next
 import { Users, BookOpen, Award, Ship } from 'lucide-vue-next'
 
-import MarkdownIt from 'markdown-it'
+/* ===============================
+   Markdown-Renderer initialisieren
+   =============================== */
 const md = new MarkdownIt()
-
 const formattedRodeGruett = computed(() => md.render(rodeGruettText))
 const formattedWindjammer = computed(() => md.render(windjammerText))
 
-// Kategorien-Definition mit Icon-Komponente
+// 4) Kategorien definieren (inkl. Röde Grütt & Windjammer)
 const categories = [
   { id: 'sassen', name: 'Sassen', icon: Users },
   { id: 'rode-gruett', name: 'Röde Grütt', icon: BookOpen },
-  { id: 'ehrenschlaraffen', name: 'Erz- & Ehrenschlaraffen', icon: Award },
-  { id: 'kilianischer-windjammerorden', name: 'Kilianischer Windjammerorden', icon: Ship }
+  { id: 'schlaraffen', name: 'Erz & Ehrenschlaraffen', icon: Award },
+  {
+    id: 'kilianischer-windjammerorden',
+    name: 'Kilianischer Windjammerorden',
+    icon: Ship
+  }
 ]
 
-// Modal‐State
+// 5) Modal-State
 const activeId = ref(null)
-const openModal = id => { activeId.value = id }
+const openModal = (id) => {
+  activeId.value = id
+  // Reset bei Schlaraffen
+  if (id === 'schlaraffen') subSchlaraffen.value = null
+}
 const closeModal = () => {
   activeId.value = null
   enlargedImage.value = null
+  subSchlaraffen.value = null
 }
 
-// Bild‐Zoom
+// 6) Bild-Zoom
 const enlargedImage = ref(null)
-const enlargeImage = img => { enlargedImage.value = img }
+const enlargeImage = (obj) => {
+  enlargedImage.value = obj
+}
 
-// Suche für Sassen
+// 7) Suchen + gefilterte Sassen-Liste
 const search = ref('')
-const sassenKnights = computed(() =>
-  knights.filter(
-    k => !['ehrenschlaraffen-1920w','erzschlaraffen-1920w'].includes(k.id)
-  )
-)
-const filteredKnights = computed(() =>
-  sassenKnights.value.filter(kn =>
+const sassenAll = computed(() => {
+  return sassenData.map((itm) => ({
+    id: itm.id,
+    name: itm.name,
+    // Ordner „Sassen/“ automatisch davor
+    fullPath: `Sassen/${itm.filename}`
+  }))
+})
+const filteredSassen = computed(() =>
+  sassenAll.value.filter((kn) =>
     kn.name.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
-// "Ehrenschlaraffen" aus JSON-Datei
-const ehrenschlaraffen = ref(ehrenschlaraffenData)
+// 8) Sub-Selection bei Schlaraffen
+const subSchlaraffen = ref(null) // null | 'erz' | 'ehr'
 
-// Body scroll unterbinden, wenn Modal offen ist
-watch(activeId, val => {
+// 9) Alle Schlaraffen-Bilder dynamisch einlesen
+const allImages = import.meta.glob(
+  '../assets/pictures/flensburgen/**/**/*.{png,webp,jpg,jpeg}',
+  { eager: true, import: 'default' }
+)
+
+// Hilfsfunktion: Aus viteKey Objekt { id, name, fullPath } machen
+function makeItemObject(viteKey) {
+  // z. B. "../assets/pictures/flensburgen/Erzschlaraffen/Ritter X.png"
+  const parts = viteKey.split('/')
+  const filenameWithExt = parts[parts.length - 1] // "Ritter X.png"
+  const folderName = parts[parts.length - 2] // "Erzschlaraffen" oder "Ehrenschlaraffen"
+  const name = filenameWithExt.replace(/\.(png|webp|jpg|jpeg)$/i, '') // ohne Extension
+  const id = name
+    .toLowerCase()
+    .replace(/[^a-z0-9äöüß]+/gi, '-')
+    .replace(/^-+|-+$/g, '')
+  const fullPath = `${folderName}/${filenameWithExt}`
+  return { id, name, fullPath }
+}
+
+// 10) Erzschlaraffen-Liste
+const erzList = computed(() => {
+  const arr = []
+  Object.keys(allImages).forEach((key) => {
+    if (key.includes('/Erzschlaraffen/')) {
+      arr.push(makeItemObject(key))
+    }
+  })
+  return arr
+})
+
+// 11) Ehrenschlaraffen-Liste
+const ehrList = computed(() => {
+  const arr = []
+  Object.keys(allImages).forEach((key) => {
+    if (key.includes('/Ehrenschlaraffen/')) {
+      arr.push(makeItemObject(key))
+    }
+  })
+  return arr
+})
+
+// 12) Body-Scroll unterbinden, wenn Modal offen
+watch(activeId, (val) => {
   document.body.classList.toggle('modal-open', !!val)
 })
 
-// Bilder‐Loader via Vite
-const imageModules = import.meta.glob('../assets/pictures/flensburgen/*', { eager: true })
-function getImage(filename) {
-  const path = `../assets/pictures/flensburgen/${filename}`
-  return imageModules[path]?.default || ''
+// 13) getImage: Bild via vite-glob laden
+function getImage(path) {
+  // path = "Sassen/Junker_Friedrich.webp" oder "Erzschlaraffen/Ritter X.png"
+  const fullKey = `../assets/pictures/flensburgen/${path}`
+  return allImages[fullKey] || ''
 }
 </script>
 
@@ -204,7 +339,7 @@ function getImage(filename) {
   padding: 2rem 1.5rem;
 }
 
-/* 2×2 Grid für Flensburgen-Kategorien */
+/* 2×2 Grid für vier Buttons */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -217,18 +352,13 @@ function getImage(filename) {
   }
 }
 
-/* 
-  Wichtige Anpassungen:
-  - Padding oben/unten vergrößert (2rem statt 1.75rem), damit der Button "größer" wird
-  - Inhalte (Icon + Text) zentriert
-  - Gap zwischen Icon und Text auf 1rem gesetzt
-*/
+/* Style der Kategorie-Buttons */
 .category-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;               /* größerer Abstand zwischen Icon und Text */
-  padding: 2rem 1rem;      /* etwas mehr Höhe */
+  gap: 1rem;
+  padding: 2rem 1rem;
   background: #f3f4f6;
   border: none;
   border-radius: 8px;
@@ -239,16 +369,22 @@ function getImage(filename) {
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease-out forwards;
 }
-.category-button:nth-child(1) { animation-delay: 0.6s }
-.category-button:nth-child(2) { animation-delay: 0.7s }
-.category-button:nth-child(3) { animation-delay: 0.8s }
-.category-button:nth-child(4) { animation-delay: 0.9s }
+.category-button:nth-child(1) {
+  animation-delay: 0.6s;
+}
+.category-button:nth-child(2) {
+  animation-delay: 0.7s;
+}
+.category-button:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.category-button:nth-child(4) {
+  animation-delay: 0.9s;
+}
 .category-button:hover {
   background: #e0e0e0;
   transform: scale(1.02);
 }
-
-/* Icon in den Buttons */
 .category-icon {
   width: 1.75rem;
   height: 1.75rem;
@@ -272,12 +408,11 @@ function getImage(filename) {
   padding: 1.5rem;
   border-radius: 12px;
   width: 90%;
-  max-width: 700px;
-  max-height: 75vh;
+  max-width: 800px;
+  max-height: 80vh;
   overflow-y: auto;
   position: relative;
   animation: zoomIn 0.4s ease-out;
-  color: #000000;
 }
 .modal-content.compact {
   max-width: fit-content;
@@ -300,39 +435,34 @@ function getImage(filename) {
 /* Fade & Zoom Keyframes        */
 /* =========================== */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes zoomIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* =========================== */
-/* Modal Text (Röde Grütt)      */
-/* =========================== */
-.modal-text.poem .text-content {
-  text-align: center;
-  white-space: pre-wrap;
-  overflow-y: auto;
-  max-height: 65vh;
-  padding: 1rem;
-}
-.modal-text .text-content {
-  font-family: Georgia, “Times New Roman”, serif;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-.modal-text.poem .text-content p:first-of-type::first-letter {
-  float: left;
-  font-size: 4rem;
-  line-height: 1;
-  margin-right: 0.5rem;
-  font-family: serif;
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* =========================== */
@@ -340,7 +470,7 @@ function getImage(filename) {
 /* =========================== */
 .modal-sassen h2 {
   margin-bottom: 0.5rem;
-  color: #0ea5e9; /* blau */
+  color: #0ea5e9;
   font-size: 1.75rem;
   font-weight: 700;
 }
@@ -358,7 +488,7 @@ function getImage(filename) {
   font-size: 1.125rem;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: border 0.3s, box-shadow 0.3s;
 }
 .search-bar:focus {
@@ -369,14 +499,14 @@ function getImage(filename) {
 
 .sassen-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
 }
 .sassen-card {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.3s ease-out;
   display: flex;
   flex-direction: column;
@@ -389,12 +519,14 @@ function getImage(filename) {
   cursor: zoom-in;
   transition: transform 0.3s;
 }
-.sassen-card:hover img { transform: scale(1.05) }
+.sassen-card:hover img {
+  transform: scale(1.05);
+}
 .sassen-name {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   color: #ffffff;
   padding: 0.5rem;
   text-align: center;
@@ -402,25 +534,96 @@ function getImage(filename) {
   font-size: 1rem;
 }
 
-/* Single-result adjustments */
-.sassen-grid.single { justify-content: center }
+/* Single-Result Anpassung */
+.sassen-grid.single {
+  justify-content: center;
+}
 .sassen-card.single {
   background: none;
   box-shadow: none;
   padding: 0;
 }
-.sassen-card.single img { max-height: 50vh }
+.sassen-card.single img {
+  max-height: 50vh;
+}
 
 /* =========================== */
-/* Erz- & Ehrenschlaraffen Modal */
+/* Röde Grütt Modal            */
 /* =========================== */
+.modal-text.poem .text-content {
+  text-align: center;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 65vh;
+  padding: 1rem;
+}
+.modal-text .text-content {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.modal-text.poem .text-content p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 1;
+  margin-right: 0.5rem;
+  font-family: serif;
+}
+
+/* =========================== */
+/* Auswahl-Buttons im Schlaraffen-Modal */
+/* =========================== */
+.modal-schlaraffen-selection {
+  text-align: center;
+}
+.modal-schlaraffen-selection h2 {
+  margin-bottom: 1rem;
+  color: #0ea5e9;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.selection-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.sub-button {
+  flex: 1;
+  max-width: 200px;
+  padding: 1rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.sub-button:hover {
+  background: #e0e0e0;
+  transform: scale(1.02);
+}
+
+/* =========================== */
+/* Erz- & Ehrenschlaraffen-Grid */
+/* =========================== */
+.modal-schlaraffen-grid h2 {
+  margin-bottom: 0.5rem;
+  color: #0ea5e9;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .ehrenschlaraffen-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
   justify-items: center;
   margin-top: 1rem;
 }
+
 .ehrenschlaraffen-card {
   display: flex;
   flex-direction: column;
@@ -428,7 +631,7 @@ function getImage(filename) {
   background: #ffffff;
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   animation: fadeIn 0.3s ease-out;
 }
 .ehrenschlaraffen-card img {
@@ -440,7 +643,9 @@ function getImage(filename) {
   margin-bottom: 0.5rem;
   transition: transform 0.3s;
 }
-.ehrenschlaraffen-card:hover img { transform: scale(1.05) }
+.ehrenschlaraffen-card:hover img {
+  transform: scale(1.05);
+}
 .ehrenschlaraffen-name {
   font-size: 1rem;
   font-weight: 600;
@@ -448,46 +653,23 @@ function getImage(filename) {
   text-align: center;
 }
 
-/* Transition-group fade */
-.fade-list-enter-active,
-.fade-list-leave-active {
-  transition: all 0.3s ease;
+/* Zurück-Button */
+.btn-back {
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
 }
-.fade-list-enter-from,
-.fade-list-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.btn-back:hover {
+  background: #e0e0e0;
 }
 
 /* =========================== */
-/* Image Zoom Overlay           */
-/* =========================== */
-.image-zoom {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1500;
-}
-.image-zoom img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-/* =========================== */
-/* Kilianischer Windjammerorden */
+/* Kilianischer Windjammerorden Modal */
 /* =========================== */
 .modal-windjammer p:first-of-type::first-letter {
   float: left;
@@ -546,6 +728,46 @@ function getImage(filename) {
 }
 .btn-download:hover {
   background: #003f7d;
+}
+
+/* =========================== */
+/* Transition-Klassen           */
+/* =========================== */
+.fade-list-enter-active,
+.fade-list-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-list-enter-from,
+.fade-list-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* =========================== */
+/* Image Zoom Overlay           */
+/* =========================== */
+.image-zoom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+}
+.image-zoom img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* Prevent background scroll */
