@@ -1,26 +1,23 @@
 [
   {
-    "id": 1,
-    "date": "15. Oktober 2024",
-    "title": "Kulturerbe-Symposium",
-    "excerpt": "Führende Experten diskutieren den Erhalt regionaler Kulturgüter durch moderne Methoden."
+    "id": "event1",
+    "date": "2025-06-20",
+    "title": "Kaffeeklatsch bei den Erzschlaraffen",
+    "description": "Gemütliches Beisammensein mit frisch gebrühtem Kaffee und Krapfen-Spezialitäten.",
+    "image": "kaffeeklatsch.png"
   },
   {
-    "id": 2,
-    "date": "2.–4. November 2024",
-    "title": "Traditionelles Kunstfestival",
-    "excerpt": "Dreitägige Feier lokaler Handwerkskunst, Musik und Kulinarik mit Workshops."
+    "id": "event2",
+    "date": "2025-07-05",
+    "title": "Liedersingen im Ehrenschlaraffenhof",
+    "description": "Gemeinsames Singen klassischer Lieder unter fachkundiger Leitung.",
+    "image": "liedersingen.png"
   },
   {
-    "id": 3,
-    "date": "1. Dezember 2024",
-    "title": "Winterlichter-Ausstellung",
-    "excerpt": "Interaktive Lichtinstallationen mit traditionellen Motiven und moderner Technologie."
-  },
-  {
-    "id": 4,
-    "date": "10. Januar 2025",
-    "title": "Neujahrsritual",
-    "excerpt": "Feierlicher Ritus zum Jahresbeginn in der historischen Burg Flensburgia."
+    "id": "event3",
+    "date": "2025-08-10",
+    "title": "Sommerfest der Schlaraffen",
+    "description": "Festliche Tafel mit Grillgut, Bier und geselligem Umtrunk im Freien.",
+    "image": "sommerfest.png"
   }
 ]

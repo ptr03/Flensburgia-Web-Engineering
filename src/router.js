@@ -11,6 +11,7 @@ import Impressum from './components/Impressum.vue'
 import Terms from './components/Terms.vue'
 import Privacy from './components/Privacy.vue'
 import NewsletterPage from './components/NewsletterPage.vue'
+import EventPage from './components/EventPage.vue'
 
 const routes = [
   { path: '/',             name: 'Home',          component: HomePage },
@@ -23,7 +24,8 @@ const routes = [
   { path: '/impressum', name: 'Impressum', component: Impressum},
   { path: '/terms', name: 'Terms', component: Terms},
   { path: '/privacy', name: 'Privacy', component: Privacy},
-  { path: '/newsletter', name: 'Newsletter', component: NewsletterPage }
+  { path: '/newsletter', name: 'Newsletter', component: NewsletterPage },
+  { path: '/events', name: 'Events', component: EventPage }
 ]
 
 const router = createRouter({

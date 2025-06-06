@@ -1,272 +1,257 @@
 <template>
-  <section 
-    class="event-section"
-    ref="sectionRef"
-  >
-    <div class="container">
-      <h2 class="section-title">Kommende Veranstaltungen</h2>
-      
-      <div class="events-grid">
-        <article 
-          v-for="(event, index) in events"
-          :key="event.id"
-          class="event-card"
-          :style="{ transitionDelay: `${index * 50}ms` }"
-        >
-          <div class="card-content">
-            <div class="date-badge">
-              <Calendar class="calendar-icon" :size="20" />
-              <time class="event-date">{{ event.date }}</time>
-            </div>
-            
-            <h3 class="event-title">{{ event.title }}</h3>
-            
-            <div class="event-meta">
-              <div class="meta-item">
-                <MapPin class="meta-icon" :size="16" />
-                <span>{{ event.location }}</span>
-              </div>
-            </div>
-
-            <p class="event-excerpt">{{ event.excerpt }}</p>
-
-            <router-link 
-              :to="event.link"
-              class="event-cta"
-            >
-              Details anzeigen
-              <ArrowRight class="cta-arrow" :size="16" />
-            </router-link>
+  <section class="events-section">
+    <div class="content-wrapper">
+      <!-- ‣ FALLS KEIN EVENT AUSGEWÄHLT IST UND ES EVENTS GIBT: Zentrierter Horizontal-Scroll -->
+      <div
+        v-if="!selectedEvent && events.length"
+        class="horizontal-scroll-wrapper"
+      >
+        <div class="horizontal-scroll-container">
+          <div
+            v-for="(event, index) in events"
+            :key="event.id"
+            class="scroll-item"
+          >
+            <button class="event-button" @click="selectEvent(event)">
+              {{ event.title }}
+            </button>
           </div>
-        </article>
+        </div>
+      </div>
+
+      <!-- ‣ FALLS KEIN EVENT DA IST -->
+      <p v-else-if="!events.length" class="no-events-message">
+        Momentan sind keine geplanten Veranstaltungen eingetragen.
+      </p>
+
+      <!-- ‣ FALLS EIN EVENT AUSGEWÄHLT IST: Detail-Ansicht -->
+      <div v-else-if="selectedEvent" class="detail-container">
+        <button class="btn-back" @click="selectedEvent = null">
+          ← Zurück zu allen Events
+        </button>
+        <div class="detail-card">
+          <!-- Bild oben (falls vorhanden) -->
+          <img
+            v-if="getImageUrl(selectedEvent.image)"
+            :src="getImageUrl(selectedEvent.image)"
+            :alt="selectedEvent.title"
+            class="detail-image"
+          />
+
+          <div class="detail-text">
+            <h3 class="detail-title">{{ selectedEvent.title }}</h3>
+            <time class="detail-date">{{ formatDate(selectedEvent.date) }}</time>
+            <p class="detail-description">{{ selectedEvent.description }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Calendar, MapPin, ArrowRight } from 'lucide-vue-next'
+import eventsData from '../data/events.json'
+import { ref } from 'vue'
 
-const sectionRef = ref(null)
+// ‣ Statischer Import der Events aus JSON
+const events = ref(eventsData || [])
 
-const events = ref([
-  {
-    id: 1,
-    date: '15. Oktober 2024',
-    title: 'Kulturerbe-Symposium',
-    location: 'Flensburger Rathaus',
-    excerpt: 'Führende Experten diskutieren den Erhalt regionaler Kulturgüter durch moderne Methoden.',
-    link: '/events/kulturerbe-symposium'
-  },
-  {
-    id: 2,
-    date: '2.-4. November 2024',
-    title: 'Traditionelles Kunstfestival',
-    location: 'Flensburger Altstadt',
-    excerpt: 'Dreitägige Feier lokaler Handwerkskunst, Musik und kulinarischer Traditionen mit Workshops.',
-    link: '/events/kunstfestival'
-  },
-  {
-    id: 3,
-    date: '1. Dezember 2024',
-    title: 'Winterlichter-Ausstellung',
-    location: 'Flensburger Kunstmuseum',
-    excerpt: 'Interaktive Lichtinstallationen mit traditionellen Motiven und moderner Technologie.',
-    link: '/events/winterlichter'
+// ‣ State für das aktuell ausgewählte Event
+const selectedEvent = ref(null)
+
+// ‣ Methode zum Auswählen eines Events
+function selectEvent(event) {
+  selectedEvent.value = event
+}
+
+// ‣ Datum im deutschen Format
+function formatDate(iso) {
+  const d = new Date(iso)
+  return d.toLocaleDateString('de-DE', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  })
+}
+
+// ‣ Helfer-Funktion, die mit Vite new URL() das Asset lädt
+function getImageUrl(filename) {
+  if (!filename) return null
+  try {
+    return new URL(`../assets/pictures/events/${filename}`, import.meta.url).href
+  } catch {
+    return null
   }
-])
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value)
-  }
-})
+}
 </script>
 
 <style scoped>
-.event-section {
-  background: #fbfbfd;        /* light gradient if you prefer */
-  padding: clamp(4rem,10vw,8rem) 0;
-}
+/* =========================== */
+/* EventSection.vue CSS        */
+/* =========================== */
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 4rem);
-}
-
-.section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 600;
-  color: #1d1d1f;
-  text-align: center;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-}
-
-.events-grid {
-  display: grid;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-}
-
-.event-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  border: 1px solid rgba(210, 210, 215, 0.3);
-  padding: 2rem;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.event-card.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.card-content {
-  display: grid;
-  gap: 1.5rem;
-  height: 100%;
-}
-
-.date-badge {
+.events-section {
+  background: #ffffff;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.875rem;
-  color: #86868b;
-  margin-bottom: 0.5rem;
+  justify-content: center;
 }
 
-.calendar-icon {
-  color: #0066cc;
+.content-wrapper {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
 }
 
-.event-title {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-  font-weight: 600;
-  line-height: 1.3;
-  color: #1d1d1f;
-  letter-spacing: -0.01em;
+/* =========================== */
+/* Fallback-Meldung: keine Events */
+/* =========================== */
+.no-events-message {
+  color: #475569;
+  font-size: 1rem;
+  margin-top: 2rem;
 }
 
-.event-meta {
+/* =========================== */
+/* Zentrierter Horizontal-Scroll-Wrapper */
+/* =========================== */
+.horizontal-scroll-wrapper {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.5rem; /* Platz für Scrollbar */
+}
+
+/* =========================== */
+/* Horizontal-Scroll-Container  */
+/* =========================== */
+.horizontal-scroll-container {
   display: flex;
   gap: 1rem;
-  font-size: 0.875rem;
-  color: #86868b;
 }
 
-.meta-item {
+.horizontal-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.horizontal-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* =========================== */
+/* Fade-In-Animation für Buttons */
+/* =========================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.scroll-item {
+  flex: 0 0 auto;       /* Keine Flex-Grow/Shrink */
+  width: 200px;
+  aspect-ratio: 1 / 1;   /* Höhe = Breite */
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+  /* Jeder Button fängt mit 0 an und blendet nach 0.6s auf Opazität 1 */
+}
+
+/* =========================== */
+/* Quadrat-Button (Kategorie-Stil) */
+/* =========================== */
+.event-button {
+  width: 100%;
+  height: 100%;
+  background: #f3f4f6; /* heller Grauton, wie bei Kategorie-Buttons */
+  color: #1d1d1f;      /* dunkles Schwarz für Text */
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
 }
 
-.meta-icon {
-  color: #0066cc;
+/* Hover-Effekt: etwas tieferer Schatten und Hintergrund leicht aufgehellt */
+.event-button:hover {
+  background: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.event-excerpt {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #464646;
-  margin: 1rem 0;
-}
-
-.event-cta {
-  display: inline-flex;
+/* =========================== */
+/* Detail-Ansicht              */
+/* =========================== */
+.detail-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  color: #0066cc;
-  font-weight: 500;
-  text-decoration: none;
-  margin-top: auto;
-  transition: gap 0.3s ease;
+  margin-top: 2rem;
 }
 
-.cta-arrow {
-  transition: transform 0.3s ease;
+/* Zurück-Button */
+.btn-back {
+  align-self: flex-start;
+  margin-bottom: 1.5rem;
+  background: none;
+  border: none;
+  color: #0ea5e9;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.event-card:hover .cta-arrow {
-  transform: translateX(3px);
+.btn-back:hover {
+  color: #0369a1;
 }
 
-.event-card:hover .event-cta {
-  gap: 0.75rem;
+/* Detail Card */
+.detail-card {
+  width: 100%;
+  max-width: 600px;
+  background: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .event-section {
-    background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
-  }
-  
-  .event-card {
-    background: rgba(28, 28, 30, 0.9);
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-  
-  .event-title {
-    color: #ffffff;
-  }
-  
-  .event-excerpt {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  
-  .calendar-icon,
-  .meta-icon {
-    color: #2997ff;
-  }
-  
-  .event-cta {
-    color: #2997ff;
-  }
+.detail-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .events-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .event-card {
-    padding: 1.75rem;
-  }
+.detail-text {
+  padding: 1.5rem;
+  text-align: left;
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .event-card {
-    transition: opacity 0.6s ease !important;
-  }
-  
-  .event-card.visible {
-    transform: none;
-  }
-  
-  .cta-arrow,
-  .event-cta {
-    transition: none !important;
-  }
+.detail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.detail-date {
+  display: block;
+  color: #0ea5e9;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.detail-description {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
 }
 </style>

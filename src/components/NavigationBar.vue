@@ -1,18 +1,21 @@
 <template>
   <nav class="navbar">
     <div class="container">
+      <!-- Desktop‐Links -->
       <div class="nav-links">
         <router-link
           v-for="link in navLinks"
           :key="link.path"
           :to="link.path"
           class="nav-link"
-          exact-active-class=""
+          active-class="active"
+          exact
         >
           {{ link.name }}
         </router-link>
       </div>
 
+      <!-- Hamburger‐Icon für Mobile -->
       <button
         class="menu-toggle"
         :class="{ active: menuOpen }"
@@ -25,12 +28,15 @@
       </button>
     </div>
 
+    <!-- Mobile‐Menü -->
     <div v-if="menuOpen" class="mobile-menu">
       <router-link
         v-for="link in navLinks"
         :key="link.path"
         :to="link.path"
         class="mobile-nav-link"
+        active-class="active"
+        exact
         @click="toggleMenu"
       >
         {{ link.name }}
@@ -41,9 +47,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
 const menuOpen = ref(false)
 
 function toggleMenu() {
@@ -51,13 +55,14 @@ function toggleMenu() {
 }
 
 const navLinks = [
-  { name: 'Flensburgia',                     path: '/' },
-  { name: 'Sippungsfolge',                   path: '/sippungsfolge' },
-  { name: 'Die Flensburgen',                 path: '/die-flensburgen' },
-  { name: 'Dictionary',                        path: '/dictionary' },
-  { name: 'Über Uns',                        path: '/about' },
-  { name: 'Kontakt',                        path: '/contact' },
-  { name: 'Newsletter',                        path: '/newsletter' }
+  { name: 'Flensburgia',  path: '/' },
+  { name: 'Sippungsfolge', path: '/sippungsfolge' },
+  { name: 'Events',       path: '/events' },
+  { name: 'Die Flensburgen', path: '/die-flensburgen' },
+  { name: 'Dictionary',   path: '/dictionary' },
+  { name: 'Über Uns',     path: '/about' },
+  { name: 'Kontakt',      path: '/contact' },
+  { name: 'Newsletter',   path: '/newsletter' }
 ]
 </script>
 
@@ -72,28 +77,43 @@ const navLinks = [
   background: transparent;
 }
 
+/* --------------------------------
+   Desktop‐Links
+   -------------------------------- */
 .nav-links {
   display: inline-flex;
   gap: 1.5rem;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   padding: 0.5rem 1rem;
   border-radius: 9999px;
 }
 
 .nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
   color: #1d1d1f;
   text-decoration: none;
-  font-weight: 600;
-  transition: opacity 0.2s ease, background 0.2s ease;
-  padding: 0.25rem 0.5rem;
+  transition: background 0.2s ease, opacity 0.2s ease;
 }
 
-.nav-link:hover {
-  background: rgba(255,255,255,1);
-  opacity: 0.8;
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: #fff;
+  opacity: 0.9;
 }
 
+/* Aktive Route */
+.nav-link.active {
+  background: #fff;
+}
+
+/* --------------------------------
+   Hamburger‐Icon (nur Mobile)
+   -------------------------------- */
 .menu-toggle {
   display: none;
   background: none;
@@ -109,65 +129,47 @@ const navLinks = [
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* --------------------------------
+   Mobile‐Menü
+   -------------------------------- */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
 
   .mobile-menu {
     position: fixed;
-    top: 60px; left: 0; right: 0;
-    background: rgba(255,255,255,0.95);
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem 0;
   }
   .mobile-nav-link {
+    position: relative;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
     color: #1d1d1f;
     text-decoration: none;
-    font-weight: 600;
     font-size: 1.1rem;
     margin: 0.5rem 0;
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
+    background: #fff;
+    opacity: 0.9;
+  }
+  .mobile-nav-link.active {
+    background: #fff;
   }
 }
-
-.router-link-active .nav-link,
-.router-link-exact-active .nav-link,
-.router-link-active .mobile-nav-link {
-  color: inherit !important;
-  text-decoration: none !important;
-}
-
-.nav-link,
-.mobile-nav-link{
-  position: relative;    
-  display:inline-block;
-  padding: .5rem 1rem;     
-  border-radius: 9999px;  
-  font-weight: 600;
-  color:#1d1d1f;
-  text-decoration:none;
-  transition: background .2s ease, opacity .2s ease;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible{
-  background:#fff;          
-  opacity:.9;
-}
-
-.router-link-active,
-.router-link-exact-active{
-  background:#fff;         
-}
-
-.nav-links{
-  display:inline-flex;
-  gap:1.5rem;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(10px);
-  padding:.5rem 1rem;
-  border-radius:9999px;
-}
-
 </style>
