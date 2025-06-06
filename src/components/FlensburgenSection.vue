@@ -1,6 +1,6 @@
 <template>
   <section class="flensburgen-section">
-    <!-- Obere Kategorie-Buttons: Sassen, Röde Grütt, Erz- & Ehrenschlaraffen, Kilianischer Windjammerorden -->
+    <!-- Obere Kategorie-Buttons: Sassen, Röde Grütt, Erz- & Ehrenschlaraffen, Windjammer -->
     <div class="category-grid">
       <button
         v-for="cat in categories"
@@ -42,7 +42,7 @@
           <div v-if="activeId === 'sassen'" class="modal-sassen">
             <h2 class="modal-title">Sassen</h2>
 
-            <!-- Suchfeld -->
+            <!-- Suchfeld (Position wie gehabt) -->
             <div class="search-wrapper">
               <input
                 v-model="search"
@@ -52,7 +52,7 @@
               />
             </div>
 
-            <!-- Gitterdarstellung -->
+            <!-- Gitterdarstellung der Sassen -->
             <transition-group
               name="fade-list"
               tag="div"
@@ -107,9 +107,9 @@
             </div>
           </div>
 
-          <!-- ======================================================= -->
-          <!-- 4a) Erzschlaraffen – zeigt alle Bilder aus Ordner „Erzschlaraffen“ -->
-          <!-- ======================================================= -->
+          <!-- =========================================== -->
+          <!-- 4a) Erzschlaraffen – zeigt Bilder aus Ordner „Erzschlaraffen“ -->
+          <!-- =========================================== -->
           <div
             v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'erz'"
             class="modal-schlaraffen-grid"
@@ -137,9 +137,9 @@
             </button>
           </div>
 
-          <!-- ======================================================= -->
-          <!-- 4b) Ehrenschlaraffen – zeigt alle Bilder aus Ordner „Ehrenschlaraffen“ -->
-          <!-- ======================================================= -->
+          <!-- =========================================== -->
+          <!-- 4b) Ehrenschlaraffen – zeigt Bilder aus Ordner „Ehrenschlaraffen“ -->
+          <!-- =========================================== -->
           <div
             v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'ehr'"
             class="modal-schlaraffen-grid"
@@ -206,28 +206,23 @@
 import { ref, computed, watch } from 'vue'
 import MarkdownIt from 'markdown-it'
 
-// 1) Rohtexte importieren
+// Texte importieren
 import rodeGruettText from '../data/rodeGruetteText.md?raw'
 import windjammerText from '../data/windjammerText.md?raw'
 
-// 2) JSON für Sassen
-import sassenData from '../data/sassen.json'
-
-// 3) Icons von lucide-vue-next
+// Icons von lucide-vue-next
 import { Users, BookOpen, Award, Ship } from 'lucide-vue-next'
 
-/* ===============================
-   Markdown-Renderer initialisieren
-   =============================== */
+// Markdown-Renderer
 const md = new MarkdownIt()
 const formattedRodeGruett = computed(() => md.render(rodeGruettText))
 const formattedWindjammer = computed(() => md.render(windjammerText))
 
-// 4) Kategorien definieren (inkl. Röde Grütt & Windjammer)
+// Kategorien definieren
 const categories = [
   { id: 'sassen', name: 'Sassen', icon: Users },
   { id: 'rode-gruett', name: 'Röde Grütt', icon: BookOpen },
-  { id: 'schlaraffen', name: 'Erz & Ehrenschlaraffen', icon: Award },
+  { id: 'schlaraffen', name: 'Erz- & Ehrenschlaraffen', icon: Award },
   {
     id: 'kilianischer-windjammerorden',
     name: 'Kilianischer Windjammerorden',
@@ -235,11 +230,10 @@ const categories = [
   }
 ]
 
-// 5) Modal-State
+// Modal-State
 const activeId = ref(null)
 const openModal = (id) => {
   activeId.value = id
-  // Reset bei Schlaraffen
   if (id === 'schlaraffen') subSchlaraffen.value = null
 }
 const closeModal = () => {
@@ -248,44 +242,29 @@ const closeModal = () => {
   subSchlaraffen.value = null
 }
 
-// 6) Bild-Zoom
+// Bild-Zoom
 const enlargedImage = ref(null)
 const enlargeImage = (obj) => {
   enlargedImage.value = obj
 }
 
-// 7) Suchen + gefilterte Sassen-Liste
+// Such‐Feld für Sassen
 const search = ref('')
-const sassenAll = computed(() => {
-  return sassenData.map((itm) => ({
-    id: itm.id,
-    name: itm.name,
-    // Ordner „Sassen/“ automatisch davor
-    fullPath: `Sassen/${itm.filename}`
-  }))
-})
-const filteredSassen = computed(() =>
-  sassenAll.value.filter((kn) =>
-    kn.name.toLowerCase().includes(search.value.toLowerCase())
-  )
-)
 
-// 8) Sub-Selection bei Schlaraffen
-const subSchlaraffen = ref(null) // null | 'erz' | 'ehr'
-
-// 9) Alle Schlaraffen-Bilder dynamisch einlesen
+// Alle Bilder in allen Unterordnern laden
 const allImages = import.meta.glob(
   '../assets/pictures/flensburgen/**/**/*.{png,webp,jpg,jpeg}',
   { eager: true, import: 'default' }
 )
 
-// Hilfsfunktion: Aus viteKey Objekt { id, name, fullPath } machen
+// Hilfsfunktion: Aus viteKey ein Objekt { id, name, fullPath } machen
 function makeItemObject(viteKey) {
-  // z. B. "../assets/pictures/flensburgen/Erzschlaraffen/Ritter X.png"
+  // Beispiel viteKey:
+  // "../assets/pictures/flensburgen/Sassen/Junker Friedrich.png"
   const parts = viteKey.split('/')
-  const filenameWithExt = parts[parts.length - 1] // "Ritter X.png"
-  const folderName = parts[parts.length - 2] // "Erzschlaraffen" oder "Ehrenschlaraffen"
-  const name = filenameWithExt.replace(/\.(png|webp|jpg|jpeg)$/i, '') // ohne Extension
+  const filenameWithExt = parts[parts.length - 1]          // "Junker Friedrich.png"
+  const folderName = parts[parts.length - 2]                // "Sassen", "Erzschlaraffen" oder "Ehrenschlaraffen"
+  const name = filenameWithExt.replace(/\.(png|webp|jpg|jpeg)$/i, '')
   const id = name
     .toLowerCase()
     .replace(/[^a-z0-9äöüß]+/gi, '-')
@@ -294,7 +273,25 @@ function makeItemObject(viteKey) {
   return { id, name, fullPath }
 }
 
-// 10) Erzschlaraffen-Liste
+// 1) Sassen-Liste (dynamisch aus Ordner „Sassen“)
+const sassenList = computed(() => {
+  const arr = []
+  Object.keys(allImages).forEach((key) => {
+    if (key.includes('/Sassen/')) {
+      arr.push(makeItemObject(key))
+    }
+  })
+  return arr
+})
+
+// 2) Gefilterte Sassen nach Suchbegriff
+const filteredSassen = computed(() =>
+  sassenList.value.filter((kn) =>
+    kn.name.toLowerCase().includes(search.value.toLowerCase())
+  )
+)
+
+// 3) Erzschlaraffen-Liste (wie gehabt)
 const erzList = computed(() => {
   const arr = []
   Object.keys(allImages).forEach((key) => {
@@ -305,7 +302,7 @@ const erzList = computed(() => {
   return arr
 })
 
-// 11) Ehrenschlaraffen-Liste
+// 4) Ehrenschlaraffen-Liste (wie gehabt)
 const ehrList = computed(() => {
   const arr = []
   Object.keys(allImages).forEach((key) => {
@@ -316,14 +313,17 @@ const ehrList = computed(() => {
   return arr
 })
 
-// 12) Body-Scroll unterbinden, wenn Modal offen
+// State für Auswahl bei Schlaraffen
+const subSchlaraffen = ref(null) // null | 'erz' | 'ehr'
+
+// Body-Scroll sperren, wenn Modal offen
 watch(activeId, (val) => {
   document.body.classList.toggle('modal-open', !!val)
 })
 
-// 13) getImage: Bild via vite-glob laden
+// getImage: Lädt Bild via vite-glob
 function getImage(path) {
-  // path = "Sassen/Junker_Friedrich.webp" oder "Erzschlaraffen/Ritter X.png"
+  // path = "Sassen/Name.png" oder "Erzschlaraffen/Name.png"
   const fullKey = `../assets/pictures/flensburgen/${path}`
   return allImages[fullKey] || ''
 }
