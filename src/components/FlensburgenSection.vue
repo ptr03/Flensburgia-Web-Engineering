@@ -511,6 +511,11 @@ function getImage(path) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  cursor: zoom-in;
+  transition: transform 0.3s;
 }
 .sassen-card img {
   width: 100%;
