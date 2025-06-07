@@ -1,14 +1,12 @@
 <!-- src/pages/Terms.vue -->
 <template>
   <div class="terms-page">
-    <!-- Hero-Bereich -->
     <section class="hero-plain">
       <div class="content-wrapper">
-        <h1 class="hero-title animate-target">Terms &amp; Conditions</h1>
+        <h1 ref="heroTitle" class="hero-title animate-target">Terms &amp; Conditions</h1>
       </div>
     </section>
 
-    <!-- Inhalt -->
     <section class="section content-section">
       <div class="container">
         <h2>Anwendungsbereich</h2>
@@ -56,14 +54,14 @@
 </template>
 
 <script setup>
-import { onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
+
+const heroTitle = ref(null)
 
 onMounted(() => {
-  nextTick(() => {
-    document.querySelectorAll('.animate-target').forEach(el => {
-      el.classList.add('animate-in')
-    })
-  })
+  if (heroTitle.value) {
+    heroTitle.value.classList.add('animate-in')
+  }
 })
 </script>
 
