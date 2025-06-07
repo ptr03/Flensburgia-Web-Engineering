@@ -1,10 +1,9 @@
 <!-- src/pages/Impressum.vue -->
 <template>
   <div class="impressum-page">
-    <!-- Hero-Bereich -->
     <section class="hero-plain">
       <div class="content-wrapper">
-        <h1 class="hero-title animate-target">Impressum</h1>
+        <h1 ref="heroTitle" class="hero-title animate-target">Impressum</h1>
       </div>
     </section>
 
@@ -69,13 +68,15 @@
 </template>
 
 <script setup>
-import { onMounted, nextTick } from 'vue'
+import { onMounted, nextTick, ref } from 'vue'
+
+const heroTitle = ref(null)
 
 onMounted(() => {
-  nextTick(() => {
-    document.querySelectorAll('.animate-target').forEach(el => {
-      el.classList.add('animate-in')
-    })
+  requestAnimationFrame(() => {
+    if (heroTitle.value) {
+      heroTitle.value.classList.add('animate-in')
+    }
   })
 })
 </script>
