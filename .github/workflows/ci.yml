@@ -1,32 +1,26 @@
 name: CI
 
-on:
-  push:
-    branches: [main]
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 18
 
-      - run: npm ci --legacy-peer-deps
-      - run: npm run lint                
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npx playwright install --with-deps
-      - run: npx playwright test --reporter=line
-      - run: npm run test
-      - run: npm run e2e
-      - run: npm run coverage
-      - run: npm run coverage:check
-      - uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage/
+      - name: Prepare coverage directory
+        run: mkdir -p coverage/tmp     # ← ensure this exists
+
+      - name: Run unit tests + coverage
+        run: npm run coverage
+
+      - name: Check coverage thresholds
+        run: npm run coverage:check

@@ -19,7 +19,8 @@
       <!-- Formular -->
       <div class="form-wrapper">
         <input
-          v-model="email"
+         v-model="email"
+          @input="clearMessage"
           type="email"
           placeholder="Eure ehrwürdige E-Mail-Adresse"
           class="email-input"
@@ -48,20 +49,28 @@ const email = ref('')
 const message = ref('')
 const isSuccess = ref(false)
 
-function subscribe() {
-  const e = email.value.trim()
-  // einfache Validierung
-  if (!e || !e.includes('@') || e.length < 5) {
-    isSuccess.value = false
-    message.value = 'Oh weh! Bitte gib eine gültige E-Mail-Adresse ein, edler Schlaraffe.'
-    return
+// Clear any existing feedback when the user types again
+function clearMessage() {
+  if (message.value) {
+    message.value = ''
   }
-
-  // Hier später echter API-Call – zurzeit nur simuliert
-  isSuccess.value = true
-  message.value = 'Dein Kürschner hat Dich im Boten verzeichnet. Mit schlaraffenischem Gruß!'
-  email.value = ''
 }
+
+function subscribe() {
+   const e = email.value.trim()
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+   
+   if (!e || !emailRegex.test(e)) {
+     isSuccess.value = false
+     message.value = 'Oh weh! Bitte gib eine gültige E-Mail-Adresse ein, edler Schlaraffe.'
+     return
+   }
+
+   // Simulate API call
+   email.value = ''
+   isSuccess.value = true
+   message.value = 'Dein Kürschner hat Dich im Boten verzeichnet. Mit schlaraffenischem Gruß!'
+ }
 </script>
 
 <style scoped>
