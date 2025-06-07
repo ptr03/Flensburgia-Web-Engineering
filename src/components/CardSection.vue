@@ -47,22 +47,21 @@ const cards = [
   }
 ]
 
-const sectionRef = ref(null)
+const sectionRef = ref<HTMLElement|null>(null)
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+      }
+    })
+  }, { threshold: 0.1 })
 
   if (sectionRef.value) {
-    observer.observe(sectionRef.value)
+    sectionRef.value
+      .querySelectorAll<HTMLElement>('.card')
+      .forEach(cardEl => observer.observe(cardEl))
   }
 })
 </script>
@@ -159,52 +158,26 @@ onMounted(() => {
   .card-section {
     background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
   }
-  
   .card {
     background: rgba(28, 28, 30, 0.8);
     border-color: rgba(255, 255, 255, 0.08);
   }
-  
-  .card-title {
-    color: #ffffff;
-  }
-  
-  .card-description {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  
-  .card-icon {
-    color: #2997ff;
-  }
-  
-  .card-action {
-    color: #2997ff;
-  }
+  .card-title { color: #ffffff; }
+  .card-description { color: rgba(255, 255, 255, 0.75); }
+  .card-icon { color: #2997ff; }
+  .card-action { color: #2997ff; }
 }
 
 @media (max-width: 768px) {
-  .cards-container {
-    gap: 1.5rem;
-  }
-  
-  .card {
-    padding: 2rem;
-  }
+  .cards-container { gap: 1.5rem; }
+  .card { padding: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card {
-    transition: opacity 0.6s ease !important;
-  }
-  
-  .card:hover {
-    transform: none !important;
-  }
-  
+  .card { transition: opacity 0.6s ease !important; }
+  .card:hover { transform: none !important; }
   .card-action,
   .card-icon,
-  .action-arrow {
-    transition: none !important;
-  }
+  .action-arrow { transition: none !important; }
 }
 </style>
