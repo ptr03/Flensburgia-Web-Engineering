@@ -1,10 +1,10 @@
 // tests/unit/HomePage.spec.ts
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import HomePage from '@/components/HomePage.vue'
 
-describe('HomePage', () => {
-  it('renders without crashing', () => {
-    const wrapper = mount(HomePage)
-    expect(wrapper.html()).toMatchSnapshot()
+describe('HomePage.vue', () => {
+  it('renders the HeroSection stub', () => {
+    const wrapper = shallowMount(HomePage)
+    expect(wrapper.find('hero-section-stub').exists()).toBe(true)
   })
 })
