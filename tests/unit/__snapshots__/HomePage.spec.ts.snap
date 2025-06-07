@@ -101,3 +101,94 @@ exports[`HomePage > renders without crashing 1`] = `
   </div>
 </section>"
 `;
+
+exports[`HomePage.vue > matches the snapshot 1`] = `
+"<div data-v-42781596="" class="stub-hero"></div>
+<!-- About Teaser -->
+<section data-v-42781596="" class="section about-teaser">
+  <div data-v-42781596="" class="container">
+    <h2 data-v-42781596="" class="section-title text-center animate-on-scroll">Über Flensburgia</h2>
+    <p data-v-42781596="" class="teaser-text animate-on-scroll"> Die Schlaraffia Flensburgia ist Teil der weltweiten Vereinigung Schlaraffia® – einer Gemeinschaft zur Pflege von Freundschaft, Kunst und Humor. </p>
+    <div data-v-42781596="" class="stats-grid">
+      <div data-v-42781596="" class="stat-item animate-on-scroll" style="transition-delay: 0s;"><svg data-v-42781596="" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days stat-icon text-primary">
+          <path d="M8 2v4"></path>
+          <path d="M16 2v4"></path>
+          <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+          <path d="M3 10h18"></path>
+          <path d="M8 14h.01"></path>
+          <path d="M12 14h.01"></path>
+          <path d="M16 14h.01"></path>
+          <path d="M8 18h.01"></path>
+          <path d="M12 18h.01"></path>
+          <path d="M16 18h.01"></path>
+        </svg>
+        <h3 data-v-42781596="" class="stat-title">Jährliche Veranstaltungen</h3>
+        <p data-v-42781596="" class="stat-value">30+</p>
+      </div>
+      <div data-v-42781596="" class="stat-item animate-on-scroll" style="transition-delay: 0.2s;"><svg data-v-42781596="" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy-icon lucide-trophy stat-icon text-primary">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+          <path d="M4 22h16"></path>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+        </svg>
+        <h3 data-v-42781596="" class="stat-title">Gegründet</h3>
+        <p data-v-42781596="" class="stat-value">1973</p>
+      </div>
+      <div data-v-42781596="" class="stat-item animate-on-scroll" style="transition-delay: 0.4s;"><svg data-v-42781596="" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users stat-icon text-primary">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+        </svg>
+        <h3 data-v-42781596="" class="stat-title">Aktive Mitglieder</h3>
+        <p data-v-42781596="" class="stat-value">25+</p>
+      </div>
+    </div>
+    <div data-v-42781596="" class="cta-wrapper text-center">
+      <router-link-stub data-v-42781596="" to="/about" class="btn btn-outline-gradient mt-4 animate-on-scroll"></router-link-stub>
+    </div>
+  </div>
+</section>
+<!-- Aktuelles Section (in Blöcken, Hintergrund: weiß) -->
+<section data-v-42781596="" class="section aktuelles-teaser">
+  <div data-v-42781596="" class="container">
+    <h2 data-v-42781596="" class="section-title text-center animate-on-scroll">Aktuelles</h2>
+    <div data-v-42781596="" class="aktuales-grid">
+      <div data-v-42781596="" class="aktual-card animate-on-scroll" style="transition-delay: 0.2s;">
+        <p data-v-42781596="" class="aktual-text">Aktuelle Bilder der letzten Sippung in dieser Winterung.</p>
+      </div>
+      <div data-v-42781596="" class="aktual-card animate-on-scroll" style="transition-delay: 0.4s;">
+        <p data-v-42781596="" class="aktual-text">Eine schöne und gute Sommerung!</p>
+      </div>
+      <div data-v-42781596="" class="aktual-card animate-on-scroll" style="transition-delay: 0.6000000000000001s;">
+        <p data-v-42781596="" class="aktual-text">Sippungen jeden Donnerstag, Glocke 7:30 d. A. im Händelhof 7, 24394 Flensburg</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Events Teaser (Kommende Veranstaltungen, verwaltet per JSON, Hintergrund: weiß) -->
+<section data-v-42781596="" class="section events-teaser">
+  <div data-v-42781596="" class="container">
+    <h2 data-v-42781596="" class="section-title text-center animate-on-scroll">Kommende Veranstaltungen</h2>
+    <div data-v-42781596="" class="events-grid">
+      <article data-v-42781596="" class="event-card animate-on-scroll" style="transition-delay: 0.2s;"><time data-v-42781596="" class="event-date">2025-06-20</time>
+        <h3 data-v-42781596="" class="event-title">Kaffeeklatsch bei den Erzschlaraffen</h3>
+        <p data-v-42781596="" class="event-excerpt"></p>
+      </article>
+      <article data-v-42781596="" class="event-card animate-on-scroll" style="transition-delay: 0.4s;"><time data-v-42781596="" class="event-date">2025-07-05</time>
+        <h3 data-v-42781596="" class="event-title">Liedersingen im Ehrenschlaraffenhof</h3>
+        <p data-v-42781596="" class="event-excerpt"></p>
+      </article>
+      <article data-v-42781596="" class="event-card animate-on-scroll" style="transition-delay: 0.6000000000000001s;"><time data-v-42781596="" class="event-date">2025-08-10</time>
+        <h3 data-v-42781596="" class="event-title">Sommerfest der Schlaraffen</h3>
+        <p data-v-42781596="" class="event-excerpt"></p>
+      </article>
+    </div>
+    <div data-v-42781596="" class="cta-wrapper text-center">
+      <router-link-stub data-v-42781596="" to="/events" class="btn btn-outline-gradient mt-4 animate-on-scroll"></router-link-stub>
+    </div>
+  </div>
+</section>"
+`;

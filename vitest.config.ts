@@ -11,12 +11,8 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: 'tests/setupVitest.ts',
-    include: ['tests/unit/**/*.spec.ts', 'tests/unit/**/*.spec.ts'],
-    exclude: ['node_modules/**'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'html'],
-    },
+    include: ['tests/unit/**/*.spec.ts'],    // <- only unit tests
+    exclude: ['tests/e2e/**'],                // <- skip e2e here
+    coverage: { provider: 'v8', reporter: ['text','html'] },
   },
 })

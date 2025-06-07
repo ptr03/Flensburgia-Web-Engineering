@@ -120,6 +120,7 @@ onMounted(() => {
 }
 
 /* Keyframes for text fade-in */
+/* Keyframes for text fade-in */
 @keyframes fadeInUp {
   from {
     opacity: 0;
