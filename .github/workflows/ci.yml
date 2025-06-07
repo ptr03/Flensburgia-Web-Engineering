@@ -21,6 +21,13 @@ jobs:
           mkdir -p coverage/tmp
           touch coverage/tmp/.keep
 
+      - name: Validate coverage directory
+        run: |
+          if [ ! -d coverage/tmp ]; then
+            echo "coverage/tmp directory does not exist. Recreating..."
+            mkdir -p coverage/tmp
+          fi
+
       - name: Run unit tests + coverage
         run: npm run coverage
 
