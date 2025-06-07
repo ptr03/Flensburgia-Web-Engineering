@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    /*  ── neu ──  */
+    "lib": ["ESNext", "DOM"],        // Promise, async/await, fetch …
+
+    "strict": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+
+    /*  Playwright- & Vitest-Globals bekannt machen  */
+    "types": ["vitest/globals", "@playwright/test"]
+  },
+
+  /* Tests & Shims kompilieren lassen  */
+  "include": ["src", "tests", "env.d.ts"]
+}

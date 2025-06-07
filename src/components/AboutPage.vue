@@ -4,7 +4,7 @@
     <AboutSection />
 
     <!-- Timeline Section (nur horizontale Boxen) -->
-    <section class="container timeline-section">
+    <section data-testid="about-section" class="container timeline-section">
       <h2 class="section-title text-center animate-target">Unsere Geschichte</h2>
       <div class="timeline-horizontal">
         <div
