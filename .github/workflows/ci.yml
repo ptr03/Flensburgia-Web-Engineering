@@ -17,8 +17,9 @@ jobs:
         run: npm ci
 
       - name: Prepare coverage directory
-        run: mkdir -p coverage/tmp ls coverage/tmp || echo "Directory creation failed" && exit 1 
-         
+        run: |
+          mkdir -p coverage/tmp && \
+          ls coverage/tmp || { echo "Directory creation failed"; exit 1; }
 
       - name: Run unit tests + coverage
         run: npm run coverage
