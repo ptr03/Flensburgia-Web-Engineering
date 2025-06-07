@@ -1,10 +1,8 @@
-<!-- src/pages/Privacy.vue -->
 <template>
   <div class="privacy-page">
-    <!-- Hero-Bereich -->
     <section class="hero-plain">
       <div class="content-wrapper">
-        <h1 class="hero-title animate-target">Privacy Policy</h1>
+        <h1 ref="heroTitle" class="hero-title animate-target">Privacy Policy</h1>
       </div>
     </section>
 
@@ -95,14 +93,14 @@
 </template>
 
 <script setup>
-import { onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
+
+const heroTitle = ref(null)
 
 onMounted(() => {
-  nextTick(() => {
-    document.querySelectorAll('.animate-target').forEach(el => {
-      el.classList.add('animate-in')
-    })
-  })
+  if (heroTitle.value) {
+    heroTitle.value.classList.add('animate-in')
+  }
 })
 </script>
 

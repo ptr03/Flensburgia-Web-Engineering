@@ -18,14 +18,12 @@
           <ul class="contact-list">
             <li>
               <span class="contact-label">Ritter Couplet (Frank Jähnig):</span>
-              <a href="tel:+4946120791" class="contact-link">0461 20791</a>
-              •
+              <a href="tel:+4946120791" class="contact-link">0461 20791</a> •
               <a href="mailto:couplet@t-online.de" class="contact-link">couplet@t-online.de</a>
             </li>
             <li>
               <span class="contact-label">Ritter Pedro Nero (Peter Gregersen):</span>
-              <a href="tel:+4946341861" class="contact-link">04634 1861</a>
-              •
+              <a href="tel:+4946341861" class="contact-link">04634 1861</a> •
               <a href="mailto:pesimabe@t-online.de" class="contact-link">pesimabe@t-online.de</a>
             </li>
           </ul>
@@ -74,43 +72,60 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, nextTick } from 'vue'
+<script>
+import { defineComponent } from 'vue'
 
-const form = ref({
-  name: '',
-  email: '',
-  message: ''
-})
-const success = ref(false)
-
-function submitForm() {
-  success.value = true
-  form.value.name = ''
-  form.value.email = ''
-  form.value.message = ''
-  setTimeout(() => (success.value = false), 5000)
-}
-
-onMounted(() => {
-  nextTick(() => {
-    document.querySelectorAll('.section-title, .section-subtitle')
-      .forEach(el => el.classList.add('animate-in'))
-  })
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  document.querySelectorAll('.animate-target').forEach(el => observer.observe(el))
+export default defineComponent({
+  name: 'ContactPage',
+  data() {
+    return {
+      form: {
+        name: '',
+        email: '',
+        message: ''
+      },
+      success: false
+    }
+  },
+  methods: {
+    submitForm() {
+      this.success = true
+      // clear fields
+      this.form.name = ''
+      this.form.email = ''
+      this.form.message = ''
+      // hide after 5s
+      setTimeout(() => {
+        this.success = false
+      }, 5000)
+    }
+  },
+  mounted() {
+    // animate-in the hero immediately
+    this.$nextTick(() => {
+      document
+        .querySelectorAll('.section-title, .section-subtitle')
+        .forEach(el => el.classList.add('animate-in'))
+    })
+    // intersection observer for the rest
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+    document
+      .querySelectorAll('.animate-target')
+      .forEach(el => observer.observe(el))
+  }
 })
 </script>
+
 
 <style scoped>
 .contact-page {
@@ -154,7 +169,7 @@ onMounted(() => {
 }
 
 .container {
-  max-width: 1300px; /* erhöht für breiteres Layout */
+  max-width: 1300px;
   margin: 0 auto;
   display: flex;
   gap: 3rem;
@@ -202,7 +217,7 @@ onMounted(() => {
 }
 
 .contact-form-wrapper {
-  flex: 1 1 500px; 
+  flex: 1 1 500px;
   opacity: 0;
   transform: translateY(20px);
 }
