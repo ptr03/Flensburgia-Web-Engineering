@@ -10,10 +10,12 @@
     "prepare": "husky",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "vitest run",
     "test:watch": "vitest watch",
-    "coverage": "vitest run --coverage"
-  },
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "coverage": "vitest run --coverage",
+    "coverage:check": "npx c8 check-coverage --branches 50 --lines 70 --functions 60 --statements 70"
+},
   "dependencies": {
     "gsap": "^3.13.0",
     "lucide-vue-next": "^0.509.0",

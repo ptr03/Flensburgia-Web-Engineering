@@ -5,28 +5,15 @@ import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [vue()],
-
-  // ─ Alias "@/…" überall (Vitest, Vite, IDE) ─
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
+    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
-
   test: {
-    environment: 'jsdom',   // JSDOM-Browser-Stub
-    globals: true,          // describe/it/expect ohne Import
-
-    // 👉 Setup-Datei mit IntersectionObserver-Mock & Router-Stubs
+    environment: 'jsdom',
+    globals: true,
     setupFiles: 'tests/setupVitest.ts',
-
-    // 👉 E2E-Specs NICHT mit Vitest ausführen
-    exclude: [
-      '**/e2e/**',
-      'node_modules/**',
-    ],
-
-    // ─ Coverage ─
+    include: ['tests/unit/**/*.spec.ts', 'tests/unit/**/*.spec.ts'],
+    exclude: ['node_modules/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
