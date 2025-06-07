@@ -18,8 +18,8 @@ jobs:
 
       - name: Prepare coverage directory
         run: |
-          mkdir -p coverage/tmp && \
-          ls coverage/tmp || { echo "Directory creation failed"; exit 1; }
+          mkdir -p coverage/tmp
+          touch coverage/tmp/.keep
 
       - name: Run unit tests + coverage
         run: npm run coverage
