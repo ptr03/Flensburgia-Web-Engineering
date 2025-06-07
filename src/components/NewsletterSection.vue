@@ -65,10 +65,6 @@ function subscribe() {
 </script>
 
 <style scoped>
-/* ===================================== */
-/* NewsletterSection.vue (Schlaraffen-Stil) */
-/* ===================================== */
-
 .newsletter-section {
   background: #ffffff;
   padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
