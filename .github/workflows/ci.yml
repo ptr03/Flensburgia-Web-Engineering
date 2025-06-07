@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run lint              # ESLint/Prettier
+      - run: npm run test              # Vitest
+
+      - run: npx playwright install --with-deps
+      - run: npx playwright test --reporter=line
+
+      # Coverage erzeugen + Artefakt hochladen
+      - run: npm run coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
