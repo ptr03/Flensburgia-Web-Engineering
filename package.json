@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "gsap": "^3.13.0",
@@ -17,6 +20,19 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-standard": "^9.0.1",
+    "eslint": "^9.28.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^17.19.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-vue": "^10.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
+    "prettier": "^3.5.3",
     "vite": "^6.3.5"
+  },
+    "lint-staged": {
+    "*.{js,vue}": "npm run lint:fix"
   }
 }

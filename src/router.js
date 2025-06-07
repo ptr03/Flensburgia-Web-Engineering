@@ -1,44 +1,54 @@
+/**
+ * App-Router
+ * ----------
+ *  • Code-Splitting per Lazy Loading (=> kleinere Start-Bundle-Größe)
+ *  • Einheitliche, sprechende Namen
+ *  • Sauberes Scroll-Verhalten (behält Position beim History-Navigation,
+ *    springt sonst an den Seitenanfang)
+ */
+
 import { createRouter, createWebHistory } from 'vue-router'
 
-// (1) Import every page component that you list in `routes`
-import HomePage           from './components/HomePage.vue'
-import AboutPage          from './components/AboutPage.vue'
-import SippungsfolgePage from './components/SippungsfolgePage.vue'
-import ContactPage        from './components/ContactPage.vue'
-import FlensburgenPage    from './components/FlensburgenPage.vue'
-import DictionaryPage     from './components/DictionaryPage.vue'  
-import Impressum from './components/Impressum.vue'
-import Terms from './components/Terms.vue'
-import Privacy from './components/Privacy.vue'
-import NewsletterPage from './components/NewsletterPage.vue'
-import EventPage from './components/EventPage.vue'
+/* Lazy-Loaded Views — jede Route wird erst geladen,
+   wenn der User sie wirklich aufruft. */
+const HomePage          = () => import('./components/HomePage.vue')
+const AboutPage         = () => import('./components/AboutPage.vue')
+const SippungsfolgePage = () => import('./components/SippungsfolgePage.vue')
+const FlensburgenPage   = () => import('./components/FlensburgenPage.vue')
+const ContactPage       = () => import('./components/ContactPage.vue')
+const DictionaryPage    = () => import('./components/DictionaryPage.vue')
+const ImpressumPage     = () => import('./components/Impressum.vue')
+const TermsPage         = () => import('./components/Terms.vue')
+const PrivacyPage       = () => import('./components/Privacy.vue')
+const NewsletterPage    = () => import('./components/NewsletterPage.vue')
+const EventPage         = () => import('./components/EventPage.vue')
 
-const routes = [
-  { path: '/',             name: 'Home',          component: HomePage },
-  { path: '/about',        name: 'About',         component: AboutPage },
-  { path: '/sippungsfolge', name: 'Sippungsfolge', component: SippungsfolgePage },
-  { path: '/contact',      name: 'Contact',       component: ContactPage },
-  { path: '/die-flensburgen', name: 'DieFlensburgen', component: FlensburgenPage },
-  { path: '/contact', name: 'Contact', component: ContactPage },
-  { path: '/dictionary', name: 'Dictionary', component: DictionaryPage},
-  { path: '/impressum', name: 'Impressum', component: Impressum},
-  { path: '/terms', name: 'Terms', component: Terms},
-  { path: '/privacy', name: 'Privacy', component: Privacy},
-  { path: '/newsletter', name: 'Newsletter', component: NewsletterPage },
-  { path: '/events', name: 'Events', component: EventPage }
+export const routes = [
+  { path: '/',               name: 'Home',          component: HomePage },
+  { path: '/about',          name: 'About',         component: AboutPage },
+  { path: '/sippungsfolge',  name: 'Sippungsfolge', component: SippungsfolgePage },
+  { path: '/die-flensburgen',name: 'DieFlensburgen',component: FlensburgenPage },
+  { path: '/contact',        name: 'Contact',       component: ContactPage },
+  { path: '/dictionary',     name: 'Dictionary',    component: DictionaryPage },
+  { path: '/impressum',      name: 'Impressum',     component: ImpressumPage },
+  { path: '/terms',          name: 'Terms',         component: TermsPage },
+  { path: '/privacy',        name: 'Privacy',       component: PrivacyPage },
+  { path: '/newsletter',     name: 'Newsletter',    component: NewsletterPage },
+  { path: '/events',         name: 'Events',        component: EventPage },
+
+  // Optional (erst erstellen, wenn du eine 404-Seite hast):
+  // { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/components/NotFound.vue') },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Wenn der Nutzer mit Zurück-/Vorwärts-Button navigiert, übernimmt savedPosition
-    if (savedPosition) {
-      return savedPosition
-    }
-    // Ansonsten immer ganz nach oben scrollen:
+    // Browser-History navigation → vorige Scroll-Position wiederherstellen
+    if (savedPosition) return savedPosition
+    // Bei normaler Navigation stets nach oben
     return { top: 0 }
-  }
+  },
 })
 
 export default router
