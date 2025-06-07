@@ -12,7 +12,6 @@
 
     <!-- Main Content -->
     <FlensburgenSection />
-
   </div>
 </template>
 
@@ -28,7 +27,6 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
   background: #ffffff;
 }
 
-/* Hier wird der Hero-Bereich etwas verkürzt, damit Buttons näher an der Beschreibung stehen */
 .flense-hero {
   display: flex;
   align-items: center;
@@ -38,14 +36,13 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
   background: #ffffff;
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
-  overflow: visible; /* stellt sicher, dass nichts abgeschnitten wird */
+  overflow: visible;
 }
 
 .flense-hero .content-wrapper {
   text-align: center;
 }
 
-/* Überschrift: mehr Zeilenhöhe und unteren Abstand hinzufügen, damit z.B. das "g" nicht abgeschnitten wird */
 .flense-hero .section-title {
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
@@ -71,7 +68,6 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
-/* Footer immer unten anheften */
 .site-footer {
   margin-top: auto;
   background: #f8fafc;

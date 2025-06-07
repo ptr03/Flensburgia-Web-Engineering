@@ -13,192 +13,164 @@
       </button>
     </div>
 
-    <transition name="fade">
-      <div v-if="activeId" class="modal-overlay" @click.self="closeModal">
-        <div
-          class="modal-content"
-          :class="{
-            compact:
-              activeId === 'sassen' && filteredSassen.length === 1
-          }"
-        >
-          <!-- Bild-Zoom Overlay -->
-          <transition name="fade">
+    <!-- OUTER TRANSITION REMOVED TO ENSURE IMMEDIATE REMOVAL -->
+    <div v-if="activeId" class="modal-overlay" @click.self="closeModal">
+      <div
+        class="modal-content"
+        :class="{ compact: activeId === 'sassen' && filteredSassen.length === 1 }"
+      >
+        <!-- Bild-Zoom Overlay -->
+        <transition name="fade" :css="false">
+          <div
+            v-if="enlargedImage"
+            class="image-zoom"
+            @click.self="enlargedImage = null"
+          >
+            <img
+              :src="getImage(enlargedImage.fullPath)"
+              :alt="enlargedImage.name"
+            />
+          </div>
+        </transition>
+
+        <!-- 1) Sassen Modal -->
+        <div v-if="activeId === 'sassen'" class="modal-sassen">
+          <h2 class="modal-title">Sassen</h2>
+
+          <div class="search-wrapper">
+            <input
+              v-model="search"
+              type="text"
+              placeholder="Suche..."
+              class="search-bar"
+            />
+          </div>
+
+          <transition-group
+            name="fade-list"
+            tag="div"
+            class="sassen-grid"
+            :class="{ single: filteredSassen.length === 1 }"
+          >
             <div
-              v-if="enlargedImage"
-              class="image-zoom"
-              @click.self="enlargedImage = null"
+              v-for="kn in filteredSassen"
+              :key="kn.id"
+              class="sassen-card"
             >
               <img
-                :src="getImage(enlargedImage.fullPath)"
-                :alt="enlargedImage.name"
+                :src="getImage(kn.fullPath)"
+                :alt="kn.name"
+                class="clickable"
+                @click="enlargeImage(kn)"
               />
+              <div class="sassen-name">{{ kn.name }}</div>
             </div>
-          </transition>
-
-          <!-- ====================== -->
-          <!-- 1) Sassen Modal       -->
-          <!-- ====================== -->
-          <div v-if="activeId === 'sassen'" class="modal-sassen">
-            <h2 class="modal-title">Sassen</h2>
-
-            <!-- Suchfeld (Position wie gehabt) -->
-            <div class="search-wrapper">
-              <input
-                v-model="search"
-                type="text"
-                placeholder="Suche..."
-                class="search-bar"
-              />
-            </div>
-
-            <!-- Gitterdarstellung der Sassen -->
-            <transition-group
-              name="fade-list"
-              tag="div"
-              class="sassen-grid"
-              :class="{ single: filteredSassen.length === 1 }"
-            >
-              <div
-                v-for="kn in filteredSassen"
-                :key="kn.id"
-                class="sassen-card"
-              >
-                <img
-                  :src="getImage(kn.fullPath)"
-                  :alt="kn.name"
-                  class="clickable"
-                  @click="enlargeImage(kn)"
-                />
-                <div class="sassen-name">{{ kn.name }}</div>
-              </div>
-            </transition-group>
-          </div>
-
-          <!-- ====================== -->
-          <!-- 2) Röde Grütt Modal   -->
-          <!-- ====================== -->
-          <div v-else-if="activeId === 'rode-gruett'" class="modal-text poem">
-            <h2 class="modal-title">Röde Grütt</h2>
-            <div class="text-content" v-html="formattedRodeGruett"></div>
-          </div>
-
-          <!-- =============================================== -->
-          <!-- 3) Erz- & Ehrenschlaraffen – Auswahlbuttons   -->
-          <!-- =============================================== -->
-          <div
-            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === null"
-            class="modal-schlaraffen-selection"
-          >
-            <h2 class="modal-title">Erz- & Ehrenschlaraffen</h2>
-            <div class="selection-buttons">
-              <button
-                class="sub-button"
-                @click="subSchlaraffen = 'erz'"
-              >
-                Erzschlaraffen
-              </button>
-              <button
-                class="sub-button"
-                @click="subSchlaraffen = 'ehr'"
-              >
-                Ehrenschlaraffen
-              </button>
-            </div>
-          </div>
-
-          <!-- =========================================== -->
-          <!-- 4a) Erzschlaraffen – zeigt Bilder aus Ordner „Erzschlaraffen“ -->
-          <!-- =========================================== -->
-          <div
-            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'erz'"
-            class="modal-schlaraffen-grid"
-          >
-            <h2 class="modal-title">Erzschlaraffen</h2>
-            <div class="ehrenschlaraffen-grid">
-              <div
-                v-for="item in erzList"
-                :key="item.id"
-                class="ehrenschlaraffen-card"
-              >
-                <img
-                  :src="getImage(item.fullPath)"
-                  :alt="item.name"
-                  class="clickable"
-                  @click="enlargeImage(item)"
-                />
-                <div class="ehrenschlaraffen-name">{{ item.name }}</div>
-              </div>
-            </div>
-
-            <!-- Zurück-Button -->
-            <button class="btn-back" @click="subSchlaraffen = null">
-              ← Zur Auswahl
-            </button>
-          </div>
-
-          <!-- =========================================== -->
-          <!-- 4b) Ehrenschlaraffen – zeigt Bilder aus Ordner „Ehrenschlaraffen“ -->
-          <!-- =========================================== -->
-          <div
-            v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'ehr'"
-            class="modal-schlaraffen-grid"
-          >
-            <h2 class="modal-title">Ehrenschlaraffen</h2>
-            <div class="ehrenschlaraffen-grid">
-              <div
-                v-for="item in ehrList"
-                :key="item.id"
-                class="ehrenschlaraffen-card"
-              >
-                <img
-                  :src="getImage(item.fullPath)"
-                  :alt="item.name"
-                  class="clickable"
-                  @click="enlargeImage(item)"
-                />
-                <div class="ehrenschlaraffen-name">{{ item.name }}</div>
-              </div>
-            </div>
-
-            <!-- Zurück-Button -->
-            <button class="btn-back" @click="subSchlaraffen = null">
-              ← Zur Auswahl
-            </button>
-          </div>
-
-          <!-- =========================================== -->
-          <!-- 5) Kilianischer Windjammerorden Modal    -->
-          <!-- =========================================== -->
-          <div
-            v-else-if="activeId === 'kilianischer-windjammerorden'"
-            class="modal-text modal-windjammer"
-          >
-            <h2 class="modal-title">Kilianischer Windjammerorden</h2>
-            <div class="text-content" v-html="formattedWindjammer"></div>
-            <div class="download-links">
-              <a
-                href="https://view.officeapps.live.com/op/view.aspx?src=…"
-                class="btn-download"
-                target="_blank"
-              >
-                Eynritts-Liste herunterladen
-              </a>
-              <a
-                href="https://cdn.website-editor.net/.../statuten.pdf"
-                class="btn-download"
-                target="_blank"
-              >
-                Historische Statuten herunterladen
-              </a>
-            </div>
-          </div>
-
-          <!-- Schließen-Button -->
-          <button class="btn-close" @click="closeModal">×</button>
+          </transition-group>
         </div>
+
+        <!-- 2) Röde Grütt Modal -->
+        <div v-else-if="activeId === 'rode-gruett'" class="modal-text poem">
+          <h2 class="modal-title">Röde Grütt</h2><div class="text-content" v-html="formattedRodeGruett"></div>
+        </div>
+
+
+        <!-- 3) Erz- & Ehrenschlaraffen Auswahl -->
+        <div
+          v-else-if="activeId === 'schlaraffen' && subSchlaraffen === null"
+          class="modal-schlaraffen-selection"
+        >
+          <h2 class="modal-title">Erz- & Ehrenschlaraffen</h2>
+          <div class="selection-buttons">
+            <button class="sub-button" @click="subSchlaraffen = 'erz'">
+              Erzschlaraffen
+            </button>
+            <button class="sub-button" @click="subSchlaraffen = 'ehr'">
+              Ehrenschlaraffen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4a) Erzschlaraffen -->
+        <div
+          v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'erz'"
+          class="modal-schlaraffen-grid"
+        >
+          <h2 class="modal-title">Erzschlaraffen</h2>
+          <div class="ehrenschlaraffen-grid">
+            <div
+              v-for="item in erzList"
+              :key="item.id"
+              class="ehrenschlaraffen-card"
+            >
+              <img
+                :src="getImage(item.fullPath)"
+                :alt="item.name"
+                class="clickable"
+                @click="enlargeImage(item)"
+              />
+              <div class="ehrenschlaraffen-name">{{ item.name }}</div>
+            </div>
+          </div>
+          <button class="btn-back" @click="subSchlaraffen = null">
+            ← Zur Auswahl
+          </button>
+        </div>
+
+        <!-- 4b) Ehrenschlaraffen -->
+        <div
+          v-else-if="activeId === 'schlaraffen' && subSchlaraffen === 'ehr'"
+          class="modal-schlaraffen-grid"
+        >
+          <h2 class="modal-title">Ehrenschlaraffen</h2>
+          <div class="ehrenschlaraffen-grid">
+            <div
+              v-for="item in ehrList"
+              :key="item.id"
+              class="ehrenschlaraffen-card"
+            >
+              <img
+                :src="getImage(item.fullPath)"
+                :alt="item.name"
+                class="clickable"
+                @click="enlargeImage(item)"
+              />
+              <div class="ehrenschlaraffen-name">{{ item.name }}</div>
+            </div>
+          </div>
+          <button class="btn-back" @click="subSchlaraffen = null">
+            ← Zur Auswahl
+          </button>
+        </div>
+
+        <!-- 5) Kilianischer Windjammerorden Modal -->
+        <div
+          v-else-if="activeId === 'kilianischer-windjammerorden'"
+          class="modal-text modal-windjammer"
+        >
+          <h2 class="modal-title">Kilianischer Windjammerorden</h2>
+          <div class="text-content" v-html="formattedWindjammer"></div>
+          <div class="download-links">
+            <a
+              href="https://view.officeapps.live.com/op/view.aspx?src=…"
+              class="btn-download"
+              target="_blank"
+            >
+              Eynritts-Liste herunterladen
+            </a>
+            <a
+              href="https://cdn.website-editor.net/.../statuten.pdf"
+              class="btn-download"
+              target="_blank"
+            >
+              Historische Statuten herunterladen
+            </a>
+          </div>
+        </div>
+
+        <!-- Schließen-Button -->
+        <button class="btn-close" @click="closeModal">×</button>
       </div>
-    </transition>
+    </div>
   </section>
 </template>
 
@@ -232,7 +204,15 @@ const categories = [
 
 // Modal-State
 const activeId = ref(null)
-const openModal = (id) => {
+const subSchlaraffen = ref(null)
+const search = ref('')
+
+// Bild-Zoom
+const enlargedImage = ref(null)
+const enlargeImage = obj => (enlargedImage.value = obj)
+
+// Modal öffnen/schließen
+const openModal = id => {
   activeId.value = id
   if (id === 'schlaraffen') subSchlaraffen.value = null
 }
@@ -242,28 +222,17 @@ const closeModal = () => {
   subSchlaraffen.value = null
 }
 
-// Bild-Zoom
-const enlargedImage = ref(null)
-const enlargeImage = (obj) => {
-  enlargedImage.value = obj
-}
-
-// Such‐Feld für Sassen
-const search = ref('')
-
-// Alle Bilder in allen Unterordnern laden
+// Glob alle Bilder
 const allImages = import.meta.glob(
   '../assets/pictures/flensburgen/**/**/*.{png,webp,jpg,jpeg}',
   { eager: true, import: 'default' }
 )
 
-// Hilfsfunktion: Aus viteKey ein Objekt { id, name, fullPath } machen
+// Hilfsfunktion: viteKey → {id,name,fullPath}
 function makeItemObject(viteKey) {
-  // Beispiel viteKey:
-  // "../assets/pictures/flensburgen/Sassen/Junker Friedrich.png"
   const parts = viteKey.split('/')
-  const filenameWithExt = parts[parts.length - 1]          // "Junker Friedrich.png"
-  const folderName = parts[parts.length - 2]                // "Sassen", "Erzschlaraffen" oder "Ehrenschlaraffen"
+  const filenameWithExt = parts.pop()
+  const folderName = parts.pop()
   const name = filenameWithExt.replace(/\.(png|webp|jpg|jpeg)$/i, '')
   const id = name
     .toLowerCase()
@@ -273,62 +242,45 @@ function makeItemObject(viteKey) {
   return { id, name, fullPath }
 }
 
-// 1) Sassen-Liste (dynamisch aus Ordner „Sassen“)
-const sassenList = computed(() => {
-  const arr = []
-  Object.keys(allImages).forEach((key) => {
-    if (key.includes('/Sassen/')) {
-      arr.push(makeItemObject(key))
-    }
-  })
-  return arr
-})
+// 1) Sassen-Liste
+const sassenList = computed(() =>
+  Object.keys(allImages)
+    .filter(key => key.includes('/Sassen/'))
+    .map(makeItemObject)
+)
 
-// 2) Gefilterte Sassen nach Suchbegriff
+// 2) Gefilterte Sassen
 const filteredSassen = computed(() =>
-  sassenList.value.filter((kn) =>
+  sassenList.value.filter(kn =>
     kn.name.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
-// 3) Erzschlaraffen-Liste (wie gehabt)
-const erzList = computed(() => {
-  const arr = []
-  Object.keys(allImages).forEach((key) => {
-    if (key.includes('/Erzschlaraffen/')) {
-      arr.push(makeItemObject(key))
-    }
-  })
-  return arr
-})
+// 3) Erzschlaraffen
+const erzList = computed(() =>
+  Object.keys(allImages)
+    .filter(key => key.includes('/Erzschlaraffen/'))
+    .map(makeItemObject)
+)
 
-// 4) Ehrenschlaraffen-Liste (wie gehabt)
-const ehrList = computed(() => {
-  const arr = []
-  Object.keys(allImages).forEach((key) => {
-    if (key.includes('/Ehrenschlaraffen/')) {
-      arr.push(makeItemObject(key))
-    }
-  })
-  return arr
-})
+// 4) Ehrenschlaraffen
+const ehrList = computed(() =>
+  Object.keys(allImages)
+    .filter(key => key.includes('/Ehrenschlaraffen/'))
+    .map(makeItemObject)
+)
 
-// State für Auswahl bei Schlaraffen
-const subSchlaraffen = ref(null) // null | 'erz' | 'ehr'
-
-// Body-Scroll sperren, wenn Modal offen
-watch(activeId, (val) => {
+// Body-scroll sperren, wenn Modal offen
+watch(activeId, val => {
   document.body.classList.toggle('modal-open', !!val)
 })
 
-// getImage: Lädt Bild via vite-glob
+// getImage: Pfad → URL
 function getImage(path) {
-  // path = "Sassen/Name.png" oder "Erzschlaraffen/Name.png"
   const fullKey = `../assets/pictures/flensburgen/${path}`
   return allImages[fullKey] || ''
 }
 </script>
-
 <style scoped>
 /* =========================== */
 /* Base & Buttons              */
