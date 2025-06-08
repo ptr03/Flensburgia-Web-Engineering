@@ -132,6 +132,7 @@ onMounted(() => {
     observer.observe(el)
   })
 })
+
 </script>
 
 <style scoped>
@@ -211,8 +212,24 @@ onMounted(() => {
   }
 }
 
+/* ============================== */
+/* Simple scroll-fade animation   */
+/* ============================== */
+.animate-target {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* optional delay helper */
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+/* when JS adds “animate-in” */
 .animate-in {
-  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card-header {

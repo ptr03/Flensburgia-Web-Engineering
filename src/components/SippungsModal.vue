@@ -46,7 +46,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// 1) Props: Wir erwarten jetzt `item` (Objekt) und `images` (Array von Bild-URLs)
+// Props: item und images
 const props = defineProps({
   item: Object,
   images: {
@@ -56,12 +56,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['close'])
 
-// 2) Zum Schließen des Modals
 function close() {
   emit('close')
 }
 
-// 3) Zoom-Overlay für Bildanzeigen
+// Zoom-Logik
 const zoomSrc = ref(null)
 function openZoom(src) {
   zoomSrc.value = src
@@ -83,6 +82,7 @@ function closeZoom() {
 }
 
 .modal {
+  position: relative; /* Damit der .close Button sich auf die Modal bezieht */
   max-width: 800px;
   width: 90%;
   max-height: 90vh;
@@ -94,11 +94,7 @@ function closeZoom() {
   animation: zoomIn 0.3s ease;
   color: #111;
 }
-.modal h3,
-.modal p,
-.modal .description {
-  color: inherit;
-}
+
 .close {
   position: absolute;
   top: 1rem;

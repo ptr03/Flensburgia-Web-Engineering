@@ -182,6 +182,7 @@ const navLinks = [
     background: rgba(82, 51, 31, 0.39) !important;
     padding: 0.75rem 1rem;
     z-index: 2000;
+    right: 83%;
   }
 
   /* Style the menu button in white */
