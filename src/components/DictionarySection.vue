@@ -45,7 +45,7 @@
           v-for="entry in landingResults"
           :key="entry.term"
           class="dictionary-card result-card"
-          @click="openDetails(entry)"
+          @click="toggleEntry(entry.term)"
         >
           <div class="card-header">
             <div class="term-container">
@@ -60,6 +60,15 @@
               </svg>
             </span>
           </div>
+          <!-- aufgeklappter Bereich -->
+   <transition name="expand">
+     <div v-if="expandedTerm === entry.term" class="card-content">
+       <p>{{ entry.definition }}</p>
+       <button @click.stop="openDetails(entry)" class="details-button text-left">
+        Details
+       </button>
+     </div>
+   </transition>
         </div>
       </div>
 
@@ -875,6 +884,7 @@ onMounted(() => {
   padding: 1.5rem;
   background: #FFFFFF;
   border-top: 1px solid #E2E8F0;
+  text-align: left;
 }
 
 .definition {
@@ -887,6 +897,9 @@ onMounted(() => {
 /* Details Button */
 .details-button {
   display: inline-block;
+  margin: 0;
+  margin-top: 3%;
+  padding-left: 0.5rem;
   padding: 1rem 2.5rem;
   background: #E0F2FF;
   color: #0F172A;
