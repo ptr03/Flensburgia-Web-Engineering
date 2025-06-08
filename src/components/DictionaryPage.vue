@@ -1,24 +1,24 @@
-<!-- src/components/DictionaryPage.vue -->
 <template>
+  <!-- Container für die Wörterbuch-Seite (Dictionary Page Container) -->
   <div class="dictionary-page-container">
-    <!-- Hier wird einfach das große DictionarySection‐Component gerendert -->
+    <!-- Einbinden der DictionarySection-Komponente -->
     <DictionarySection />
   </div>
 </template>
 
 <script setup>
+// Import der DictionarySection-Komponente
 import DictionarySection from './DictionarySection.vue'
 </script>
 
 <style scoped>
+/* Haupt-Container der Dictionary-Seite (Dictionary Page Styling) */
 .dictionary-page-container {
-  /* Wenn Du willst, dass diese Komponente den vollen Viewport einnimmt: */
   min-height: 100vh;
-  background-color: #FFFFFF; /* Ganz weiß hintenrum */
+  background-color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Vertical padding, damit es nicht direkt an der Navbar klebt */
   padding: 2rem 0;
 }
 </style>

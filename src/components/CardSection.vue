@@ -1,6 +1,9 @@
 <template>
+  <!-- Abschnitt mit Karten (Card Section) -->
   <section class="card-section" ref="sectionRef">
+    <!-- Container für alle Karten -->
     <div class="cards-container">
+      <!-- Einzelne Karte als Router-Link -->
       <router-link 
         v-for="(card, index) in cards" 
         :key="card.route" 
@@ -8,11 +11,15 @@
         class="card"
         :style="{ transitionDelay: `${index * 50}ms` }"
       >
+        <!-- Icon-Bereich der Karte -->
         <div class="card-icon">
           <component :is="card.icon" :size="32" />
         </div>
+        <!-- Titel der Karte -->
         <h3 class="card-title">{{ card.title }}</h3>
+        <!-- Beschreibungstext der Karte -->
         <p class="card-description">{{ card.description }}</p>
+        <!-- Aktionselement (Discover) mit Pfeil-Icon -->
         <div class="card-action">
           <span class="action-text">Discover</span>
           <ArrowRight class="action-arrow" :size="16" />
@@ -23,32 +30,21 @@
 </template>
 
 <script setup>
+// Imports und Composition-API Hooks
 import { ref, onMounted } from 'vue'
 import { BookOpen, Clock, Map, ArrowRight } from 'lucide-vue-next'
 
+// Definition der Karten-Daten
 const cards = [
-  {
-    title: 'Dictionary',
-    description: 'Explore our comprehensive cultural terminology database',
-    route: '/dictionary',
-    icon: BookOpen
-  },
-  {
-    title: 'Timeline',
-    description: 'Journey through our region\'s historical milestones',
-    route: '/timeline',
-    icon: Clock
-  },
-  {
-    title: 'Tour',
-    description: 'Discover guided experiences of cultural landmarks',
-    route: '/tour',
-    icon: Map
-  }
+  { title: 'Dictionary', description: 'Explore our comprehensive cultural terminology database', route: '/dictionary', icon: BookOpen },
+  { title: 'Timeline', description: 'Journey through our region\'s historical milestones', route: '/timeline', icon: Clock },
+  { title: 'Tour', description: 'Discover guided experiences of cultural landmarks', route: '/tour', icon: Map }
 ]
 
+// Referenz auf das Section-Element für Intersection Observer
 const sectionRef = ref<HTMLElement|null>(null)
 
+// Intersection Observer für Fade-In Animation der Karten
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -67,11 +63,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* =====================================
+   Grundstil des Karten-Abschnitts
+   ===================================== */
 .card-section {
   padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   background: linear-gradient(to bottom, #fbfbfd 0%, #ffffff 100%);
 }
 
+/* =====================================
+   Layout des Karten-Containers (Grid)
+   ===================================== */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -80,6 +82,9 @@ onMounted(() => {
   margin: 0 auto;
 }
 
+/* =====================================
+   Basis-Stil jeder Karte
+   ===================================== */
 .card {
   display: flex;
   flex-direction: column;
@@ -96,27 +101,38 @@ onMounted(() => {
               border-color 0.3s ease;
 }
 
+/* =====================================
+   Sichtbar-Klasse für Fade-In
+   ===================================== */
 .card.visible {
   transform: translateY(0);
   opacity: 1;
 }
 
+/* =====================================
+   Hover-Effekte auf Karte
+   ===================================== */
 .card:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
   border-color: rgba(210, 210, 215, 0.6);
 }
 
+/* =====================================
+   Icon in der Karte
+   ===================================== */
 .card-icon {
   margin-bottom: 1.5rem;
   color: #0066cc;
   transition: transform 0.3s ease;
 }
-
 .card:hover .card-icon {
   transform: scale(1.1);
 }
 
+/* =====================================
+   Titel und Beschreibung
+   ===================================== */
 .card-title {
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   font-weight: 600;
@@ -124,7 +140,6 @@ onMounted(() => {
   color: #1d1d1f;
   letter-spacing: -0.015em;
 }
-
 .card-description {
   font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
   line-height: 1.6;
@@ -133,6 +148,9 @@ onMounted(() => {
   flex-grow: 1;
 }
 
+/* =====================================
+   Aktionstext und Pfeil-Icon
+   ===================================== */
 .card-action {
   display: inline-flex;
   align-items: center;
@@ -141,19 +159,19 @@ onMounted(() => {
   color: #0066cc;
   transition: gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .action-arrow {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .card:hover .action-arrow {
   transform: translateX(4px);
 }
-
 .card:hover .card-action {
   gap: 1rem;
 }
 
+/* =====================================
+   Dunkles Farbschema (dark mode)
+   ===================================== 
 @media (prefers-color-scheme: dark) {
   .card-section {
     background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
@@ -166,13 +184,19 @@ onMounted(() => {
   .card-description { color: rgba(255, 255, 255, 0.75); }
   .card-icon { color: #2997ff; }
   .card-action { color: #2997ff; }
-}
+}*/
 
+/* =====================================
+   Responsive Anpassungen für Mobilgeräte
+   ===================================== */
 @media (max-width: 768px) {
   .cards-container { gap: 1.5rem; }
   .card { padding: 2rem; }
 }
 
+/* =====================================
+   Reduzierte Animation für reduced-motion
+   ===================================== */
 @media (prefers-reduced-motion: reduce) {
   .card { transition: opacity 0.6s ease !important; }
   .card:hover { transform: none !important; }

@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <!-- 1.5) Zufälliger Begriff – Vorschau (falls gesetzt) -->
+      <!-- 1.5) Zufälliger Begriff – Vorschau  -->
       <div v-if="randomEntry" class="random-preview animate-fade-in delay-600">
         <h2 class="preview-heading">Zufälliger Begriff</h2>
         <div class="preview-card">

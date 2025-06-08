@@ -1,7 +1,7 @@
 <!-- src/components/AboutSection.vue -->
 <template>
   <section class="about-section">
-    <!-- Hero-Bereich (jetzt mit mehr Abstand unten) -->
+    <!-- Hero-Bereich  -->
     <div class="hero-plain about-hero">
       <div class="content-wrapper">
         <h1 class="hero-title animate-target">Über Flensburgia</h1>
@@ -74,12 +74,12 @@ onMounted(() => {
 
 <style scoped>
 /* ===============================
-   Hero-ähnlicher Abschnitt (mehr Abstand unten)
+   Hero-ähnlicher Abschnitt 
    =============================== */
 .about-hero {
   background: #ffffff;
-  padding-top: 48px;       /* etwas weniger oben */
-  padding-bottom: 6rem;    /* noch mehr Abstand unten, damit Titel weiter runterrutscht */
+  padding-top: 48px;       
+  padding-bottom: 6rem;    
   text-align: center;
 }
 .content-wrapper {
@@ -141,7 +141,7 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   max-width: 900px;
-  margin: 2.5rem auto; /* etwas mehr Abstand nach Infotext-Box */
+  margin: 2.5rem auto; 
   padding: 0 1.5rem;
 }
 .stat-card {
@@ -239,7 +239,7 @@ onMounted(() => {
     font-size: clamp(1.25rem, 4vw, 1.75rem);
   }
   .welcome-box {
-    margin: -2rem auto 1.5rem; /* negative margin auf Mobil etwas reduziert */
+    margin: -2rem auto 1.5rem; 
     padding: 1rem 1rem;
   }
   .buttons-container {

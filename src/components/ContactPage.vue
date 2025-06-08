@@ -1,18 +1,22 @@
-<!-- src/pages/ContactPage.vue -->
 <template>
+  <!-- Wrapper für die Kontaktseite (Contact Page Wrapper) -->
   <div class="contact-page">
+    <!-- Hero-Bereich mit Überschrift und Untertitel (Hero Section) -->
     <section class="contact-hero">
       <div class="content-wrapper">
+        <!-- Hauptüberschrift der Kontaktseite (Main Title) -->
         <h1 class="section-title animate-target">Kontakt</h1>
+        <!-- Untertitel (Subtitle) -->
         <p class="section-subtitle animate-target">
           Wir stehen Ihnen gerne zur Verfügung – schreiben Sie uns oder rufen Sie an.
         </p>
       </div>
     </section>
 
+    <!-- Hauptbereich mit Kontaktinfos und Formular (Contact Info & Form Section) -->
     <section class="contact-section">
       <div class="container">
-        <!-- Kontaktinformationen -->
+        <!-- Kontaktinformationen (Contact Information) -->
         <div class="contact-info animate-target">
           <h2 class="contact-heading">Unsere Ansprechpartner</h2>
           <ul class="contact-list">
@@ -29,41 +33,25 @@
           </ul>
         </div>
 
-        <!-- Kontaktformular -->
+        <!-- Kontaktformular (Contact Form) -->
         <div class="contact-form-wrapper animate-target">
           <h2 class="contact-heading">Kontaktformular</h2>
           <form @submit.prevent="submitForm" class="contact-form">
             <div class="form-group">
               <label for="name">Name</label>
-              <input
-                id="name"
-                v-model="form.name"
-                type="text"
-                required
-                placeholder="Ihr Name"
-              />
+              <input id="name" v-model="form.name" type="text" required placeholder="Ihr Name" />
             </div>
             <div class="form-group">
               <label for="email">E-Mail</label>
-              <input
-                id="email"
-                v-model="form.email"
-                type="email"
-                required
-                placeholder="Ihre E-Mail-Adresse"
-              />
+              <input id="email" v-model="form.email" type="email" required placeholder="Ihre E-Mail-Adresse" />
             </div>
             <div class="form-group">
               <label for="message">Nachricht</label>
-              <textarea
-                id="message"
-                v-model="form.message"
-                rows="7"
-                required
-                placeholder="Ihre Nachricht"
-              ></textarea>
+              <textarea id="message" v-model="form.message" rows="7" required placeholder="Ihre Nachricht"></textarea>
             </div>
+            <!-- Absende-Button (Submit Button) -->
             <button type="submit" class="btn btn-primary">Absenden</button>
+            <!-- Bestätigungstext nach erfolgreichem Senden (Success Message) -->
             <p v-if="success" class="form-success">Ihre Nachricht wurde gesendet!</p>
           </form>
         </div>
@@ -73,41 +61,37 @@
 </template>
 
 <script>
+// Vue-Komponente definieren (Define Vue Component)
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ContactPage',
   data() {
     return {
-      form: {
-        name: '',
-        email: '',
-        message: ''
-      },
+      form: { name: '', email: '', message: '' },
       success: false
     }
   },
   methods: {
+    // Formular-Absende-Logik (Form Submission Logic)
     submitForm() {
       this.success = true
-      // clear fields
+      // Felder zurücksetzen (Clear fields)
       this.form.name = ''
       this.form.email = ''
       this.form.message = ''
-      // hide after 5s
-      setTimeout(() => {
-        this.success = false
-      }, 5000)
+      // Erfolgsmeldung nach 5 Sekunden ausblenden (Hide success message after 5s)
+      setTimeout(() => { this.success = false }, 5000)
     }
   },
   mounted() {
-    // animate-in the hero immediately
+    // Animation des Hero-Bereichs direkt auslösen (Animate hero immediately)
     this.$nextTick(() => {
       document
         .querySelectorAll('.section-title, .section-subtitle')
         .forEach(el => el.classList.add('animate-in'))
     })
-    // intersection observer for the rest
+    // Intersection Observer für restliche Elemente (Intersection Observer for fade-in)
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -119,15 +103,13 @@ export default defineComponent({
       },
       { threshold: 0.1 }
     )
-    document
-      .querySelectorAll('.animate-target')
-      .forEach(el => observer.observe(el))
+    document.querySelectorAll('.animate-target').forEach(el => observer.observe(el))
   }
 })
 </script>
 
-
 <style scoped>
+/* Grundstruktur der Kontaktseite (Layout) */
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -135,6 +117,7 @@ export default defineComponent({
   min-height: 100vh;
 }
 
+/* Hero-Bereich Styling (Hero Section Styling) */
 .contact-hero {
   background: #ffffff;
   padding: clamp(4rem, 8vw, 6rem) 1.5rem;
@@ -142,166 +125,49 @@ export default defineComponent({
   margin-top: 64px;
 }
 
+/* Wrapper für Inhalte (Content Wrapper) */
 .content-wrapper {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.section-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  color: #0ea5e9;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Titel und Untertitel Animationseinstellungen (Title & Subtitle Animations) */
+.section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #0ea5e9; margin-bottom: 0.5rem; opacity: 0; transform: translateY(20px); }
+.section-subtitle { font-size: clamp(1rem, 2.5vw, 1.25rem); color: #334155; margin-top: 0.5rem; opacity: 0; transform: translateY(20px); }
 
-.section-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: #334155;
-  margin-top: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Kontaktbereich Styling (Contact Section Styling) */
+.contact-section { padding: clamp(4rem, 8vw, 6rem) 1.5rem; }
+.container { max-width: 1300px; margin: 0 auto; display: flex; gap: 3rem; flex-wrap: wrap; justify-content: space-between; }
 
-.contact-section {
-  padding: clamp(4rem, 8vw, 6rem) 1.5rem;
-}
+/* Kontaktinformationen Styling (Contact Information Styling) */
+.contact-info { flex: 1 1 300px; opacity: 0; transform: translateY(20px); }
+.contact-heading { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: #111827; }
+.contact-list { list-style: none; padding: 0; margin: 0; }
+.contact-list li { margin-bottom: 0.75rem; font-size: 1rem; color: #374151; }
+.contact-label { font-weight: 500; margin-right: 0.25rem; }
+.contact-link { color: #0ea5e9; text-decoration: none; }
+.contact-link:hover { text-decoration: underline; }
 
-.container {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+/* Formular Styling (Form Styling) */
+.contact-form-wrapper { flex: 1 1 500px; opacity: 0; transform: translateY(20px); }
+.contact-form { display: flex; flex-direction: column; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.25rem; font-weight: 500; color: #111827; }
+.form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; color: #111827; transition: border-color 0.2s, box-shadow 0.2s; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 4px 8px rgba(14, 165, 233, 0.1); }
+.btn-primary { align-self: flex-start; padding: 0.75rem 2rem; background-color: #0ea5e9; color: #ffffff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: background-color 0.2s, transform 0.2s; }
+.btn-primary:hover { background-color: #0369a1; transform: translateY(-2px); }
 
-.contact-info {
-  flex: 1 1 300px;
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Erfolgsmeldung Styling (Success Message Styling) */
+.form-success { margin-top: 1rem; color: #16a34a; font-weight: 500; }
 
-.contact-heading {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #111827;
-}
+/* Fade-In Animation Keyframes */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { animation: fadeInUp 0.6s ease-out forwards; }
 
-.contact-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.contact-list li {
-  margin-bottom: 0.75rem;
-  font-size: 1rem;
-  color: #374151;
-}
-
-.contact-label {
-  font-weight: 500;
-  margin-right: 0.25rem;
-}
-
-.contact-link {
-  color: #0ea5e9;
-  text-decoration: none;
-}
-
-.contact-link:hover {
-  text-decoration: underline;
-}
-
-.contact-form-wrapper {
-  flex: 1 1 500px;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 500;
-  color: #111827;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 1rem;
-  color: #111827;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #0ea5e9;
-  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.1);
-}
-
-.btn-primary {
-  align-self: flex-start;
-  padding: 0.75rem 2rem;
-  background-color: #0ea5e9;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.2s, transform 0.2s;
-}
-
-.btn-primary:hover {
-  background-color: #0369a1;
-  transform: translateY(-2px);
-}
-
-.form-success {
-  margin-top: 1rem;
-  color: #16a34a;
-  font-weight: 500;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-in {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
+/* Responsive Anpassungen (Responsive Adjustments) */
 @media (max-width: 992px) {
-  .container {
-    flex-direction: column;
-  }
-  .contact-info,
-  .contact-form-wrapper {
-    width: 100%;
-  }
+  .container { flex-direction: column; }
+  .contact-info, .contact-form-wrapper { width: 100%; }
 }
 </style>
