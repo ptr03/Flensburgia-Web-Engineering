@@ -30,3 +30,6 @@ config.global.stubs = {
   'router-link': true,
   'router-view': true,
 }
+config.global.mocks = {
+  $mq: { isMobile: true }
+}

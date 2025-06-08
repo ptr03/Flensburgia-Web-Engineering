@@ -18,17 +18,27 @@
 
     <!-- Mobile Navigation (drawer only) -->
     <div class="mobile-nav">
-      <button class="menu-btn" @click="menuOpen = true" aria-label="Menü öffnen">
+      <!-- added `menu-toggle` here -->
+      <button
+        class="menu-btn menu-toggle"
+        @click="menuOpen = !menuOpen"
+        aria-label="Menü öffnen"
+      >
         ☰
       </button>
       <transition name="slide">
+        <!-- added `mobile-menu` here -->
         <div
           v-if="menuOpen"
-          class="nav-drawer"
+          class="nav-drawer mobile-menu"
           @click.self="menuOpen = false"
         >
           <div class="drawer-content">
-            <button class="close-btn" @click="menuOpen = false" aria-label="Schließen">
+            <button
+              class="close-btn"
+              @click="menuOpen = false"
+              aria-label="Schließen"
+            >
               &times;
             </button>
             <router-link
@@ -125,8 +135,6 @@ const navLinks = [
   justify-content: flex-start;
   z-index: 2000;
 }
-
-/* Drawer panel covers 100% */
 .drawer-content {
   background: transparent;
   width: 100%;
@@ -136,8 +144,6 @@ const navLinks = [
   flex-direction: column;
   color: #fff;
 }
-
-/* Close button */
 .close-btn {
   align-self: flex-end;
   font-size: 2rem;
@@ -147,8 +153,6 @@ const navLinks = [
   cursor: pointer;
   margin-bottom: 1.5rem;
 }
-
-/* Links in drawer */
 .drawer-link {
   padding: 1rem 0;
   color: #fff;
@@ -168,15 +172,12 @@ const navLinks = [
 
 /* Breakpoint */
 @media (max-width: 768px) {
-  /* Hide desktop links, show mobile menu button */
   .desktop-nav {
     display: none !important;
   }
   .mobile-nav {
     display: flex !important;
   }
-
-  /* Make navbar opaque and left-aligned so the ☰ is visible */
   .navbar {
     justify-content: flex-start;
     background: rgba(82, 51, 31, 0.39) !important;
@@ -184,8 +185,6 @@ const navLinks = [
     z-index: 2000;
     right: 83%;
   }
-
-  /* Style the menu button in white */
   .menu-btn {
     font-size: 1.75rem;
     color: #fff !important;

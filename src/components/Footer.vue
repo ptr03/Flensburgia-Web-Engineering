@@ -16,7 +16,6 @@
 </template>
 
 <style scoped>
-/* Footer Grundaufbau */
 .footer {
   background-color: #ffffff;
   border-top: 1px solid var(--color-border);
@@ -66,7 +65,6 @@
   color: var(--color-primary);
 }
 
-/* Mobile-Optimierung: Keine Lücken, kompakt */
 @media (max-width: 768px) {
   .footer {
     padding: 0.5rem 0.75rem;
