@@ -90,7 +90,7 @@ onMounted(() => {
   inset: 0;
   background: rgba(0,0,0,0.4);
   z-index: 1;
-  opacity: 0;                /* start overlay hidden */
+  opacity: 0;              
   animation: fadeInOverlay 0.6s ease-out 0.1s forwards;
 }
 

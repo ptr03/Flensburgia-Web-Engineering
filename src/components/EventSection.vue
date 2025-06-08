@@ -119,8 +119,7 @@ function getImageUrl(filename) {
   overflow-x: auto;
   display: flex;
   justify-content: center;
-  padding-bottom: 0.5rem; /* Platz für Scrollbar */
-}
+  padding-bottom: 0.5rem; 
 
 /* =========================== */
 /* Horizontal-Scroll-Container  */
@@ -150,12 +149,11 @@ function getImageUrl(filename) {
 }
 
 .scroll-item {
-  flex: 0 0 auto;       /* Keine Flex-Grow/Shrink */
+  flex: 0 0 auto;       
   width: 200px;
-  aspect-ratio: 1 / 1;   /* Höhe = Breite */
+  aspect-ratio: 1 / 1;   
   opacity: 0;
   animation: fadeIn 0.6s ease-out forwards;
-  /* Jeder Button fängt mit 0 an und blendet nach 0.6s auf Opazität 1 */
 }
 
 /* =========================== */
@@ -164,8 +162,8 @@ function getImageUrl(filename) {
 .event-button {
   width: 100%;
   height: 100%;
-  background: #f3f4f6; /* heller Grauton, wie bei Kategorie-Buttons */
-  color: #1d1d1f;      /* dunkles Schwarz für Text */
+  background: #f3f4f6; 
+  color: #1d1d1f;      
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -179,7 +177,6 @@ function getImageUrl(filename) {
   padding: 1rem;
 }
 
-/* Hover-Effekt: etwas tieferer Schatten und Hintergrund leicht aufgehellt */
 .event-button:hover {
   background: #e0e0e0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -253,5 +250,6 @@ function getImageUrl(filename) {
   color: #475569;
   line-height: 1.5;
   margin: 0;
+}
 }
 </style>

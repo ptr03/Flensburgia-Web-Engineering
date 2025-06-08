@@ -92,16 +92,11 @@ onMounted(() => {
   margin-top: 0.25rem;
 }
 
-/* 
-  Wir geben beiden Elementen (Titel + Untertitel) die Klasse 'animate-target',
-  und sobald .animate-in hinzukommt, führen wir FadeInUp aus.
-*/
 .animate-target {
   opacity: 0;
   transform: translateY(20px);
 }
 
-/* Wenn .animate-in gesetzt ist, wird fadeInUp abgespielt */
 .animate-in {
   animation: fadeInUp 0.8s ease-out forwards;
 }

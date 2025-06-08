@@ -175,9 +175,9 @@ function subscribe() {
   margin-top: 0.5rem;
 }
 .message-success {
-  color: #2d572c; /* ein gedecktes Grün */
+  color: #2d572c; 
 }
 .message-error {
-  color: #8b1a1a; /* ein dunkles Rot */
+  color: #8b1a1a; 
 }
 </style>

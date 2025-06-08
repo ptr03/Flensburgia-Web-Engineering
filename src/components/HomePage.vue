@@ -115,7 +115,7 @@ onMounted(() => {
 
 /* About Teaser */
 .about-teaser {
-  background-color: #ffffff; /* weißer Block */
+  background-color: #ffffff; 
 }
 .about-teaser .section-title {
   color: #2b2e32;
@@ -147,7 +147,7 @@ onMounted(() => {
 .stat-value { font-size: 1.75rem; font-weight: 700; color: #111827; }
 .cta-wrapper { display: flex; justify-content: center; margin-top: 2rem; }
 
-/* Aktuelles Teaser (weißer Block) */
+/* Aktuelles Teaser  */
 .aktuelles-teaser {
   background-color: #ffffff;
 }
