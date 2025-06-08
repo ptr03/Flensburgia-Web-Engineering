@@ -213,12 +213,52 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+  /* Push title and subtitle higher on mobile */
+  .hero-section {
+    align-items: flex-start;
+    padding-top: 20vh;
+  }
+  .content-wrapper {
+    transform: none;
+  }
+  /* Keep three buttons in a row, but smaller */
   .button-grid {
-    grid-template-columns: 1fr;
-    bottom: -3rem;
+    grid-template-columns: repeat(3, 1fr);
+    bottom: 10rem;
+    width: 100%;
+    padding: 0.5rem;
+    gap: 0.5rem;
   }
   .grid-button {
+    padding: 10%;
+    font-size: 0.875rem;
+  }
+  .stats-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .stat-item {
+    flex: 1;
     padding: 0.75rem;
+    text-align: center;
+  }
+
+  .stat-title {
+    font-size: 0.875rem; /* kleiner */
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;  /* kleiner */
+  }
+
+  .stat-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-bottom: 0.5rem;
   }
 }
+
 </style>
