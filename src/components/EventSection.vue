@@ -209,4 +209,19 @@ function getImageUrl(filename) {
   color: #475569;
   line-height: 1.5;
 }
+@media (max-width: 640px) {
+  .horizontal-scroll-wrapper {
+    justify-content: flex-start !important;
+  }
+
+  .scroll-item {
+    width: 140px !important;
+  }
+
+  .event-button {
+    font-size: 0.875rem !important;
+    padding: 0.5rem !important;
+  }
+}
+
 </style>

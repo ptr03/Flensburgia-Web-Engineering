@@ -102,4 +102,35 @@ onMounted(() => {
 .animate-in {
   animation: fadeInUp 0.6s ease-out forwards;
 }
+.horizontal-scroll-wrapper {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.scroll-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 140px;
+}
+@media (max-width: 768px) {
+  .horizontal-scroll-wrapper {
+    justify-content: flex-start !important;
+  }
+
+  .scroll-item {
+    width: 140px !important;
+  }
+
+  .event-button {
+    font-size: 0.875rem !important;
+    padding: 0.5rem !important;
+  }
+}
+
 </style>
