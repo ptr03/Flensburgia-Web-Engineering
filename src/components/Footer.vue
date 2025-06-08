@@ -1,4 +1,3 @@
-<!-- src/components/Footer.vue -->
 <template>
   <footer class="footer">
     <div class="container footer-content">
@@ -17,11 +16,12 @@
 </template>
 
 <style scoped>
+/* Footer Grundaufbau */
 .footer {
-  background-color: #ffffff; /* Weißer Hintergrund, passend zum restlichen Look */
+  background-color: #ffffff;
   border-top: 1px solid var(--color-border);
   color: var(--color-text-secondary);
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1rem;
   width: 100%;
   flex-shrink: 0;
 }
@@ -33,19 +33,19 @@
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-brand,
 .footer-links {
   flex: 1 1 200px;
-  margin-bottom: 1rem;
 }
 
 .footer-title {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .footer-copy {
@@ -62,21 +62,37 @@
   margin-bottom: 0.5rem;
   transition: color 0.2s ease;
 }
-
 .footer-link:hover {
   color: var(--color-primary);
 }
 
+/* Mobile-Optimierung: Keine Lücken, kompakt */
 @media (max-width: 768px) {
+  .footer {
+    padding: 0.5rem 0.75rem;
+  }
   .footer-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 0 !important;
   }
   .footer-brand,
   .footer-links {
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-title {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .footer-copy {
+    font-size: 0.75rem;
+  }
+  .footer-link {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
   }
 }
 </style>
