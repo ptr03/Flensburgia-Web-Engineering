@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
-    <div class="container">
-      <!-- Desktop‐Links -->
+    <!-- Desktop Navigation (centered, transparent background) -->
+    <div class="desktop-nav">
       <div class="nav-links">
         <router-link
           v-for="link in navLinks"
@@ -14,33 +14,35 @@
           {{ link.name }}
         </router-link>
       </div>
-
-      <!-- Hamburger‐Icon für Mobile -->
-      <button
-        class="menu-toggle"
-        :class="{ active: menuOpen }"
-        @click="toggleMenu"
-        aria-label="Toggle menu"
-      >
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
     </div>
 
-    <!-- Mobile‐Menü -->
-    <div v-if="menuOpen" class="mobile-menu">
-      <router-link
-        v-for="link in navLinks"
-        :key="link.path"
-        :to="link.path"
-        class="mobile-nav-link"
-        active-class="active"
-        exact
-        @click="toggleMenu"
-      >
-        {{ link.name }}
-      </router-link>
+    <!-- Mobile Navigation (drawer only) -->
+    <div class="mobile-nav">
+      <button class="menu-btn" @click="menuOpen = true" aria-label="Menü öffnen">
+        ☰
+      </button>
+      <transition name="slide">
+        <div
+          v-if="menuOpen"
+          class="nav-drawer"
+          @click.self="menuOpen = false"
+        >
+          <div class="drawer-content">
+            <button class="close-btn" @click="menuOpen = false" aria-label="Schließen">
+              &times;
+            </button>
+            <router-link
+              v-for="link in navLinks"
+              :key="link.path"
+              :to="link.path"
+              class="drawer-link"
+              @click="menuOpen = false"
+            >
+              {{ link.name }}
+            </router-link>
+          </div>
+        </div>
+      </transition>
     </div>
   </nav>
 </template>
@@ -49,20 +51,15 @@
 import { ref } from 'vue'
 
 const menuOpen = ref(false)
-
-function toggleMenu() {
-  menuOpen.value = !menuOpen.value
-}
-
 const navLinks = [
-  { name: 'Flensburgia',  path: '/' },
-  { name: 'Sippungsfolge', path: '/sippungsfolge' },
-  { name: 'Events',       path: '/events' },
+  { name: 'Flensburgia',     path: '/' },
+  { name: 'Sippungsfolge',    path: '/sippungsfolge' },
+  { name: 'Events',          path: '/events' },
   { name: 'Die Flensburgen', path: '/die-flensburgen' },
-  { name: 'Dictionary',   path: '/dictionary' },
-  { name: 'Über Uns',     path: '/about' },
-  { name: 'Kontakt',      path: '/contact' },
-  { name: 'Newsletter',   path: '/newsletter' }
+  { name: 'Dictionary',      path: '/dictionary' },
+  { name: 'Über Uns',        path: '/about' },
+  { name: 'Kontakt',         path: '/contact' },
+  { name: 'Newsletter',      path: '/newsletter' }
 ]
 </script>
 
@@ -70,16 +67,18 @@ const navLinks = [
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  padding: 0.75rem 2rem;
-  z-index: 1000;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
   background: transparent;
+  z-index: 1000;
 }
 
-/* --------------------------------
-   Desktop‐Links
-   -------------------------------- */
+/* Desktop Nav */
+.desktop-nav {
+  display: flex;
+}
 .nav-links {
   display: inline-flex;
   gap: 1.5rem;
@@ -88,88 +87,107 @@ const navLinks = [
   padding: 0.5rem 1rem;
   border-radius: 9999px;
 }
-
 .nav-link {
-  position: relative;
-  display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-weight: 600;
   color: #1d1d1f;
   text-decoration: none;
-  transition: background 0.2s ease, opacity 0.2s ease;
+  transition: background 0.2s, opacity 0.2s;
 }
-
 .nav-link:hover,
 .nav-link:focus-visible {
   background: #fff;
   opacity: 0.9;
 }
-
-/* Aktive Route */
 .nav-link.active {
   background: #fff;
 }
 
-/* --------------------------------
-   Hamburger‐Icon (nur Mobile)
-   -------------------------------- */
-.menu-toggle {
+/* Mobile Nav button */
+.mobile-nav {
   display: none;
+}
+.menu-btn {
+  font-size: 1.5rem;
   background: none;
   border: none;
-  margin-left: auto;
+  color: #1d1d1f;
   cursor: pointer;
 }
-.bar {
-  width: 24px;
-  height: 2px;
-  background: #1d1d1f;
-  margin: 4px 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+
+/* Drawer backdrop covers full viewport, solid grey */
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  background: #333;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 2000;
 }
 
-/* --------------------------------
-   Mobile‐Menü
-   -------------------------------- */
+/* Drawer panel covers 100% */
+.drawer-content {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+/* Close button */
+.close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+/* Links in drawer */
+.drawer-link {
+  padding: 1rem 0;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  font-size: 1.25rem;
+}
+.drawer-link:last-of-type {
+  border-bottom: none;
+}
+
+/* Slide-in animation for drawer */
+.slide-enter-from { transform: translateX(-100%); }
+.slide-enter-active { transition: transform 0.3s ease; }
+.slide-leave-to { transform: translateX(-100%); }
+.slide-leave-active { transition: transform 0.3s ease; }
+
+/* Breakpoint */
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
+  /* Hide desktop links, show mobile menu button */
+  .desktop-nav {
+    display: none !important;
   }
-  .menu-toggle {
-    display: block;
+  .mobile-nav {
+    display: flex !important;
   }
 
-  .mobile-menu {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
+  /* Make navbar opaque and left-aligned so the ☰ is visible */
+  .navbar {
+    justify-content: flex-start;
+    background: rgba(82, 51, 31, 0.39) !important;
+    padding: 0.75rem 1rem;
+    z-index: 2000;
   }
-  .mobile-nav-link {
-    position: relative;
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    color: #1d1d1f;
-    text-decoration: none;
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    transition: background 0.2s ease, opacity 0.2s ease;
-  }
-  .mobile-nav-link:hover,
-  .mobile-nav-link:focus-visible {
-    background: #fff;
-    opacity: 0.9;
-  }
-  .mobile-nav-link.active {
-    background: #fff;
+
+  /* Style the menu button in white */
+  .menu-btn {
+    font-size: 1.75rem;
+    color: #fff !important;
   }
 }
 </style>
