@@ -1,16 +1,9 @@
 /**
  * App-Router
- * ----------
- *  • Code-Splitting per Lazy Loading (=> kleinere Start-Bundle-Größe)
- *  • Einheitliche, sprechende Namen
- *  • Sauberes Scroll-Verhalten (behält Position beim History-Navigation,
- *    springt sonst an den Seitenanfang)
  */
 
 import { createRouter, createWebHistory } from 'vue-router'
 
-/* Lazy-Loaded Views — jede Route wird erst geladen,
-   wenn der User sie wirklich aufruft. */
 const HomePage          = () => import('./components/HomePage.vue')
 const AboutPage         = () => import('./components/AboutPage.vue')
 const SippungsfolgePage = () => import('./components/SippungsfolgePage.vue')
@@ -36,8 +29,7 @@ export const routes = [
   { path: '/newsletter',     name: 'Newsletter',    component: NewsletterPage },
   { path: '/events',         name: 'Events',        component: EventPage },
 
-  // Optional (erst erstellen, wenn du eine 404-Seite hast):
-  // { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/components/NotFound.vue') },
+
 ]
 
 const router = createRouter({

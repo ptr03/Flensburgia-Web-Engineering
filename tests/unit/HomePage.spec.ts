@@ -1,27 +1,27 @@
-import { shallowMount } from '@vue/test-utils'
-import HomePage from '@/components/HomePage.vue'
+import { mount, flushPromises } from '@vue/test-utils'
+import HomePage from '@/pages/HomePage.vue'
+import { nextTick } from 'vue'
 
 describe('HomePage.vue', () => {
-  beforeAll(() => {
-    // Stub IntersectionObserver globally for this suite
-    // @ts-ignore
-    window.IntersectionObserver = class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    }
-  })
-
-  it('renders the HeroSection stub', () => {
-    const wrapper = shallowMount(HomePage, {
+  it('renders the HeroSection stub and animates it', async () => {
+    const wrapper = mount(HomePage, {
       global: {
-        stubs: {
-          'hero-section': true,
-          'about-section': true,
-          'router-link': true, // Add this stub for `router-link`
-        },
-      },
+        stubs: { 'HeroSection': true }
+      }
     })
-    expect(wrapper.find('hero-section-stub').exists()).toBe(true)
+
+    // find the stub
+    const heroStub = wrapper.findComponent({ name: 'HeroSection' })
+    expect(heroStub.exists()).toBe(true)
+
+    // it should have animate-target on mount
+    expect(heroStub.classes()).toContain('animate-target')
+    expect(heroStub.classes()).not.toContain('animate-in')
+
+    // after onMounted + IntersectionObserver
+    await nextTick()
+    await flushPromises()
+
+    expect(heroStub.classes()).toContain('animate-in')
   })
 })

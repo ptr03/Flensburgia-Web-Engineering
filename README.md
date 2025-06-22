@@ -76,7 +76,6 @@ Ziel ist es, alle wichtigen Informationen zu Sippungen, Flensburgen, Kontakt und
 │  │   ├─ TimelineSection.vue
 │  │   ├─ TourPage.vue
 │  │   ├─ TourSection.vue
-│  │   └─ (weitere wiederverwendbare Komponenten)
 │  ├─ data/
 │  │   ├─ aktuelles.json
 │  │   ├─ dictionary.json
@@ -186,7 +185,6 @@ Wenn du „Aktuelles“, „Events“ oder andere Daten ändern möchtest, bearb
 
 ---
 
-*Happy Coding!*
 Schlaraffia Flensburgia e. V.
 
 ```

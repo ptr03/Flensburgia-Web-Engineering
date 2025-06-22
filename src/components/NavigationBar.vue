@@ -1,6 +1,9 @@
 <template>
   <nav class="navbar">
-    <!-- Desktop Navigation (centered, transparent background) -->
+    <!-- Clock always here, not inside desktop-nav -->
+    <SchlaraffiaTime class="nav-clock" />
+
+    <!-- Desktop Navigation, hidden on mobile -->
     <div class="desktop-nav">
       <div class="nav-links">
         <router-link
@@ -16,29 +19,17 @@
       </div>
     </div>
 
-    <!-- Mobile Navigation (drawer only) -->
+    <!-- Mobile Menu Button & Drawer -->
     <div class="mobile-nav">
-      <!-- added `menu-toggle` here -->
-      <button
-        class="menu-btn menu-toggle"
-        @click="menuOpen = !menuOpen"
-        aria-label="Menü öffnen"
-      >
-        ☰
-      </button>
+      <button class="menu-btn" @click="menuOpen = !menuOpen">☰</button>
       <transition name="slide">
-        <!-- added `mobile-menu` here -->
         <div
           v-if="menuOpen"
-          class="nav-drawer mobile-menu"
+          class="nav-drawer"
           @click.self="menuOpen = false"
         >
           <div class="drawer-content">
-            <button
-              class="close-btn"
-              @click="menuOpen = false"
-              aria-label="Schließen"
-            >
+            <button class="close-btn" @click="menuOpen = false">
               &times;
             </button>
             <router-link
@@ -59,17 +50,18 @@
 
 <script setup>
 import { ref } from 'vue'
+import SchlaraffiaTime from '../components/SchlaraffiaTime.vue'
 
 const menuOpen = ref(false)
 const navLinks = [
-  { name: 'Flensburgia',     path: '/' },
-  { name: 'Sippungsfolge',    path: '/sippungsfolge' },
-  { name: 'Events',          path: '/events' },
-  { name: 'Die Flensburgen', path: '/die-flensburgen' },
-  { name: 'Dictionary',      path: '/dictionary' },
-  { name: 'Über Uns',        path: '/about' },
-  { name: 'Kontakt',         path: '/contact' },
-  { name: 'Newsletter',      path: '/newsletter' }
+  { name: 'Flensburgia',        path: '/' },
+  { name: 'Sippungsfolge',      path: '/sippungsfolge' },
+  { name: 'Events',             path: '/events' },
+  { name: 'Die Flensburgen',    path: '/die-flensburgen' },
+  { name: 'Dictionary',         path: '/dictionary' },
+  { name: 'Über Uns',           path: '/about' },
+  { name: 'Kontakt',            path: '/contact' },
+  { name: 'Newsletter',         path: '/newsletter' }
 ]
 </script>
 
@@ -78,21 +70,31 @@ const navLinks = [
   position: fixed;
   top: 0; left: 0; right: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 0.75rem 1rem;
   background: transparent;
   z-index: 1000;
 }
 
-/* Desktop Nav */
+/* Clock container — always visible */
+.nav-clock {
+  position: absolute;
+  top: 50%;               
+  right: 1rem;           
+  transform: translateY(-50%);
+  margin-right: 27rem;
+}
+
+/* Desktop nav links */
 .desktop-nav {
+  flex: 1;
   display: flex;
+  justify-content: center;
 }
 .nav-links {
   display: inline-flex;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
   padding: 0.5rem 1rem;
   border-radius: 9999px;
@@ -103,18 +105,13 @@ const navLinks = [
   font-weight: 600;
   color: #1d1d1f;
   text-decoration: none;
-  transition: background 0.2s, opacity 0.2s;
 }
-.nav-link:hover,
-.nav-link:focus-visible {
-  background: #fff;
-  opacity: 0.9;
-}
-.nav-link.active {
+.nav-link.active,
+.nav-link:hover {
   background: #fff;
 }
 
-/* Mobile Nav button */
+/* Mobile nav button */
 .mobile-nav {
   display: none;
 }
@@ -122,72 +119,58 @@ const navLinks = [
   font-size: 1.5rem;
   background: none;
   border: none;
-  color: #1d1d1f;
   cursor: pointer;
 }
 
-/* Drawer backdrop covers full viewport, solid grey */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav {
+    display: block;
+  }
+  .nav-clock {
+    position: fixed !important;
+    top: 0.8rem;
+    right: 0.8rem;
+    margin: 0;
+    z-index: 2000;
+    transform: scale(0.9);
+  }
+}
+
+/* Mobile drawer */
 .nav-drawer {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: #333;
-  display: flex;
-  justify-content: flex-start;
-  z-index: 2000;
+  display: flex; justify-content: flex-start;
+  z-index: 1500;
 }
 .drawer-content {
-  background: transparent;
-  width: 100%;
-  height: 100%;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
+  width: 80%;
+  background: #222; color: #fff;
 }
 .close-btn {
-  align-self: flex-end;
   font-size: 2rem;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  margin-bottom: 1.5rem;
+  background: none; border: none;
+  color: #fff; cursor: pointer;
+  margin-bottom: 1rem;
 }
 .drawer-link {
+  display: block;
   padding: 1rem 0;
   color: #fff;
   text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.2);
-  font-size: 1.25rem;
 }
 .drawer-link:last-of-type {
   border-bottom: none;
 }
 
-/* Slide-in animation for drawer */
+/* Drawer animation */
 .slide-enter-from { transform: translateX(-100%); }
 .slide-enter-active { transition: transform 0.3s ease; }
 .slide-leave-to { transform: translateX(-100%); }
 .slide-leave-active { transition: transform 0.3s ease; }
-
-/* Breakpoint */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  .mobile-nav {
-    display: flex !important;
-  }
-  .navbar {
-    justify-content: flex-start;
-    background: rgba(82, 51, 31, 0.39) !important;
-    padding: 0.75rem 1rem;
-    z-index: 2000;
-    right: 83%;
-  }
-  .menu-btn {
-    font-size: 1.75rem;
-    color: #fff !important;
-  }
-}
 </style>
