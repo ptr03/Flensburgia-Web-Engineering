@@ -87,10 +87,11 @@ const schlaraffiaDate = computed(() => {
   padding: 0.2em 0.5em;
   border-radius: 4px;
   background: rgba(14,165,233,0.2);
+  font-weight: 600;
 }
 
 .time {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .info-icon {
