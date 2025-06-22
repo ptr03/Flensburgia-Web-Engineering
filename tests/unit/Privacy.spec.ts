@@ -1,5 +1,5 @@
 import { mount, flushPromises } from '@vue/test-utils'
-import Privacy from '@/components/Privacy.vue'
+import Privacy from '../../src/components/Privacy.vue'
 
 describe('Privacy.vue', () => {
   it('renders hero title and applies animate-in class on mount', async () => {

@@ -1,6 +1,7 @@
-import { mount, flushPromises } from '@vue/test-utils'
-import HeroSection from '@/components/HeroSection.vue'
+import { mount } from '@vue/test-utils'
+import HeroSection from '../../src/components/HeroSection.vue'
 import { nextTick } from 'vue'
+import { vi } from 'vitest'
 
 describe('HeroSection.vue', () => {
   it('renders title and subtitle and animates them on mount', async () => {
@@ -8,23 +9,33 @@ describe('HeroSection.vue', () => {
       props: {
         title: 'Mein Heldentitel',
         subtitle: 'Untertitel hier'
-      }
+      },
+      global: {
+        stubs: {
+          Info: true,
+          List: true,
+          PhoneCall: true,
+          RouterLink: true
+        }
+      },
+      attachTo: document.body
     })
 
-    const h1 = wrapper.find('h1')
-    const p  = wrapper.find('p')
+    const h1 = wrapper.find('.hero-title')
+    const h2 = wrapper.find('.welcome-text')
 
+    // Initial state
     expect(h1.text()).toBe('Mein Heldentitel')
-    expect(p.text()).toBe('Untertitel hier')
-
-    // starts with animate-target only
-    expect(h1.classes()).toContain('animate-target')
+    expect(h2.text()).toBe('Untertitel hier')
     expect(h1.classes()).not.toContain('animate-in')
+    expect(h2.classes()).not.toContain('animate-in')
 
+    // Instead of manually calling setup, let Vue handle the lifecycle
     await nextTick()
-    await flushPromises()
-
+    await new Promise(resolve => setTimeout(resolve, 100)) // Short delay
+    
+    // Check classes after animation
     expect(h1.classes()).toContain('animate-in')
-    expect(p.classes()).toContain('animate-in')
+    expect(h2.classes()).toContain('animate-in')
   })
 })

@@ -21,7 +21,7 @@
 
     <!-- Mobile Menu Button & Drawer -->
     <div class="mobile-nav">
-      <button class="menu-btn" @click="menuOpen = !menuOpen">☰</button>
+      <button class="menu-btn" aria-label="Menü öffnen" @click="menuOpen = !menuOpen">☰ </button>
       <transition name="slide">
         <div
           v-if="menuOpen"

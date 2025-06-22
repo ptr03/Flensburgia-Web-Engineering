@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import Footer from '@/components/Footer.vue'
+import Footer from '../../src/components/Footer.vue'
 import { describe, it, expect } from 'vitest'
 import { RouterLinkStub } from '@vue/test-utils'
 

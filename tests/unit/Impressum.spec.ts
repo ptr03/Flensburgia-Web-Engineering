@@ -1,7 +1,7 @@
 // tests/unit/Impressum.spec.ts
 import { mount, flushPromises } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import Impressum from '@/components/Impressum.vue'
+import Impressum from '../../src/components/Impressum.vue'
 
 describe('Impressum.vue', () => {
   it('renders hero title and applies animate-in class on mount', async () => {

@@ -94,6 +94,8 @@ const upcomingEvents = ref(allEvents.value.slice(0, 3))
 
 // IntersectionObserver für Scroll-Animation
 onMounted(() => {
+  if (typeof IntersectionObserver === 'undefined') return // Add this line
+  
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -104,6 +106,7 @@ onMounted(() => {
     },
     { threshold: 0.1 }
   )
+  
   document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
 })
 </script>

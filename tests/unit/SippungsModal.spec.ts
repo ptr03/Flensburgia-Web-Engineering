@@ -1,7 +1,7 @@
 // tests/unit/SippungsModal.spec.ts
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import SippungsModal from '@/components/SippungsModal.vue'
+import SippungsModal from '../../src/components/SippungsModal.vue'
 
 describe('SippungsModal.vue', () => {
   const baseProps = {

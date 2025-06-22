@@ -1,6 +1,6 @@
 // tests/unit/FlensburgenSection.spec.ts
 import { mount, flushPromises } from '@vue/test-utils'
-import FlensburgenSection from '@/components/FlensburgenSection.vue'
+import FlensburgenSection from '../../src/components/FlensburgenSection.vue'
 
 // @ts-ignore: no types for markdown-it
 import MarkdownIt from 'markdown-it'

@@ -6,8 +6,8 @@
   >
     <!-- Animated Title -->
     <div class="content-wrapper">
-      <h1 class="hero-title">Schlaraffia Flensburgia</h1>
-      <h2 class="welcome-text">Ein herzliches Willekum</h2>
+      <h1 class="hero-title">{{ title }}</h1>
+      <h2 class="welcome-text">{{ subtitle }}</h2>
     </div>
 
     <!-- Button Grid overlapping next section -->
@@ -30,25 +30,48 @@
   </section>
 </template>
 
-<script setup>
+<script>
+import { defineComponent, onMounted, nextTick } from 'vue'
+import { RouterLink } from 'vue-router'
 import heroBg from '../assets/pictures/3.jpeg'
 import { Info, List, PhoneCall } from 'lucide-vue-next'
-import { onMounted, nextTick } from 'vue'
 
-onMounted(() => {
-  nextTick(() => {
-    const title = document.querySelector('.hero-title')
-    const subtitle = document.querySelector('.welcome-text')
-    const buttons = document.querySelectorAll('.grid-button')
-    if (title && subtitle) {
-      title.classList.add('animate-in')
-      subtitle.classList.add('animate-in')
+export default defineComponent({
+  name: 'HeroSection',
+  components: {
+    RouterLink,
+    Info,
+    List,
+    PhoneCall
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'Schlaraffia Flensburgia'
+    },
+    subtitle: {
+      type: String,
+      default: 'Ein herzliches Willekum'
     }
-    buttons.forEach((btn, i) => {
-      btn.classList.add('hidden-btn')
-      setTimeout(() => btn.classList.add('animate-btn'), 800 + i * 200)
+  },
+  setup() {
+    onMounted(() => {
+      nextTick(() => {
+        const titleEl = document.querySelector('.hero-title')
+        const subtitleEl = document.querySelector('.welcome-text')
+        const buttons = document.querySelectorAll('.grid-button')
+        if (titleEl) titleEl.classList.add('animate-in')
+        if (subtitleEl) subtitleEl.classList.add('animate-in')
+        buttons.forEach((btn, i) => {
+          btn.classList.add('hidden-btn')
+          setTimeout(() => btn.classList.add('animate-btn'), 800 + i * 200)
+        })
+      })
     })
-  })
+    return {
+      heroBg
+    }
+  }
 })
 </script>
 

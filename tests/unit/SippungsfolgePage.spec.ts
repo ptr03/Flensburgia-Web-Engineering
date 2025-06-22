@@ -7,8 +7,8 @@
 }
 
 import { mount, flushPromises } from '@vue/test-utils'
-import SippungsfolgePage from '@/components/SippungsfolgePage.vue'
-import SippungsfolgeSection from '@/components/SippungsfolgeSection.vue'
+import SippungsfolgePage from '../../src/components/SippungsfolgePage.vue'
+import SippungsfolgeSection from '../../src/components/SippungsfolgeSection.vue'
 
 // Stub the Calendar icon
 vi.mock('lucide-vue-next', () => ({

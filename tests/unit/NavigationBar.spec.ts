@@ -1,6 +1,6 @@
 // tests/unit/NavigationBar.spec.ts
 import { mount, RouterLinkStub } from '@vue/test-utils'
-import NavigationBar from '@/components/NavigationBar.vue'
+import NavigationBar from '../../src/components/NavigationBar.vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { defineComponent } from 'vue'
 
@@ -54,32 +54,34 @@ describe('NavigationBar.vue', () => {
     })
   })
 
-  it('mobile menu is hidden by default, then toggles open/closed on button click', async () => {
+   it('mobile menu is hidden by default, then toggles open/closed on button click', async () => {
     const wrapper = mountNav()
-    // drawer should not exist initially
-    expect(wrapper.find('.mobile-menu').exists()).toBe(false)
+    
+    // Drawer should not exist initially
+    expect(wrapper.find('.nav-drawer').exists()).toBe(false)
 
-    // click to open
-    await wrapper.find('.menu-toggle').trigger('click')
-    expect(wrapper.find('.mobile-menu').exists()).toBe(true)
+    // Click to open
+    await wrapper.find('.menu-btn').trigger('click')
+    expect(wrapper.find('.nav-drawer').exists()).toBe(true)
 
-    // click again to close
-    await wrapper.find('.menu-toggle').trigger('click')
-    expect(wrapper.find('.mobile-menu').exists()).toBe(false)
+    // Click again to close
+    await wrapper.find('.menu-btn').trigger('click')
+    expect(wrapper.find('.nav-drawer').exists()).toBe(false)
   })
 
   it('clicking a drawer link closes the mobile menu', async () => {
     const wrapper = mountNav()
-    // open drawer
-    await wrapper.find('.menu-toggle').trigger('click')
-    expect(wrapper.find('.mobile-menu').exists()).toBe(true)
+    
+    // Open drawer
+    await wrapper.find('.menu-btn').trigger('click')
+    expect(wrapper.find('.nav-drawer').exists()).toBe(true)
 
-    // click on the first drawer link
+    // Click on the first drawer link
     const firstDrawerLink = wrapper.findAll('.drawer-link')[0]
     await firstDrawerLink.trigger('click')
 
-    // menu should now be closed
-    expect(wrapper.find('.mobile-menu').exists()).toBe(false)
+    // Menu should now be closed
+    expect(wrapper.find('.nav-drawer').exists()).toBe(false)
   })
 
   it('passes active-class="active" to each nav-link stub', () => {

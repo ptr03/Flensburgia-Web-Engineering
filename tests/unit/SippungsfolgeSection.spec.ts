@@ -7,11 +7,11 @@
 }
 
 import { mount, flushPromises } from '@vue/test-utils'
-import SippungsfolgeSection from '@/components/SippungsfolgeSection.vue'
-import SippungsModal from '@/components/SippungsModal.vue'
+import SippungsfolgeSection from '../../src/components/SippungsfolgeSection.vue'
+import SippungsModal from '../../src/components/SippungsModal.vue'
 
 // Mock the JSON data import
-vi.mock('@/data/sippungsfolge.json', () => ({
+vi.mock('../../src/data/sippungsfolge.json', () => ({
   default: [
     { id: '1', date: '10.04.2025', title: 'April-Treffen' },
     { id: '2', date: '15.05.2025', title: 'Mai-Zunft' }
@@ -19,7 +19,7 @@ vi.mock('@/data/sippungsfolge.json', () => ({
 }))
 
 // Stub out the modal child
-vi.mock('@/components/SippungsModal.vue', () => ({
+vi.mock('../../src/components/SippungsModal.vue', () => ({
   default: { name: 'SippungsModal', render: () => null }
 }))
 

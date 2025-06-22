@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import NewsletterSection from '@/components/NewsletterSection.vue'
+import NewsletterSection from '../../src/components/NewsletterSection.vue'
 import { describe, it, expect } from 'vitest'
 import { nextTick } from 'vue'
 

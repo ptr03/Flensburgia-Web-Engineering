@@ -20,6 +20,20 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
 </script>
 
 <style scoped>
+.section-title{
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(to right, #0ea5e9, #0369a1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  margin-top: 5%;
+}
 .flensburgen-page {
   display: flex;
   flex-direction: column;
@@ -86,6 +100,11 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .flense-hero .content-wrapper {
+    margin-top: 3rem;
   }
 }
 </style>

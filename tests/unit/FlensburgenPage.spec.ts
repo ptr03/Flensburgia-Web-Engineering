@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import FlensburgenPage from '@/components/FlensburgenPage.vue'
-import FlensburgenSection from '@/components/FlensburgenSection.vue'
+import FlensburgenPage from '../../src/components/FlensburgenPage.vue'
+import FlensburgenSection from '../../src/components/FlensburgenSection.vue'
 
 // stub out the SVG-icons
 vi.mock('lucide-vue-next', () => ({

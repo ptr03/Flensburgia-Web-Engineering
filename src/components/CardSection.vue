@@ -41,24 +41,27 @@ const cards = [
   { title: 'Tour', description: 'Discover guided experiences of cultural landmarks', route: '/tour', icon: Map }
 ]
 
-// Referenz auf das Section-Element für Intersection Observer
-const sectionRef = ref<HTMLElement|null>(null)
+const sectionRef = ref(null);
 
 // Intersection Observer für Fade-In Animation der Karten
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
+  if (!sectionRef.value) return // Add this check
+  
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
 
-  if (sectionRef.value) {
-    sectionRef.value
-      .querySelectorAll<HTMLElement>('.card')
-      .forEach(cardEl => observer.observe(cardEl))
-  }
+  sectionRef.value
+    .querySelectorAll('.card')
+    .forEach(cardEl => observer.observe(cardEl))
 })
 </script>
 
@@ -168,24 +171,6 @@ onMounted(() => {
 .card:hover .card-action {
   gap: 1rem;
 }
-
-/* =====================================
-   Dunkles Farbschema (dark mode)
-   ===================================== 
-@media (prefers-color-scheme: dark) {
-  .card-section {
-    background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
-  }
-  .card {
-    background: rgba(28, 28, 30, 0.8);
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-  .card-title { color: #ffffff; }
-  .card-description { color: rgba(255, 255, 255, 0.75); }
-  .card-icon { color: #2997ff; }
-  .card-action { color: #2997ff; }
-}*/
-
 /* =====================================
    Responsive Anpassungen für Mobilgeräte
    ===================================== */

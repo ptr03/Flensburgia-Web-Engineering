@@ -9,7 +9,7 @@
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import { vi } from 'vitest'
-import ContactPage from '@/components/ContactPage.vue'
+import ContactPage from '../../src/components/ContactPage.vue'
 
 describe('ContactPage.vue', () => {
   let wrapper: ReturnType<typeof mount>

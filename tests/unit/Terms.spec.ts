@@ -1,5 +1,5 @@
 import { mount, flushPromises, RouterLinkStub } from '@vue/test-utils'
-import Terms from '@/components/Terms.vue'
+import Terms from '../../src/components/Terms.vue'
 
 describe('Terms.vue', () => {
   it('renders the hero title and applies animate-in on mount', async () => {
