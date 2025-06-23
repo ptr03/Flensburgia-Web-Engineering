@@ -3,9 +3,10 @@
     <!-- Obere Kategorie-Buttons: Sassen, Röde Grütt, Erz- & Ehrenschlaraffen, Windjammer -->
     <div class="category-grid">
       <button
-        v-for="cat in categories"
+        v-for="(cat, index) in categories"
         :key="cat.id"
         class="category-button"
+        :style="{ animationDelay: `${index * 0.1}s` }"
         @click="openModal(cat.id)"
       >
         <component :is="cat.icon" class="category-icon" />
@@ -319,19 +320,7 @@ function getImage(path) {
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-.category-button:nth-child(1) {
-  animation-delay: 0.6s;
-}
-.category-button:nth-child(2) {
-  animation-delay: 0.7s;
-}
-.category-button:nth-child(3) {
-  animation-delay: 0.8s;
-}
-.category-button:nth-child(4) {
-  animation-delay: 0.9s;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 .category-button:hover {
   background: #e0e0e0;
@@ -364,7 +353,7 @@ function getImage(path) {
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  animation: zoomIn 0.4s ease-out;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 .modal-content.compact {
   max-width: fit-content;
@@ -386,7 +375,7 @@ function getImage(path) {
 /* =========================== */
 /* Fade & Zoom Keyframes        */
 /* =========================== */
-@keyframes fadeInUp {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -396,24 +385,14 @@ function getImage(path) {
     transform: translateY(0);
   }
 }
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
