@@ -65,11 +65,9 @@ Diese Anwendung basiert auf [Vite](https://vitejs.dev/) und [Vue 3](https://vuej
 │  │   ├─ aktuelles.json             # Aktuelle Hinweise
 │  │   ├─ dictionary.json            # Glossar (Begriffe)
 │  │   ├─ events.json                # Events und Termine
-│  │   ├─ flensburgen.json           # Beschreibungen der Flensburgen
+│  │   ├─ flensburgen.json           # Flensburger Beschreibungen
 │  │   ├─ rodeGruetteText.md         # Text Röde Grütt
 │  │   ├─ sippungsfolge.json         # Sippungsfolge
-│  │   ├─ timeline.json              # Historische Meilensteine
-│  │   ├─ tour-stops.json            # Tour‑Stops (falls verwendet)
 │  │   └─ windjammerText.md          # Text Windjammerorden
 │  ├─ App.vue
 │  ├─ main.js

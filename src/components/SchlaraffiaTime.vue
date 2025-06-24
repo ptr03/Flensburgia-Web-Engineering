@@ -51,26 +51,32 @@ const schlaraffiaDate = computed(() => {
 </script>
 
 <style scoped>
-.schlaraffia-time {
+.navbar{
   position: relative;
+}
+.schlaraffia-time {
+  position:absolute;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0em;                             
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
-  padding: 0.8em 1.4em;                
+  padding: 0.8em 1.2em;                
   border-radius: 9999px;
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   color: #1d1d1f;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  top: 50%;               
+  transform: translateY(-50%);
+  right: 3.2rem;
 }
 
 .label {
   font-weight: 600;
   color: #0369a1;
-  margin-right: 0.2em;                 
+  margin-right: 0.4em;                 
 }
 
 .datetime-row {
@@ -127,9 +133,9 @@ const schlaraffiaDate = computed(() => {
     padding: 0.6em 1.2em;
     min-width: 140px;
     font-size: 0.8rem;
-    position: fixed !important;
+    position: absolute;
     top: 0.8rem;
-    right: 0.8rem;
+    right: 2rem;
     z-index: 2000;
   }
   .label {
