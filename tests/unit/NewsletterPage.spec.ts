@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import NewsletterPage from '../../src/components/NewsletterPage.vue' // Updated path
+import NewsletterPage from '../../src/components/NewsletterPage.vue'
 import NewsletterSection from '../../src/components/NewsletterSection.vue'
 import { describe, it, expect } from 'vitest'
 

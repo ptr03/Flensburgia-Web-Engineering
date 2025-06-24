@@ -1,41 +1,40 @@
 # Schlaraffia Flensburgia – Vereinswebsite
 
-**Beschreibung**
-Dies ist die offizielle Vereinswebsite der Schlaraffia Flensburgia e. V. (Flensburg).
-Sie basiert auf [Vite](https://vitejs.dev/) und [Vue 3](https://vuejs.org/).
-Ziel ist es, alle wichtigen Informationen zu Sippungen, Flensburgen, Kontakt und Rechtlichem übersichtlich bereitzustellen.
+**Offizielle Website der Schlaraffia Flensburgia e. V. (Flensburg)**
+
+Diese Anwendung basiert auf [Vite](https://vitejs.dev/) und [Vue 3](https://vuejs.org/) und dient zur übersichtlichen Darstellung aller Vereins‑Inhalte: Sippungsfolgen, Flensburgen, Events, Glossar und rechtliche Informationen.
 
 ---
 
 ## 🚀 Lokales Setup
 
-1. Repository klonen:
+1. **Repository klonen**
 
+   ```bash
+   git clone https://github.com/ptr03/Flensburgia-Web-Engineering.git
+   cd Flensburgia-Web-Engineering
    ```
-   git clone <URL-zum-Repo>
-   cd <dein-repo-ordner>
-   ```
-2. Abhängigkeiten installieren:
+2. **Abhängigkeiten installieren**
 
-   ```
+   ```bash
    npm install
    ```
-3. Entwicklungsserver starten:
+3. **Entwicklungsserver starten**
 
-   ```
+   ```bash
    npm run dev
    ```
 
-   Danach ist die Seite unter `http://localhost:3000` erreichbar (Port kann variieren).
-4. Build für Produktion:
+   Nach dem Start ist die Seite unter `http://localhost:3000` erreichbar.
+4. **Build für Produktion**
 
-   ```
+   ```bash
    npm run build
    ```
 
 ---
 
-## 📁 Ordnerstruktur
+## 📁 Projektstruktur
 
 ```
 .
@@ -45,52 +44,37 @@ Ziel ist es, alle wichtigen Informationen zu Sippungen, Flensburgen, Kontakt und
 │   └─ vite.svg
 ├─ src/
 │  ├─ assets/
-│  │  ├─ icons/
 │  │  └─ pictures/
+│  │     ├─ events/
+│  │     │  └─ kaffeklatsch.png       # Beispiel-Event-Bild
 │  │     ├─ flensburgen/
-│  │     │  └─ (Bilder für Flensburgen-Section)
-│  │     ├─ sippungen/
-│  │     │  └─ (Bilder für Sippungsfolge-Section)
-│  ├─ components/
+│  │     │  ├─ Ehrenschlarraffen/
+│  │     │  ├─ Erzschlaraffen/
+│  │     │  └─ Sassen/
+│  │     └─ sippungen/
+│  │        ├─ 3178.jpg
+│  │        ├─ 3179.jpg
+│  │        ├─ 3184.jpg
+│  │        ├─ 3185.jpg
+│  │        └─ placeholder.jpg        # Platzhalter-Bild
+│  ├─ components/                    # Vue-Komponenten
 │  │   ├─ AboutPage.vue
-│  │   ├─ AboutSection.vue
-│  │   ├─ CardSection.vue
-│  │   ├─ ContactPage.vue
-│  │   ├─ DictionaryPage.vue
-│  │   ├─ DictionarySection.vue
-│  │   ├─ EventSection.vue
-│  │   ├─ FlensburgenPage.vue
-│  │   ├─ FlensburgenSection.vue
-│  │   ├─ Footer.vue
-│  │   ├─ HeroSection.vue
-│  │   ├─ HomePage.vue
-│  │   ├─ Impressum.vue
-│  │   ├─ NavigationBar.vue
-│  │   ├─ NewsletterSection.vue
-│  │   ├─ Privacy.vue
-│  │   ├─ SippungsfolgePage.vue
 │  │   ├─ SippungsfolgeSection.vue
-│  │   ├─ SippungsModal.vue
-│  │   ├─ Terms.vue
-│  │   ├─ TimelinePage.vue
-│  │   ├─ TimelineSection.vue
-│  │   ├─ TourPage.vue
-│  │   ├─ TourSection.vue
-│  ├─ data/
-│  │   ├─ aktuelles.json
-│  │   ├─ dictionary.json
-│  │   ├─ events.json
-│  │   ├─ flensburgen.json
-│  │   ├─ rodeGruetteText.md
-│  │   ├─ sippungsfolge.json
-│  │   ├─ timeline.json
-│  │   ├─ tour-stops.json
-│  │   └─ windjammerText.md
+│  │   └─ ...
+│  ├─ data/                          # JSON‑ und Markdown‑Inhalte
+│  │   ├─ aktuelles.json             # Aktuelle Hinweise
+│  │   ├─ dictionary.json            # Glossar (Begriffe)
+│  │   ├─ events.json                # Events und Termine
+│  │   ├─ flensburgen.json           # Beschreibungen der Flensburgen
+│  │   ├─ rodeGruetteText.md         # Text Röde Grütt
+│  │   ├─ sippungsfolge.json         # Sippungsfolge
+│  │   ├─ timeline.json              # Historische Meilensteine
+│  │   ├─ tour-stops.json            # Tour‑Stops (falls verwendet)
+│  │   └─ windjammerText.md          # Text Windjammerorden
 │  ├─ App.vue
 │  ├─ main.js
-│  ├─ router.js
-│  └─ style.css
-├─ README.md
+│  ├─ router.js                      # Routen-Definitionen
+│  └─ style.css                      # Globale Styles
 ├─ index.html
 ├─ package.json
 ├─ package-lock.json
@@ -99,93 +83,95 @@ Ziel ist es, alle wichtigen Informationen zu Sippungen, Flensburgen, Kontakt und
 
 ---
 
-## 🔧 Arbeiten mit JSON-Daten
+## 🔧 Arbeiten mit JSON‑Daten
 
-* **`src/data/aktuelles.json`**
-  Liste der „Aktuelles“-Texte. Beispielstruktur:
+Die Anwendung lädt Inhalte dynamisch aus `src/data/`. Beispiele:
 
-  ```json
-  [
-    { "id": 1, "text": "Aktueller Hinweis 1" },
-    { "id": 2, "text": "Aktueller Hinweis 2" }
-  ]
-  ```
-* **`src/data/events.json`**
-  Kommende Veranstaltungen. Beispiel:
+### `src/data/aktuelles.json`
 
-  ```json
-  [
-    {
-      "id": 1,
-      "date": "15. Oktober 2024",
-      "title": "Kulturerbe-Symposium",
-      "excerpt": "Beschreibung..."
-    },
-    {
-      "id": 2,
-      "date": "2.–4. November 2024",
-      "title": "Traditionelles Kunstfestival",
-      "excerpt": "Beschreibung..."
-    }
-  ]
-  ```
-* **`src/data/flensburgen.json`**
-  Datenstruktur für Flensburgen-Section (IDs, Namen, Bilddateinamen).
-* **`src/data/sippungsfolge.json`**
-  Alle Sippungs-Termine (Datum, Titel, Beschreibung, ID).
-* **`src/data/timeline.json`**
-  Einträge für die historische Timeline (Jahr + Beschreibung).
-* **`src/data/tour-stops.json`**
-  Daten für Tour-Seite (Stops, Beschreibungen, Koordinaten usw.).
-* **`src/data/rodeGruetteText.md`** / **`src/data/windjammerText.md`**
-  Markdown-Texte für Flensburgen-Section (Röde Grütt bzw. Windjammerorden).
+```json
+[
+  {
+    "id": 1,
+    "text": "Aktuelle Bilder der letzten Sippung in dieser Winterung."
+  }
+]
+```
 
-Wenn du „Aktuelles“, „Events“ oder andere Daten ändern möchtest, bearbeite einfach die entsprechende JSON-Datei im Ordner `src/data/`.
+### `src/data/dictionary.json`
+
+```json
+{
+  "term": "Minnegabe",
+  "definition": "Eine künstlerische Gabe, z. B. ein Gedicht, ein Lied oder ein Kunstwerk, das ein Schlaraffe einem anderen bei einem besonderen Anlass überreicht. Ausdruck von Wertschätzung und Freundschaft.",
+  "kategorie": "Tradition",
+  "beispiel": "Als Zeichen der Anerkennung überreichte Rt Poeta seinem Burgmeister eine selbstverfasste Minnegabe.",
+  "herkunft": "Mittelhochdeutsch „minne“ (Liebe) und „Gabe“"
+}
+```
+
+### `src/data/events.json`
+
+```json
+[
+  {
+    "id": "event3",
+    "date": "2025-08-10",
+    "title": "Sommerfest der Schlaraffen",
+    "description": "Festliche Tafel mit Grillgut, Bier und geselligem Umtrunk im Freien.",
+    "image": "sommerfest.png"
+  }
+]
+```
+
+### `src/data/sippungsfolge.json`
+
+```json
+[
+  {
+    "id": 3158,
+    "date": "10.10.2024",
+    "title": "Eröffnungsschlaraffiade und JMV"
+  }
+]
+```
+
+Weitere Dateien (`flensburgen.json`, `timeline.json` etc.) folgen ähnlicher Struktur. Markdown‑Texte für ausführliche Beschreibungen liegen als `.md` vor.
 
 ---
 
 ## 🔍 Routenübersicht
 
-* `/` → **HomePage.vue**
-* `/about` → **AboutPage.vue**
-* `/sippungsfolge` → **SippungsfolgePage.vue**
-* `/die-flensburgen` → **FlensburgenPage.vue**
-* `/dictionary` → **DictionaryPage.vue**
-* `/contact` → **ContactPage.vue**
-* `/impressum` → **Impressum.vue**
-* `/terms` → **Terms.vue**
-* `/privacy` → **Privacy.vue**
+| Route              | Komponente              |
+| ------------------ | ----------------------- |
+| `/`                | `HomePage.vue`          |
+| `/about`           | `AboutPage.vue`         |
+| `/sippungsfolge`   | `SippungsfolgePage.vue` |
+| `/die-flensburgen` | `FlensburgenPage.vue`   |
+| `/dictionary`      | `DictionaryPage.vue`    |
+| `/contact`         | `ContactPage.vue`       |
+| `/impressum`       | `Impressum.vue`         |
+| `/terms`           | `Terms.vue`             |
+| `/privacy`         | `Privacy.vue`           |
 
 ---
 
 ## 👩🏻‍💻 Hinweise für Entwickler
 
-* **Globale CSS-Variablen** findest du in `src/style.css`. Farben, Abstände, Schatten und Radii sind dort definiert.
-* **Fade-In-Animationen**: Fast jede Seite verwendet die Klassen `.animate-target` + `.animate-in`. Beispiel im Script:
-
-  ```js
-  onMounted(() => {
-    nextTick(() => {
-      document.querySelectorAll('.animate-target')
-        .forEach(el => el.classList.add('animate-in'))
-    })
-  })
-  ```
-* **Responsive Design**: Media Queries in den scoped-Styles; mobiles Menü in `NavigationBar.vue`.
-* **Image-Loading**: Bilder unter `src/assets/pictures/...` werden mit `import.meta.glob` automatisch eingebunden.
+* **Globale Styles & Variablen**: `src/style.css` enthält CSS‑Variablen für Farben, Abstände, Schatten und Radii.
+* **Animationen**: Elemente mit `.animate-target` erhalten beim Mounten die Klasse `.animate-in`.
+* **Responsive Design**: Mobile Navigation in `NavigationBar.vue`, Media Queries in Scoped-Styles.
+* **Bild-Loading**: `import.meta.glob` lädt alle Bilder aus `src/assets/pictures`.
 
 ---
 
-## 📈 Ausblick / To-Do
+## 📈 Ausblick / To‑Do
 
-* Backend-Anbindung für das Kontaktformular (E-Mail-Service oder Serverless-API).
-* Endgültige Rechtstexte (von Juristen prüfen lassen).
-* Erweiterung um Mitgliederbereich, Mitgliederliste oder passwortgeschützte Bereiche.
-* Fotos-Galerie oder Event-Archiv erweitern.
+* Backend‑Anbindung für Kontaktformular (Serverless/API).
+* Juristische Prüfung der Rechtstexte.
+* Mitgliederbereich / Passwortschutz.
+* Erweiterte Event‑Galerie und Archiv.
 
 ---
 
-Schlaraffia Flensburgia e. V.
-
-```
-```
+© Schlaraffia Flensburgia e. V.
