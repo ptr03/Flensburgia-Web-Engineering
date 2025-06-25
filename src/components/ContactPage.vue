@@ -73,14 +73,11 @@ export default defineComponent({
     }
   },
   methods: {
-    // Formular-Absende-Logik (Form Submission Logic)
     submitForm() {
       this.success = true
-      // Felder zurücksetzen (Clear fields)
       this.form.name = ''
       this.form.email = ''
       this.form.message = ''
-      // Erfolgsmeldung nach 5 Sekunden ausblenden (Hide success message after 5s)
       setTimeout(() => { this.success = false }, 5000)
     }
   },

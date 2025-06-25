@@ -14,7 +14,6 @@
       </button>
     </div>
 
-    <!-- OUTER TRANSITION REMOVED TO ENSURE IMMEDIATE REMOVAL -->
     <div v-if="activeId" class="modal-overlay" @click.self="closeModal">
       <div
         class="modal-content"

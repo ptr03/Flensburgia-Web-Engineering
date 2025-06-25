@@ -76,7 +76,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Fade in entire hero background */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -87,15 +86,12 @@ export default defineComponent({
   justify-content: center;
   overflow: visible;
 
-  /* start hidden and shifted downward */
   opacity: 0;
   transform: translateY(30px);
 
-  /* slide up & fade in, starting after 1s */
   animation: fadeInBg 0.6s ease-out 0s forwards;
 }
 
-/* Keyframes for background fade-in */
 @keyframes fadeInBg {
   from {
     opacity: 0;
@@ -117,7 +113,6 @@ export default defineComponent({
   animation: fadeInOverlay 0.6s ease-out 0.1s forwards;
 }
 
-/* Overlay fade-in delayed to appear after background */
 @keyframes fadeInOverlay {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -130,20 +125,16 @@ export default defineComponent({
   color: #fff;
 }
 
-/* Hidden initial state for text */
 .hero-title,
 .welcome-text {
   opacity: 0;
   transform: translateY(30px);
 }
 
-/* Animate in for text */
 .animate-in {
   animation: fadeInUp 0.8s forwards;
 }
 
-/* Keyframes for text fade-in */
-/* Keyframes for text fade-in */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -168,7 +159,6 @@ export default defineComponent({
   animation-delay: 0.5s;
 }
 
-/* Button grid overlapping next section */
 .button-grid {
   position: absolute;
   bottom: 1.5rem;
@@ -191,20 +181,17 @@ export default defineComponent({
   transform: translateY(0);
 }
 
-/* Hidden initial state for buttons */
 .hidden-btn {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease;
 }
 
-/* Animate-in for buttons */
 .animate-btn {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
-/* Button styles */
 .grid-button {
   display: flex;
   flex-direction: column;
@@ -236,7 +223,6 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
-  /* Push title and subtitle higher on mobile */
   .hero-section {
     align-items: flex-start;
     padding-top: 20vh;
@@ -244,7 +230,6 @@ export default defineComponent({
   .content-wrapper {
     transform: none;
   }
-  /* Keep three buttons in a row, but smaller */
   .button-grid {
     grid-template-columns: repeat(3, 1fr);
     bottom: 10rem;
@@ -269,12 +254,12 @@ export default defineComponent({
   }
 
   .stat-title {
-    font-size: 0.875rem; /* kleiner */
+    font-size: 0.875rem; 
     margin-bottom: 0.25rem;
   }
 
   .stat-value {
-    font-size: 1.25rem;  /* kleiner */
+    font-size: 1.25rem;  
   }
 
   .stat-icon {

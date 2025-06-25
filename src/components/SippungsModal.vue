@@ -82,7 +82,7 @@ function closeZoom() {
 }
 
 .modal {
-  position: relative; /* Damit der .close Button sich auf die Modal bezieht */
+  position: relative; 
   max-width: 800px;
   width: 90%;
   max-height: 90vh;

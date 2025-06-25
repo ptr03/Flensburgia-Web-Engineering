@@ -5,18 +5,15 @@
     <!-- 1) LANDING VIEW          -->
     <!-- ========================= -->
     <div v-if="view === 'landing'" class="landing-view">
-      <!-- 1.1) Großes Title -->
       <h1 class="landing-title animate-fade-in">
         Schlaraffisches Wörterbuch
       </h1>
 
-      <!-- 1.2) Größere Beschreibung -->
       <p class="landing-desc animate-fade-in delay-200">
         Entdecke unsere umfassende Sammlung schlaraffischer Begriffe,<br />
         Traditionen und Hintergründe.
       </p>
 
-      <!-- 1.3) Zwei große Buttons (fade-in ver­zögert) -->
       <div class="landing-buttons animate-fade-in delay-400">
         <button @click="goToCategories" class="landing-btn">
           Kategorien
@@ -26,7 +23,6 @@
         </button>
       </div>
 
-      <!-- 1.4) Landing-Suche direkt unter den Buttons -->
       <div class="landing-search animate-fade-in delay-600">
         <input
           v-model="landingSearch"
@@ -60,7 +56,6 @@
               </svg>
             </span>
           </div>
-          <!-- aufgeklappter Bereich -->
    <transition name="expand">
      <div v-if="expandedTerm === entry.term" class="card-content">
        <p>{{ entry.definition }}</p>
@@ -72,7 +67,7 @@
         </div>
       </div>
 
-      <!-- 1.5) Zufälliger Begriff – Vorschau  -->
+      <!-- Zufälliger Begriff – Vorschau  -->
       <div v-if="randomEntry" class="random-preview animate-fade-in delay-600">
         <h2 class="preview-heading">Zufälliger Begriff</h2>
         <div class="preview-card">
@@ -102,7 +97,7 @@
         </div>
       </div>
 
-      <!-- 1.6) Featured Term Teaser (fade-in) -->
+      <!-- Featured Term Teaser (fade-in) -->
       <div class="featured-teaser animate-fade-in delay-400">
         <h2 class="featured-heading">Begriffs‐Vorschau</h2>
         <div class="featured-card">
@@ -124,7 +119,7 @@
         </div>
       </div>
 
-      <!-- 1.7) Footer-Hinweis -->
+      <!-- Footer-Hinweis -->
       <p class="landing-footer animate-fade-in delay-600">
         Du kannst jederzeit über „Kategorien“ eine vollständige Übersicht öffnen.
       </p>
@@ -167,7 +162,6 @@
     <!-- 3) TERMS VIEW             -->
     <!-- ========================= -->
     <div v-else-if="view === 'terms'" class="terms-view animate-fade-in">
-      <!-- Top Bar: Heading + Zurück nebeneinander -->
       <div class="terms-header mb-6">
         <h2 class="section-heading">{{ selectedCategory }}</h2>
         <button @click="goToCategories" class="back-button-terms">
@@ -175,7 +169,6 @@
         </button>
       </div>
 
-      <!-- Suchleiste (immer lang genug, Placeholder „Suche“) -->
       <div class="search-container mb-12">
         <div class="search-wrapper">
           <input
@@ -399,9 +392,9 @@ onMounted(() => {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  padding-top: 5rem; /* Platz für Navbar */
+  padding-top: 5rem; 
   padding-bottom: 3rem;
-  background: #FFFFFF; /* komplett weiß */
+  background: #FFFFFF; 
 }
 
 /* =========================== */
@@ -437,7 +430,7 @@ onMounted(() => {
 
 .landing-buttons {
   display: flex;
-  gap: 5rem;    /* ca. 80px Abstand */
+  gap: 5rem;    
   justify-content: center;
   margin-bottom: 2rem;
 }
@@ -511,7 +504,7 @@ onMounted(() => {
   background: #F8FAFC;
 }
 
-/* 1.5) Zufälliger Begriff – Vorschau */
+/* Zufälliger Begriff – Vorschau */
 .random-preview {
   width: 100%;
   max-width: 700px;
@@ -594,7 +587,7 @@ onMounted(() => {
   color: #334155;
 }
 
-/* 1.6) Featured Term Teaser */
+/* Featured Term Teaser */
 .featured-teaser {
   background: #FFFFFF;
   border-radius: 12px;
@@ -652,7 +645,7 @@ onMounted(() => {
   line-height: 1.5;
 }
 
-/* 1.7) Landing Footer-Hinweis */
+/* Landing Footer-Hinweis */
 .landing-footer {
   margin-top: 2rem;
   color: #94A3B8;
@@ -755,7 +748,7 @@ onMounted(() => {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
-  margin-left: 1rem; /* Abstand nach rechts des Titels */
+  margin-left: 1rem; 
 }
 
 .back-button-terms:hover {
@@ -1019,7 +1012,6 @@ onMounted(() => {
 /* =========================== */
 /* ANIMATION STYLES            */
 /* =========================== */
-/* Fade-In Keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1031,13 +1023,11 @@ onMounted(() => {
   }
 }
 
-/* Basisklasse für Fade-In */
 .animate-fade-in {
   opacity: 0;
   animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Verzögerungen */
 .delay-200 {
   animation-delay: 0.2s;
 }

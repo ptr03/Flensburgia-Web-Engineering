@@ -33,6 +33,7 @@ import FlensburgenSection from '../components/FlensburgenSection.vue'
   transform: translateY(20px);
   transition: all 0.8s ease-out;
   margin-top: 5%;
+  padding-top: 5%;
 }
 .flensburgen-page {
   display: flex;

@@ -45,7 +45,7 @@ const sectionRef = ref(null);
 
 // Intersection Observer für Fade-In Animation der Karten
 onMounted(() => {
-  if (!sectionRef.value) return // Add this check
+  if (!sectionRef.value) return 
   
   const observer = new IntersectionObserver(
     (entries) => {

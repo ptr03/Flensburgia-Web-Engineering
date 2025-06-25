@@ -78,11 +78,11 @@ const navLinks = [
 
 /* Clock container — always visible */
 .nav-clock {
-  position: fixed;
+  position: absolute;
   top: 50%;               
   right: 1rem;           
   transform: translateY(-50%);
-  margin-top: -15.5rem;
+  margin-top: 4rem;
 }
 
 /* Desktop nav links */

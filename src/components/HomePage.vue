@@ -182,7 +182,7 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-/* Events Teaser (weißer Block) */
+/* Events Teaser */
 .events-teaser {
   background-color: #ffffff;
 }
