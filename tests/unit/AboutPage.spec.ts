@@ -33,6 +33,6 @@ describe('AboutPage.vue', () => {
     expect(cards[0].find('span').text()).toBe('Die Flensburgen')
 
     expect(cards[1].attributes('to')).toBe('/sippungsfolge')
-    expect(cards[1].find('span').text()).toBe('Sassen')
+    expect(cards[1].find('span').text()).toBe('Sippungsfolge')
   })
 })
