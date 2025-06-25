@@ -1,4 +1,6 @@
 # Schlaraffia Flensburgia – Vereinswebsite
+Gruppe PVAK
+Piotr Michalkiewicz, Quang Vinh Pham, Alexander Vaymer, Kanat Arngold
 
 **Offizielle Website der Schlaraffia Flensburgia e. V. (Flensburg)**
 
@@ -134,7 +136,7 @@ Die Anwendung lädt Inhalte dynamisch aus `src/data/`. Beispiele:
 ]
 ```
 
-Weitere Dateien (`flensburgen.json`, `timeline.json` etc.) folgen ähnlicher Struktur. Markdown‑Texte für ausführliche Beschreibungen liegen als `.md` vor.
+Weitere Dateien (`flensburgen.json`, etc.) folgen ähnlicher Struktur. Markdown‑Texte für ausführliche Beschreibungen liegen als `.md` vor.
 
 ---
 
@@ -148,6 +150,7 @@ Weitere Dateien (`flensburgen.json`, `timeline.json` etc.) folgen ähnlicher Str
 | `/die-flensburgen` | `FlensburgenPage.vue`   |
 | `/dictionary`      | `DictionaryPage.vue`    |
 | `/contact`         | `ContactPage.vue`       |
+| `/newsletter`      | `NewsletterPage.vue`    |
 | `/impressum`       | `Impressum.vue`         |
 | `/terms`           | `Terms.vue`             |
 | `/privacy`         | `Privacy.vue`           |
@@ -165,7 +168,7 @@ Weitere Dateien (`flensburgen.json`, `timeline.json` etc.) folgen ähnlicher Str
 
 ## 📈 Ausblick / To‑Do
 
-* Backend‑Anbindung für Kontaktformular (Serverless/API).
+* Backend‑Anbindung für Kontaktformular und Newsletter (Serverless/API).
 * Juristische Prüfung der Rechtstexte.
 * Mitgliederbereich / Passwortschutz.
 * Erweiterte Event‑Galerie und Archiv.

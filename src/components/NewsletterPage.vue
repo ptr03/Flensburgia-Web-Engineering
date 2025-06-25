@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade" appear>
     <div class="newsletter-page">
-      <!-- Hero (optional) -->
+      <!-- Hero  -->
       <section class="hero-plain">
         <div class="content-wrapper">
           <h1 class="hero-title">Unser Newsletter</h1>

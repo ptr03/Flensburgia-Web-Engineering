@@ -40,7 +40,7 @@
           :style="{ 'transition-delay': '0.4s' }"
         >
           <img :src="placeholderImg" alt="Sippungsfolge" />
-          <span>Sassen</span>
+          <span>Sippungsfolge</span>
         </router-link>
       </div>
     </section>
